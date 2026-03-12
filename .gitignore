@@ -1,0 +1,36 @@
+# Generated data and model outputs
+output/
+results/
+
+# Raw data files (binary, not tracked in git)
+data/raw/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary Office lock files
+~$*
+
+# Claude Code local state
+.claude/
