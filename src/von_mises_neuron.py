@@ -117,11 +117,17 @@ class VonMisesLinear(nn.Module):
             inv = -3.0  # softplus(-3) ≈ 0.049
         nn.init.constant_(self.log_kappa, inv)
 
-    def forward(self, x: Tensor) -> Tensor:
+    def forward(self, x: Tensor, phase_shift: Optional[Tensor] = None) -> Tensor:
         """Apply Von Mises activation.
 
         Args:
             x: Input tensor, shape (..., in_features).
+            phase_shift: Optional time-conditioned phase modulation tensor,
+                shape (..., out_features, 1).  When provided, it is added to
+                the learned μ before the cosine is evaluated, enabling
+                dynamic per-neuron phase offsets (e.g. from a temporal
+                encoder).  A 2π shift is equivalent to no shift, so
+                2π-periodicity of the output in x is preserved.
 
         Returns:
             Output tensor, shape (..., out_features).
@@ -129,10 +135,14 @@ class VonMisesLinear(nn.Module):
         # Eq. κ > 0 via softplus: κ = log(1 + exp(raw))
         kappa = nn.functional.softplus(self.log_kappa)  # (out, in)
 
+        # Compute effective phase: base μ + optional time-conditioned shift
+        # phase_shift (..., out, 1) broadcasts across in_features dimension
+        effective_mu = self.mu if phase_shift is None else self.mu + phase_shift
+
         # Broadcast x over the output dimension:
-        # x: (..., in) → (..., 1, in)  |  mu: (out, in) → broadcast
+        # x: (..., in) → (..., 1, in)  |  effective_mu: (..., out, in) → broadcast
         # cos(xᵢ + μⱼᵢ) for every (neuron j, input i) pair
-        cos_term = torch.cos(x.unsqueeze(-2) + self.mu)  # (..., out, in)
+        cos_term = torch.cos(x.unsqueeze(-2) + effective_mu)  # (..., out, in)
 
         # z_j = Σᵢ κⱼᵢ · cos(xᵢ + μⱼᵢ)  —  the log-space VM response
         z = (kappa * cos_term).sum(dim=-1)  # (..., out)
