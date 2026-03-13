@@ -161,3 +161,144 @@ class FrequencyBankVonMises(nn.Module):
             indices.append(list(range(offset, offset + size)))
             offset += size
         return indices
+
+
+class TemporalVonMisesEncoder(nn.Module):
+    """Time-conditioned Von Mises encoder with optional temporal conv bridges.
+
+    Architecture per layer::
+
+        FrequencyBank(time_features)
+          → Linear → Δμ (per-neuron phase shift)
+        VonMisesLinear(sensor_features, phase_shift=Δμ)
+          → LayerNorm
+          → [DepthwiseConv1d → Residual]  (if use_temporal_conv)
+          → Dropout
+
+    Args:
+        sensor_size: Number of sensor input features.
+        time_size: Number of angular time features (= len(time_periods)).
+        hidden_size: Working dimension for VM layers.
+        num_vm_layers: Number of stacked VM layers.
+        freq_bands: κ values for frequency bank bands.
+        dropout: Dropout rate.
+        use_temporal_conv: If True, add depthwise Conv1d + residual per layer.
+        conv_kernel_size: Kernel size for depthwise Conv1d.
+    """
+
+    def __init__(
+        self,
+        sensor_size: int,
+        time_size: int,
+        hidden_size: int = 64,
+        num_vm_layers: int = 2,
+        freq_bands: Optional[List[float]] = None,
+        dropout: float = 0.0,
+        use_temporal_conv: bool = True,
+        conv_kernel_size: int = 3,
+    ) -> None:
+        super().__init__()
+        self.sensor_size = sensor_size
+        self.time_size = time_size
+        self.hidden_size = hidden_size
+        self.num_vm_layers = num_vm_layers
+        self._use_temporal_conv = use_temporal_conv
+
+        if freq_bands is None:
+            freq_bands = [0.5, 2.0, 8.0]
+
+        # Frequency bank: processes angular time features once
+        self.freq_bank = FrequencyBankVonMises(
+            in_features=time_size,
+            out_features=hidden_size,
+            freq_bands=freq_bands,
+        )
+
+        # Per-layer Δμ projections: map freq_bank output to phase shifts
+        self.delta_mu_projections = nn.ModuleList([
+            nn.Linear(hidden_size, hidden_size)
+            for _ in range(num_vm_layers)
+        ])
+
+        # VM layers for sensor features
+        self.vm_layers = nn.ModuleList()
+        self.layer_norms = nn.ModuleList()
+        in_dim = sensor_size
+        for _ in range(num_vm_layers):
+            self.vm_layers.append(
+                VonMisesLinear(
+                    in_dim, hidden_size,
+                    bias=True,
+                    log_output=True,
+                    init_kappa=1.0,
+                )
+            )
+            self.layer_norms.append(nn.LayerNorm(hidden_size))
+            in_dim = hidden_size
+
+        # Optional temporal conv bridges
+        if use_temporal_conv:
+            self.convs = nn.ModuleList([
+                nn.Conv1d(
+                    hidden_size, hidden_size,
+                    kernel_size=conv_kernel_size,
+                    padding=conv_kernel_size // 2,
+                    groups=hidden_size,  # depthwise
+                )
+                for _ in range(num_vm_layers)
+            ])
+            # First-layer residual projection (sensor_size → hidden_size)
+            if sensor_size != hidden_size:
+                self.residual_proj = nn.Linear(sensor_size, hidden_size)
+            else:
+                self.residual_proj = None
+        else:
+            self.convs = None
+            self.residual_proj = None
+
+        self.dropout = nn.Dropout(dropout) if dropout > 0 else nn.Identity()
+
+    def forward(self, x: Tensor) -> Tensor:
+        """Forward pass.
+
+        Args:
+            x: Input tensor, shape (B, T, sensor_size + time_size).
+
+        Returns:
+            Encoded tensor, shape (B, T, hidden_size).
+        """
+        # Split sensor and time features
+        x_sensor = x[..., :self.sensor_size]
+        x_time = x[..., self.sensor_size:]
+
+        # Run frequency bank once on angular time features
+        freq_out = self.freq_bank(x_time)  # (B, T, hidden_size)
+
+        # Process sensor features through VM layers with time-conditioned phases
+        h = x_sensor
+        for i in range(self.num_vm_layers):
+            residual = h
+
+            # Compute time-conditioned phase shift for this layer
+            # (B, T, hidden_size) → unsqueeze → (B, T, hidden_size, 1)
+            delta_mu = self.delta_mu_projections[i](freq_out).unsqueeze(-1)
+
+            # VM layer with phase conditioning
+            h = self.vm_layers[i](h, phase_shift=delta_mu)
+            h = self.layer_norms[i](h)
+
+            # Optional temporal conv + residual
+            if self._use_temporal_conv and self.convs is not None:
+                # Conv1d expects (B, C, T)
+                h_conv = h.transpose(1, 2)
+                h_conv = F.gelu(self.convs[i](h_conv))
+                h = h_conv.transpose(1, 2)
+
+                # Residual: project first layer if dimensions mismatch
+                if i == 0 and self.residual_proj is not None:
+                    residual = self.residual_proj(residual)
+                h = h + residual
+
+            h = self.dropout(h)
+
+        return h

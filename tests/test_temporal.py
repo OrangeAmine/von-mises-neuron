@@ -212,3 +212,71 @@ class TestFrequencyBankVonMises:
         bank = FrequencyBankVonMises(3, 6, freq_bands=[0.5, 2.0])
         bank_cpu = bank.to("cpu")
         assert bank_cpu.kappa.device.type == "cpu"
+
+
+from src.temporal import TemporalVonMisesEncoder
+
+
+# ---------------------------------------------------------------------------
+# TemporalVonMisesEncoder
+# ---------------------------------------------------------------------------
+
+class TestTemporalVonMisesEncoder:
+    """Tests for the time-conditioned VM encoder with conv bridges."""
+
+    def _make_encoder(self, **kwargs):
+        defaults = dict(
+            sensor_size=4,
+            time_size=3,
+            hidden_size=16,
+            num_vm_layers=2,
+            freq_bands=[0.5, 2.0, 8.0],
+            dropout=0.0,
+            use_temporal_conv=True,
+            conv_kernel_size=3,
+        )
+        defaults.update(kwargs)
+        return TemporalVonMisesEncoder(**defaults)
+
+    def test_output_shape(self):
+        """Forward produces (B, T, hidden_size)."""
+        enc = self._make_encoder()
+        x = torch.randn(4, 20, 7)  # 4 sensor + 3 time
+        y = enc(x)
+        assert y.shape == (4, 20, 16)
+
+    def test_sensor_time_split(self):
+        """Encoder correctly splits sensor and time features."""
+        enc = self._make_encoder(sensor_size=4, time_size=3)
+        x = torch.zeros(2, 10, 7)
+        x[:, :, 4:] = torch.tensor([1.0, 2.0, 3.0])
+        y = enc(x)
+        assert y.shape == (2, 10, 16)
+
+    def test_gradient_flow_all_params(self):
+        """Gradients reach: VM μ, VM κ, freq bank μ, Δμ projections, conv weights."""
+        enc = self._make_encoder()
+        x = torch.randn(2, 10, 7)
+        y = enc(x)
+        y.sum().backward()
+        has_grad = {}
+        for name, param in enc.named_parameters():
+            if param.grad is not None and (param.grad != 0).any():
+                component = name.split(".")[0]
+                has_grad[component] = True
+        assert len(has_grad) >= 3, f"Only got gradients in: {list(has_grad.keys())}"
+
+    def test_no_conv_variant(self):
+        """use_temporal_conv=False produces valid output."""
+        enc = self._make_encoder(use_temporal_conv=False)
+        x = torch.randn(2, 10, 7)
+        y = enc(x)
+        assert y.shape == (2, 10, 16)
+
+    def test_conv_changes_params(self):
+        """Conv variant has more parameters than no-conv variant."""
+        enc_conv = self._make_encoder(use_temporal_conv=True)
+        enc_no_conv = self._make_encoder(use_temporal_conv=False)
+        n_conv = sum(p.numel() for p in enc_conv.parameters())
+        n_no_conv = sum(p.numel() for p in enc_no_conv.parameters())
+        assert n_conv > n_no_conv
