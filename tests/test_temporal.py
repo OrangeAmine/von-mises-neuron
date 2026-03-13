@@ -375,3 +375,80 @@ class TestTemporalVonMisesForecaster:
         model = self._make_model()
         bank = model.get_freq_bank()
         assert isinstance(bank, FrequencyBankVonMises)
+
+
+from src.preprocessing import normalize
+from src.split import chronological_split
+from src.sequences import create_sequences
+
+
+# ---------------------------------------------------------------------------
+# Pipeline integration
+# ---------------------------------------------------------------------------
+
+class TestTemporalPipeline:
+    """Tests for angular features surviving the data pipeline."""
+
+    def test_angular_features_bypass_normalization(self):
+        """Angular features stay in [0, 2π) when added after normalize()."""
+        # Create synthetic DataFrame with DatetimeIndex
+        index = pd.date_range("2021-01-01", periods=200, freq="1h")
+        df = pd.DataFrame({
+            "Temperature": np.random.randn(200) * 3 + 22,
+            "CO2": np.random.randn(200) * 50 + 600,
+        }, index=index)
+
+        # Pipeline: split → normalize → extract angles → concat → sequence
+        train_df, val_df, test_df = chronological_split(df, ratios=[0.8, 0.1, 0.1])
+
+        train_norm, stats = normalize(train_df)
+
+        # Extract angular features from original (pre-norm) index
+        angles = extract_angular_time_features(train_norm.index, periods=[24, 168])
+
+        # Concat: angular features are appended to normalized sensor features
+        for i, p in enumerate([24, 168]):
+            train_norm[f"angle_{p}"] = angles[:, i]
+
+        # Verify angular columns are still in [0, 2π)
+        for p in [24, 168]:
+            col = train_norm[f"angle_{p}"]
+            assert col.min() >= 0, f"angle_{p} has values < 0"
+            assert col.max() < 2 * np.pi, f"angle_{p} has values >= 2π"
+
+        # Verify sensor columns are z-scored (mean ≈ 0, std ≈ 1)
+        assert abs(train_norm["Temperature"].mean()) < 0.5
+        assert abs(train_norm["CO2"].mean()) < 0.5
+
+    def test_full_pipeline_to_model(self):
+        """End-to-end: DataFrame → sequences → model forward pass."""
+        index = pd.date_range("2021-01-01", periods=200, freq="1h")
+        df = pd.DataFrame({
+            "Temperature": np.random.randn(200) * 3 + 22,
+            "CO2": np.random.randn(200) * 50 + 600,
+        }, index=index)
+
+        train_df, _, _ = chronological_split(df, ratios=[0.8, 0.1, 0.1])
+        train_norm, _ = normalize(train_df)
+
+        angles = extract_angular_time_features(train_norm.index, periods=[24, 168])
+        for i, p in enumerate([24, 168]):
+            train_norm[f"angle_{p}"] = angles[:, i]
+
+        X, y, _ = create_sequences(
+            train_norm, lookback=24, horizon=6, target_col="CO2"
+        )
+        X_tensor = torch.tensor(X, dtype=torch.float32)
+
+        model = TemporalVonMisesForecaster(
+            sensor_size=2,  # Temperature, CO2
+            time_periods=[24, 168],
+            hidden_size=8,
+            num_vm_layers=1,
+            output_size=6,
+            use_temporal_conv=False,
+            use_lstm=False,
+        )
+        with torch.no_grad():
+            pred = model(X_tensor)
+        assert pred.shape == (X_tensor.shape[0], 6)
