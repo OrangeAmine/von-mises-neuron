@@ -141,3 +141,74 @@ class TestExtractAngularTimeFeatures:
         index = pd.date_range("2021-01-01", periods=24, freq="1h")
         result = extract_angular_time_features(index)
         assert result.dtype == np.float64
+
+
+from src.temporal import FrequencyBankVonMises
+
+
+# ---------------------------------------------------------------------------
+# FrequencyBankVonMises
+# ---------------------------------------------------------------------------
+
+class TestFrequencyBankVonMises:
+    """Tests for the frozen-κ frequency bank VM layer."""
+
+    def test_output_shape(self):
+        """Forward produces correct output shape."""
+        bank = FrequencyBankVonMises(3, 12, freq_bands=[0.5, 2.0, 8.0])
+        x = torch.randn(4, 10, 3)
+        y = bank(x)
+        assert y.shape == (4, 10, 12)
+
+    def test_kappa_frozen(self):
+        """κ is not in model.parameters() (stored as buffer)."""
+        bank = FrequencyBankVonMises(3, 12, freq_bands=[0.5, 2.0, 8.0])
+        param_names = {name for name, _ in bank.named_parameters()}
+        assert "kappa" not in param_names
+        assert "kappa" in dict(bank.named_buffers())
+
+    def test_kappa_values_correct(self):
+        """Each neuron's κ matches its assigned band."""
+        bank = FrequencyBankVonMises(3, 9, freq_bands=[0.5, 2.0, 8.0])
+        kappa = bank.kappa
+        torch.testing.assert_close(kappa[0:3], torch.tensor([0.5, 0.5, 0.5]))
+        torch.testing.assert_close(kappa[3:6], torch.tensor([2.0, 2.0, 2.0]))
+        torch.testing.assert_close(kappa[6:9], torch.tensor([8.0, 8.0, 8.0]))
+
+    def test_kappa_uneven_allocation(self):
+        """Remainder neurons go to first bands."""
+        bank = FrequencyBankVonMises(3, 10, freq_bands=[0.5, 2.0, 8.0])
+        kappa = bank.kappa
+        assert (kappa[:4] == 0.5).all()
+        assert (kappa[4:7] == 2.0).all()
+        assert (kappa[7:10] == 8.0).all()
+
+    def test_mu_learnable(self):
+        """μ has gradients (is learnable)."""
+        bank = FrequencyBankVonMises(3, 12, freq_bands=[0.5, 2.0, 8.0])
+        x = torch.randn(2, 5, 3)
+        y = bank(x)
+        y.sum().backward()
+        assert bank.mu.grad is not None
+        assert (bank.mu.grad != 0).any()
+
+    def test_kappa_no_gradient(self):
+        """κ buffer receives no gradient."""
+        bank = FrequencyBankVonMises(3, 12, freq_bands=[0.5, 2.0, 8.0])
+        x = torch.randn(2, 5, 3)
+        y = bank(x)
+        y.sum().backward()
+        assert bank.kappa.grad is None or not bank.kappa.requires_grad
+
+    def test_single_band(self):
+        """Works with a single frequency band."""
+        bank = FrequencyBankVonMises(3, 8, freq_bands=[1.0])
+        x = torch.randn(2, 5, 3)
+        y = bank(x)
+        assert y.shape == (2, 5, 8)
+
+    def test_moves_to_device(self):
+        """Buffer moves with .to()."""
+        bank = FrequencyBankVonMises(3, 6, freq_bands=[0.5, 2.0])
+        bank_cpu = bank.to("cpu")
+        assert bank_cpu.kappa.device.type == "cpu"
