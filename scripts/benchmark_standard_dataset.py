@@ -49,6 +49,10 @@ from src.baselines import (
 from src.preprocessing import normalize
 from src.sequences import create_sequences
 from src.split import chronological_split
+from src.temporal import (
+    extract_angular_time_features,
+    TemporalVonMisesForecaster,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -237,6 +241,85 @@ def prepare_benchmark_data(
         "horizon": horizon,
         "lookback": lookback,
         "target_col": target_col,
+    }
+
+    return data
+
+
+def prepare_temporal_data(
+    df: pd.DataFrame,
+    lookback: int,
+    horizon: int,
+    device: torch.device,
+    time_periods: List[int] = None,
+    target_col: str = "CO2",
+    split_ratios: List[float] = None,
+) -> Dict[str, Any]:
+    """Split, normalize, add angular time features, and window data.
+
+    Angular time features are added AFTER normalization to preserve their
+    [0, 2π) range. Sensor features are z-scored normally.
+
+    Args:
+        df: DataFrame with sensor columns and DatetimeIndex.
+        lookback: Number of past timesteps per input window.
+        horizon: Number of future timesteps to predict.
+        device: PyTorch device.
+        time_periods: Periods in hours for angular features.
+        target_col: Column name for the prediction target.
+        split_ratios: Train/val/test ratios.
+
+    Returns:
+        Dict with X/y tensors, norm_stats, config.
+    """
+    if time_periods is None:
+        time_periods = [24, 168]
+    if split_ratios is None:
+        split_ratios = [0.8, 0.1, 0.1]
+
+    # Capture sensor column count BEFORE augmentation
+    sensor_size = len(df.columns)
+
+    train_df, val_df, test_df = chronological_split(df, ratios=split_ratios)
+
+    # Normalize sensor features only
+    train_norm, stats = normalize(train_df, stats=None)
+    val_norm, _ = normalize(val_df, stats=stats)
+    test_norm, _ = normalize(test_df, stats=stats)
+
+    # Add angular time features AFTER normalization (bypass z-scoring)
+    augmented = []
+    for split_norm in [train_norm, val_norm, test_norm]:
+        aug = split_norm.copy()
+        angles = extract_angular_time_features(aug.index, periods=time_periods)
+        for i, p in enumerate(time_periods):
+            aug[f"angle_{p}"] = angles[:, i]
+        augmented.append(aug)
+    train_aug, val_aug, test_aug = augmented
+
+    X_train_np, y_train_np, _ = create_sequences(
+        train_aug, lookback=lookback, horizon=horizon, target_col=target_col
+    )
+    X_val_np, y_val_np, _ = create_sequences(
+        val_aug, lookback=lookback, horizon=horizon, target_col=target_col
+    )
+    X_test_np, y_test_np, _ = create_sequences(
+        test_aug, lookback=lookback, horizon=horizon, target_col=target_col
+    )
+
+    data = {
+        "X_train": torch.tensor(X_train_np, dtype=torch.float32).to(device),
+        "y_train": torch.tensor(y_train_np, dtype=torch.float32).to(device),
+        "X_val": torch.tensor(X_val_np, dtype=torch.float32).to(device),
+        "y_val": torch.tensor(y_val_np, dtype=torch.float32).to(device),
+        "X_test": torch.tensor(X_test_np, dtype=torch.float32).to(device),
+        "y_test": torch.tensor(y_test_np, dtype=torch.float32).to(device),
+        "norm_stats": stats,
+        "horizon": horizon,
+        "lookback": lookback,
+        "target_col": target_col,
+        "sensor_size": sensor_size,
+        "time_periods": time_periods,
     }
 
     return data
@@ -480,6 +563,39 @@ def benchmark_handcrafted(
     return compute_benchmark_metrics(y_pred, data["y_test"], data["norm_stats"])
 
 
+def benchmark_temporal_von_mises(
+    data: Dict[str, Any], epochs: int, device: torch.device
+) -> Dict[str, float]:
+    """Train and evaluate the Temporal Von Mises forecaster."""
+    horizon = data["horizon"]
+    sensor_size = data["sensor_size"]
+    time_periods = data["time_periods"]
+
+    model = TemporalVonMisesForecaster(
+        sensor_size=sensor_size,
+        time_periods=time_periods,
+        hidden_size=64,
+        num_vm_layers=2,
+        freq_bands=[0.5, 2.0, 8.0],
+        dropout=0.1,
+        output_size=horizon,
+        use_temporal_conv=True,
+        conv_kernel_size=3,
+    ).to(device)
+
+    model = _train_model(
+        model,
+        data["X_train"], data["y_train"],
+        data["X_val"], data["y_val"],
+        max_epochs=epochs,
+    )
+
+    with torch.no_grad():
+        y_pred = model(data["X_test"])
+
+    return compute_benchmark_metrics(y_pred, data["y_test"], data["norm_stats"])
+
+
 # ---------------------------------------------------------------------------
 # Threshold checking and reporting
 # ---------------------------------------------------------------------------
@@ -506,6 +622,37 @@ def check_thresholds(
             f"  MAPE {metrics['mape']:.2f}% > {THRESHOLDS['mape']}% (threshold)"
         )
 
+    return len(failures) == 0, failures
+
+
+def check_regression(
+    new_metrics: Dict[str, float],
+    base_metrics: Dict[str, float],
+    max_regression_pct: float = 10.0,
+) -> Tuple[bool, List[str]]:
+    """Check that new model does not regress vs. base beyond a threshold.
+
+    For RMSE, MAE, MAPE: new must not exceed base by more than max_regression_pct.
+    For R2: new must not be below base by more than max_regression_pct (absolute).
+    """
+    failures = []
+    for metric in ["rmse", "mae", "mape"]:
+        base_val = base_metrics[metric]
+        new_val = new_metrics[metric]
+        if base_val > 0:
+            pct_change = (new_val - base_val) / base_val * 100
+            if pct_change > max_regression_pct:
+                failures.append(
+                    f"  {metric.upper()}: {new_val:.2f} is {pct_change:.1f}% worse "
+                    f"than base {base_val:.2f} (max allowed: {max_regression_pct}%)"
+                )
+    # R2: higher is better, check absolute difference
+    r2_diff = base_metrics["r2"] - new_metrics["r2"]
+    if r2_diff > max_regression_pct / 100:
+        failures.append(
+            f"  R2: {new_metrics['r2']:.4f} is {r2_diff:.4f} below "
+            f"base {base_metrics['r2']:.4f}"
+        )
     return len(failures) == 0, failures
 
 
@@ -662,7 +809,7 @@ def main() -> None:
     args = parser.parse_args()
 
     run_baselines = not args.skip_baselines
-    n_phases = 7 if run_baselines else 4
+    n_phases = 8 if run_baselines else 5
 
     seed_everything(42)
 
@@ -694,6 +841,14 @@ def main() -> None:
         print(f"  Augmented features: {data_augmented['X_train'].shape[2]} "
               f"(+{data_augmented['X_train'].shape[2] - data['X_train'].shape[2]} crafted)")
 
+    # Temporal pipeline for TemporalVonMisesForecaster (angular time features)
+    data_temporal = prepare_temporal_data(
+        df, args.lookback, args.horizon, device,
+        time_periods=[24, 168],
+    )
+    print(f"  Temporal features: {data_temporal['X_train'].shape[2]} "
+          f"(+{data_temporal['X_train'].shape[2] - data['X_train'].shape[2]} angular)")
+
     # --- Phase 3: Train & evaluate VonMisesForecaster ---
     print(f"\n[3/{n_phases}] Training VonMisesForecaster...")
     seed_everything(42)
@@ -715,9 +870,36 @@ def main() -> None:
     # Collect all results for comparison
     all_results: Dict[str, Dict[str, Any]] = {"VonMises": vm_result}
 
+    # --- Phase 4: Train & evaluate TemporalVonMisesForecaster ---
+    print(f"\n[4/{n_phases}] Training TemporalVonMisesForecaster...")
+    seed_everything(42)
+    tvm_result = _run_and_report(
+        "TemporalVM", benchmark_temporal_von_mises,
+        data_temporal, args.epochs, device
+    )
+    tvm_model_tmp = TemporalVonMisesForecaster(
+        sensor_size=data_temporal["sensor_size"],
+        time_periods=data_temporal["time_periods"],
+        hidden_size=64, num_vm_layers=2,
+        freq_bands=[0.5, 2.0, 8.0], dropout=0.1,
+        output_size=data["horizon"],
+    )
+    tvm_result["params"] = _count_params(tvm_model_tmp)
+    del tvm_model_tmp
+    all_results["TemporalVM"] = tvm_result
+
+    # Check SC3: TemporalVM must not regress >10% vs. base VonMises
+    tvm_ok, tvm_failures = check_regression(
+        tvm_result["metrics"], vm_result["metrics"]
+    )
+    if not tvm_ok:
+        print("\n  WARNING: TemporalVM regressed vs. base VonMises:")
+        for f in tvm_failures:
+            print(f"    {f}")
+
     if run_baselines:
-        # --- Phase 4: Train & evaluate LSTM baseline ---
-        print(f"\n[4/{n_phases}] Training LSTMForecaster (baseline)...")
+        # --- Phase 5: Train & evaluate LSTM baseline ---
+        print(f"\n[5/{n_phases}] Training LSTMForecaster (baseline)...")
         seed_everything(42)
         lstm_result = _run_and_report(
             "LSTM", benchmark_lstm, data, args.epochs, device
@@ -730,8 +912,8 @@ def main() -> None:
         del lstm_model_tmp
         all_results["LSTM"] = lstm_result
 
-        # --- Phase 5: Train & evaluate Transformer baseline ---
-        print(f"\n[5/{n_phases}] Training TransformerForecaster (baseline)...")
+        # --- Phase 6: Train & evaluate Transformer baseline ---
+        print(f"\n[6/{n_phases}] Training TransformerForecaster (baseline)...")
         seed_everything(42)
         transformer_result = _run_and_report(
             "Transformer", benchmark_transformer, data, args.epochs, device
@@ -745,8 +927,8 @@ def main() -> None:
         del tf_model_tmp
         all_results["Transformer"] = transformer_result
 
-        # --- Phase 6: Train & evaluate HandCrafted baseline ---
-        print(f"\n[6/{n_phases}] Training HandCraftedLinear (baseline)...")
+        # --- Phase 7: Train & evaluate HandCrafted baseline ---
+        print(f"\n[7/{n_phases}] Training HandCraftedLinear (baseline)...")
         seed_everything(42)
         hc_result = _run_and_report(
             "HandCrafted", benchmark_handcrafted,
