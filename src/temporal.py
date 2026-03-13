@@ -409,7 +409,7 @@ class TemporalVonMisesForecaster(nn.Module):
 
     def get_vm_layers(self) -> List[VonMisesLinear]:
         """Return VM layers from the encoder for interpretability."""
-        return list(self.encoder.vm_layers)
+        return [layer for layer in self.encoder.vm_layers if isinstance(layer, VonMisesLinear)]
 
     def get_freq_bank(self) -> FrequencyBankVonMises:
         """Return the frequency bank for interpretability."""
