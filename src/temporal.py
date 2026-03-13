@@ -302,3 +302,115 @@ class TemporalVonMisesEncoder(nn.Module):
             h = self.dropout(h)
 
         return h
+
+
+class TemporalVonMisesForecaster(nn.Module):
+    """Time-aware Von Mises forecaster with multi-scale periodic encoding.
+
+    Architecture::
+
+        Input (B, T, F_sensor + F_time)
+          → TemporalVonMisesEncoder
+              [FrequencyBank + Phase Fusion + Conv Bridges] × N
+          → LSTM backbone (or mean pool)
+          → Linear output head
+
+    The model expects angular time features (from extract_angular_time_features)
+    concatenated after sensor features. sensor_size tells the model where to split.
+
+    Args:
+        sensor_size: Number of raw sensor features (before time columns).
+        time_periods: Periods in hours for angular features (determines time_size).
+        hidden_size: Working dimension.
+        num_vm_layers: Number of stacked VM layers in the encoder.
+        freq_bands: κ values for frequency bank bands.
+        dropout: Dropout rate.
+        output_size: Forecast horizon.
+        use_temporal_conv: If True, add depthwise Conv1d bridges.
+        conv_kernel_size: Kernel size for temporal convolutions.
+        use_lstm: If True, use LSTM backbone. If False, mean pool over time.
+    """
+
+    def __init__(
+        self,
+        sensor_size: int,
+        time_periods: Optional[List[int]] = None,
+        hidden_size: int = 64,
+        num_vm_layers: int = 2,
+        freq_bands: Optional[List[float]] = None,
+        dropout: float = 0.0,
+        output_size: int = 1,
+        use_temporal_conv: bool = True,
+        conv_kernel_size: int = 3,
+        use_lstm: bool = True,
+    ) -> None:
+        super().__init__()
+        if time_periods is None:
+            time_periods = [24, 168, 8766]
+        if freq_bands is None:
+            freq_bands = [0.5, 2.0, 8.0]
+
+        self.sensor_size = sensor_size
+        self.time_periods = time_periods
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self._use_lstm = use_lstm
+
+        time_size = len(time_periods)
+
+        # --- Temporal VM encoder ---
+        self.encoder = TemporalVonMisesEncoder(
+            sensor_size=sensor_size,
+            time_size=time_size,
+            hidden_size=hidden_size,
+            num_vm_layers=num_vm_layers,
+            freq_bands=freq_bands,
+            dropout=dropout,
+            use_temporal_conv=use_temporal_conv,
+            conv_kernel_size=conv_kernel_size,
+        )
+
+        # --- Temporal backbone ---
+        if use_lstm:
+            self.lstm: Optional[nn.LSTM] = nn.LSTM(
+                input_size=hidden_size,
+                hidden_size=hidden_size,
+                num_layers=1,
+                batch_first=True,
+                dropout=0.0,
+            )
+        else:
+            self.lstm = None
+
+        # --- Output head ---
+        self.output_head = nn.Linear(hidden_size, output_size)
+
+    def forward(self, x: Tensor) -> Tensor:
+        """Forward pass.
+
+        Args:
+            x: Input tensor, shape (B, T, sensor_size + len(time_periods)).
+
+        Returns:
+            Forecast tensor, shape (B, output_size).
+        """
+        # Temporal VM encode: (B, T, F) → (B, T, H)
+        h = self.encoder(x)
+
+        if self.lstm is not None:
+            # LSTM: capture global temporal dependencies
+            _, (h_n, _) = self.lstm(h)
+            h_final = h_n.squeeze(0)  # (B, H)
+        else:
+            # Mean pool over time
+            h_final = h.mean(dim=1)  # (B, H)
+
+        return self.output_head(h_final)
+
+    def get_vm_layers(self) -> List[VonMisesLinear]:
+        """Return VM layers from the encoder for interpretability."""
+        return list(self.encoder.vm_layers)
+
+    def get_freq_bank(self) -> FrequencyBankVonMises:
+        """Return the frequency bank for interpretability."""
+        return self.encoder.freq_bank

@@ -280,3 +280,98 @@ class TestTemporalVonMisesEncoder:
         n_conv = sum(p.numel() for p in enc_conv.parameters())
         n_no_conv = sum(p.numel() for p in enc_no_conv.parameters())
         assert n_conv > n_no_conv
+
+
+from src.temporal import TemporalVonMisesForecaster
+
+
+# ---------------------------------------------------------------------------
+# TemporalVonMisesForecaster
+# ---------------------------------------------------------------------------
+
+class TestTemporalVonMisesForecaster:
+    """Tests for the complete temporal forecaster model."""
+
+    def _make_model(self, **kwargs):
+        defaults = dict(
+            sensor_size=4,
+            time_periods=[24, 168, 8766],
+            hidden_size=16,
+            num_vm_layers=2,
+            freq_bands=[0.5, 2.0, 8.0],
+            dropout=0.0,
+            output_size=12,
+            use_temporal_conv=True,
+            conv_kernel_size=3,
+            use_lstm=True,
+        )
+        defaults.update(kwargs)
+        return TemporalVonMisesForecaster(**defaults)
+
+    def test_output_shape(self):
+        """Forward produces (B, output_size)."""
+        model = self._make_model()
+        x = torch.randn(4, 20, 7)  # 4 sensor + 3 time
+        y = model(x)
+        assert y.shape == (4, 12)
+
+    def test_output_shape_different_horizon(self):
+        """Works with different output sizes."""
+        model = self._make_model(output_size=24)
+        x = torch.randn(2, 30, 7)
+        y = model(x)
+        assert y.shape == (2, 24)
+
+    def test_backward_pass(self):
+        """Full backward pass completes without error."""
+        model = self._make_model()
+        x = torch.randn(2, 10, 7)
+        y = model(x)
+        loss = y.sum()
+        loss.backward()
+        grads_exist = any(
+            p.grad is not None and (p.grad != 0).any()
+            for p in model.parameters()
+        )
+        assert grads_exist
+
+    def test_use_lstm_false(self):
+        """use_lstm=False uses mean pooling, still produces correct shape."""
+        model = self._make_model(use_lstm=False)
+        x = torch.randn(2, 10, 7)
+        y = model(x)
+        assert y.shape == (2, 12)
+
+    def test_no_conv_no_lstm(self):
+        """Both ablation flags off still works."""
+        model = self._make_model(use_temporal_conv=False, use_lstm=False)
+        x = torch.randn(2, 10, 7)
+        y = model(x)
+        assert y.shape == (2, 12)
+
+    def test_single_freq_band(self):
+        """Works with a single frequency band."""
+        model = self._make_model(freq_bands=[2.0])
+        x = torch.randn(2, 10, 7)
+        y = model(x)
+        assert y.shape == (2, 12)
+
+    def test_different_time_periods(self):
+        """Custom time periods list changes input expectation."""
+        model = self._make_model(time_periods=[24])
+        x = torch.randn(2, 10, 5)  # 4 sensor + 1 time
+        y = model(x)
+        assert y.shape == (2, 12)
+
+    def test_get_vm_layers(self):
+        """Interpretability accessor returns VM layers."""
+        model = self._make_model(num_vm_layers=3)
+        vm_layers = model.get_vm_layers()
+        assert len(vm_layers) == 3
+        assert all(isinstance(layer, VonMisesLinear) for layer in vm_layers)
+
+    def test_get_freq_bank(self):
+        """Can access frequency bank for interpretability."""
+        model = self._make_model()
+        bank = model.get_freq_bank()
+        assert isinstance(bank, FrequencyBankVonMises)
