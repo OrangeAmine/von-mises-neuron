@@ -1,5 +1,91 @@
 # Project state: ownership handoff
 
+## Completed follow-up — VM-N02 phase and width interpretation (2026-09-22)
+
+The authorized bounded interpretation study is complete in this isolated
+worktree. The inherited source snapshot and all 130 files were verified against
+SHA256 `18191869b3383ee437e33de713b4aaed6a7f103e9ae88c5581ce8ea8a44f31b5`
+at baseline revision `a7431a926c751868b11a3918c6cdd29be6540a32`. Two missing
+inherited context files were restored unchanged; no conflict existed. All
+preexisting files except this authorized handoff remain unchanged. The original
+checkout, frozen v1/v2 implementations/configs, old archives and owner notes were
+not modified. VM-N01/VM-N03 outputs were not assumed or incorporated.
+
+The [prospective protocol](vm_n02_interpretation_protocol.md) and
+[configuration](../configs/vm_n02_interpretation_v1.json) fix three known
+mechanisms: an identifiable isolated peak, an overcomplete four-kernel fit to
+two peaks, and a recorded-calendar proxy with a shifted association. Existing
+CircularBasisV2 and CartesianCircularLinearV1 APIs are reused; no new forecaster
+or old-model change is introduced. New generators/fitting and diagnostics live
+in `src/interpretation_n02_cases.py` and `src/interpretation_n02_diagnostics.py`.
+The runner, independent observer and figure/scorecard builder are
+`scripts/run_vm_n02_interpretation.py`, `scripts/audit_vm_n02_interpretation.py`
+and `scripts/report_vm_n02_interpretation.py`.
+
+All **119 full fit records** completed (102 peak, 17 proxy), plus 17 separately
+retrained sensor-only readouts. Reserved evaluation retained **12 independent
+units per case / 84 full fits**, with three initializations nested within each
+peak function. No numerical fit failed or was retried. Whole-unit paired
+bootstrap intervals use 5,000 draws; initializations are not counted as
+independent scientific replications.
+
+- **Isolated:** all 36 reserved fits met the declared recovery criteria;
+  clean NRMSE **0.00429** [0.00337, 0.00531], center error **0.000881 radians**,
+  relative kappa error **0.522%**. Recovery depends on the correct positive
+  single-peak family, full support and training-derived local initialization.
+- **Redundant:** mean clean NRMSE **0.05073** passes the 0.1 mean gate, but only
+  26/36 individual fits do. Mean between-initialization response NRMSE
+  **0.07209** [0.04876, 0.09372] **fails** the fixed 0.05 stability gate.
+  Matched center dispersion **1.117 radians** and log-width dispersion **0.643**
+  exceed descriptive flags. Exact split/cancellation representations independently
+  refute unique component meaning; stable average error is not stable geometry.
+- **Proxy:** aligned NRMSE **0.14585** fails the unchanged 0.1 threshold, whose
+  noise-limit problem was disclosed before generation. Shifted NRMSE rises to
+  **1.34867**. Clock deletion worsens aligned normalized MSE by **0.90038**
+  [0.88880, 0.91201] but improves shifted error by **0.89825**. Full-minus-retrained
+  sensor-only shifted error is **1.47671** [1.44722, 1.50686]. Predictive reliance
+  and correct phase alignment do not establish a direct recorded-clock role.
+
+All exact representation/zero/wrap/origin controls passed (worst error below
+4.89e-15), as did all nine mean attribution-randomization checks. The isolated
+double-kappa effect **0.0999106** narrowly misses the fixed 0.1 practical-effect
+threshold; that negative outcome is retained. The all-success recovery interval
+[1,1] is an empirical bootstrap degeneracy, not population certainty.
+
+Final validation: **1,331 tests passed in 84.58 seconds**. The unchanged standard
+synthetic run passed both VMs' absolute gates and the temporal regression check:
+VM RMSE 5.35727 / MAE 4.15081; TemporalVM RMSE 5.33500 / MAE 4.18974.
+Independent NumPy replay passed **1,606 pilot, 2,037 development and 5,916
+evaluation checks**, maximum evaluation discrepancy 1.78e-14. It does not replay
+unselected historical checkpoint states or separately reconstruct every
+randomization/overlap metric; those limitations remain documented.
+
+Study runtime was **234.62 seconds** on the RTX 3060 Laptop GPU in float64:
+32.39 pilot, 44.73 development, 157.49 evaluation. The measured reserved
+projections (291.51 and 268.39 seconds) passed its unchanged 900-second ceiling.
+The original pilot's terminal monitor rejected one 15.625ms CPU tick from a
+resident Python process after every fit was saved. A reviewed operational-only
+amendment retained the error receipt and all unit files, charged separate
+finalization, and corrected the overstrict terminal check. No scientific source,
+configuration, threshold or fitting loop changed; no fit was repeated. This is
+prospective science with a disclosed post-pilot operational amendment, not an
+unchanged-orchestration clean pilot. Process snapshots do not prove isolated
+hardware. The amendment SHA256 is
+`55f109c7385aa3b36d1054084ba4050b3ba82b3b97d5d20c01d83b820315bd3a`;
+reserved lock SHA256 is
+`37ab16855ba146329c6e6033a2e2a2b258ad40eb9406da2ca9acd73f1dc4651d`.
+
+See the [readable report](vm_n02_interpretation_results.md),
+[complete run record](vm_n02_run_record.json),
+[unit table](vm_n02_units.csv), [fit table](vm_n02_fits.csv),
+[claim scorecard](vm_n02_scorecard.csv),
+[figure](figures/vm_n02_interpretation.png), and
+[operational record](vm_n02_execution_notes.md). Raw arrays and selected states
+are local under `results/vm_n02_interpretation_v1/study_20260922`; no historical
+raw payload was regenerated. These synthetic mechanism results do not validate
+physical directions, times of day, forecasting superiority or causal mechanisms
+in real data.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed

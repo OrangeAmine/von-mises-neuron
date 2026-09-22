@@ -1,0 +1,88 @@
+{
+  "date_utc": "2026-09-22T13:38:32.884763+00:00",
+  "receiving_root": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron",
+  "context_root": "D:\\Desktop\\Claude\\Hybrid_models_forecasting",
+  "validator": {
+    "checkout_state": "dirty",
+    "context_root": "D:\\Desktop\\Claude\\Hybrid_models_forecasting",
+    "logical_context_id": "research-workspace",
+    "manifest_sha256": "49aed2956b668ffdbf00c531a4f4967515724ebd9747132b1618eb934f0af337",
+    "required_file_sha256": {
+      "AGENTS.md": "5064a953f084a932f99eca94ee89d54e1afc03a3e44ed91294d1d13255a3c7ef",
+      "START_HERE.md": "e4830ac2df8f3f9f279752db93756633d4ef880fc21d739449b5787d54897365",
+      "docs/research/authority.md": "82a029fade81f67240d8e35c6093afd266032ff0ad9803ebd205e434c2f7317d",
+      "docs/research/datasets.md": "206cfad9d6035bff0333ae94e35d7896366c1e9891907e1f08a1712b883d9c10",
+      "docs/research/evidence.md": "3ea6f582a8132a41a7e74f6c534db7eb4db7e8ef77899b7e31e0cc89245b78f3"
+    },
+    "required_paths": {
+      "authority": "docs/research/authority.md",
+      "datasets": "docs/research/datasets.md",
+      "entry_point": "START_HERE.md",
+      "evidence": "docs/research/evidence.md",
+      "repository_rules": "AGENTS.md"
+    },
+    "revision": "beb32d5c1a205a155242e7bc52de6d552caaa349",
+    "schema_version": "research_context_manifest_v1"
+  },
+  "route": "direction -> authority -> Paper 6 interpretation owners and named learning companion",
+  "payloads_accessed": false,
+  "unavailable_required_resources": [],
+  "scope": "Methodological inspiration only; no scientific artifact replay, no original or reference writes. No N01/N03 outputs consulted.",
+  "consulted_files": [
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\.agents\\skills\\research-workspace-context\\SKILL.md",
+      "sha256": "961927f5e59817bf5320e2d6b5b7e80c8aab5a6eb8db225a766b914cd5f9d524"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\.agents\\skills\\research-workspace-context\\references\\authority-routing.md",
+      "sha256": "a6ca490c3047a70afe5d038b236af78f998b3e2c91bf9964e9e608246b63b650"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\AGENTS.md",
+      "sha256": "5064a953f084a932f99eca94ee89d54e1afc03a3e44ed91294d1d13255a3c7ef"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\START_HERE.md",
+      "sha256": "e4830ac2df8f3f9f279752db93756633d4ef880fc21d739449b5787d54897365"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\research\\authority.md",
+      "sha256": "82a029fade81f67240d8e35c6093afd266032ff0ad9803ebd205e434c2f7317d"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\learning\\README.md",
+      "sha256": "8be637ffbf3abc4585f150e4b6e5f1ad141f43ef98b62865a3a3b7726175da4c"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\learning\\chapter6_reading_companion.md",
+      "sha256": "b684616d339639be88f5bda25a12d0a1491a4b2836890702191f69fc7e873eea"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\research\\plans\\paper6_falsifiable_interpretability\\tracking.md",
+      "sha256": "c1150387c14b0e87acdfbc8471bd2bbb6f4bef6658030554bf290af05e22cfe0"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\research\\plans\\paper6_falsifiable_interpretability\\protocol.md",
+      "sha256": "08f45ddcff36413830d67bc3731f6886c4dc2e0f5597a17b2cd4b8002909d6e1"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\learning\\explainers\\09-paper6-statistics-before-compute.md",
+      "sha256": "6e5199a174ac134320286d7903029f54e25ad69ba740c98868dd5a9894ea5c63"
+    },
+    {
+      "path": "D:\\Desktop\\Claude\\Hybrid_models_forecasting\\docs\\learning\\teaching\\README.md",
+      "sha256": "0406bc8e802cbe73e1e43998771b2b95aa2e47274b1e2d763ce52e75af2b50ec"
+    }
+  ],
+  "current_original_proposal": {
+    "path": "D:\\Desktop\\Claude\\von-mises-neuron\\docs\\proposed_tasks_from_forecasting.md",
+    "sha256": "98b5a55f65583054391b6f786fd2b91342b0ffa60ffb71e088734e0294c7d749",
+    "difference_from_snapshot": "Dispatch record updated; snapshot copy kept unchanged"
+  },
+  "primary_background": {
+    "title": "Adebayo et al. (2018), Sanity Checks for Saliency Maps",
+    "url": "https://proceedings.neurips.cc/paper/2018/hash/294a8ed24b1ad22ec2e7efea049b8737-Abstract.html",
+    "access": "Official NeurIPS abstract read 2026-09-22; model/data dependence sanity checks motivate controls, not circular-layer validation"
+  },
+  "review": "Two implementation reviews by same-model agents, distinct bounded tasks; not external/blinded peer review. Mathematical and protocol edge fixes completed before freeze."
+}
