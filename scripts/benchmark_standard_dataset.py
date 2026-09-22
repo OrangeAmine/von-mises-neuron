@@ -25,6 +25,7 @@ Usage:
 
 import argparse
 import json
+import math
 import random
 import sys
 import time
@@ -41,6 +42,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.von_mises_neuron import VonMisesForecaster
+from src.sincos import SinCosForecaster
 from src.baselines import (
     LSTMForecaster,
     TransformerForecaster,
@@ -407,6 +409,8 @@ def _train_model(
 
     best_val_loss = float("inf")
     best_state = None
+    best_epoch = None
+    validation_loss = []
     patience_counter = 0
 
     for epoch in range(max_epochs):
@@ -423,11 +427,13 @@ def _train_model(
         with torch.no_grad():
             val_pred = model(X_val)
             val_loss = criterion(val_pred, y_val).item()
+        validation_loss.append(val_loss)
 
         scheduler.step(val_loss)
 
         if val_loss < best_val_loss - 1e-6:
             best_val_loss = val_loss
+            best_epoch = epoch + 1
             best_state = {k: v.clone() for k, v in model.state_dict().items()}
             patience_counter = 0
         else:
@@ -438,6 +444,19 @@ def _train_model(
 
     if best_state is not None:
         model.load_state_dict(best_state)
+
+    model.training_history = {
+        "epochs_completed": len(validation_loss),
+        "best_epoch": best_epoch,
+        "best_val_loss": best_val_loss,
+        "validation_loss": validation_loss,
+        "max_epochs": max_epochs,
+        "lr": lr,
+        "weight_decay": weight_decay,
+        "batch_size": batch_size,
+        "patience": patience,
+        "gradient_clip": gradient_clip,
+    }
     model.eval()
 
     return model
@@ -472,6 +491,35 @@ def benchmark_von_mises(
     with torch.no_grad():
         y_pred = model(data["X_test"])
 
+    return compute_benchmark_metrics(y_pred, data["y_test"], data["norm_stats"])
+
+
+def benchmark_sincos(
+    data: Dict[str, Any], epochs: int, device: torch.device
+) -> Dict[str, float]:
+    """Evaluate the Cartesian control with the base VM's inputs and budget.
+
+    The constructor follows exactly the base VM initialization, then maps its
+    coefficients to sine/cosine weights without further RNG draws. Seeding each
+    benchmark identically before construction matches the initial function and
+    RNG state before training while retaining the historical base VM seed path.
+    """
+    model = SinCosForecaster(
+        input_size=data["X_train"].shape[2],
+        hidden_size=64,
+        num_vm_layers=2,
+        dropout=0.1,
+        output_size=data["horizon"],
+        init_kappa=1.0,
+    ).to(device)
+    model = _train_model(
+        model,
+        data["X_train"], data["y_train"],
+        data["X_val"], data["y_val"],
+        max_epochs=epochs,
+    )
+    with torch.no_grad():
+        y_pred = model(data["X_test"])
     return compute_benchmark_metrics(y_pred, data["y_test"], data["norm_stats"])
 
 
@@ -599,11 +647,23 @@ def benchmark_temporal_von_mises(
 # ---------------------------------------------------------------------------
 # Threshold checking and reporting
 # ---------------------------------------------------------------------------
+def check_finite_metrics(metrics: Dict[str, float]) -> Tuple[bool, List[str]]:
+    """Reject missing or non-finite values for every required metric."""
+    failures = [
+        f"  {name.upper()} must be finite (got {metrics.get(name)!r})"
+        for name in THRESHOLDS
+        if name not in metrics or not math.isfinite(metrics[name])
+    ]
+    return not failures, failures
+
+
 def check_thresholds(
     metrics: Dict[str, float],
 ) -> Tuple[bool, List[str]]:
     """Check whether metrics meet acceptance thresholds."""
-    failures = []
+    finite, failures = check_finite_metrics(metrics)
+    if not finite:
+        return False, failures
 
     if metrics["rmse"] > THRESHOLDS["rmse"]:
         failures.append(
@@ -633,27 +693,75 @@ def check_regression(
     """Check that new model does not regress vs. base beyond a threshold.
 
     For RMSE, MAE, MAPE: new must not exceed base by more than max_regression_pct.
-    For R2: new must not be below base by more than max_regression_pct (absolute).
+    For R2: the allowed absolute decrease is max_regression_pct / 100.
+    A zero base error permits only a zero new error. Both metric sets must
+    be finite; negative error metrics are invalid for a relative comparison.
     """
-    failures = []
+    if not math.isfinite(max_regression_pct) or max_regression_pct < 0:
+        raise ValueError("max_regression_pct must be finite and nonnegative")
+    _, new_failures = check_finite_metrics(new_metrics)
+    _, base_failures = check_finite_metrics(base_metrics)
+    failures = [f"New model: {failure.strip()}" for failure in new_failures]
+    failures += [f"Base model: {failure.strip()}" for failure in base_failures]
+    if failures:
+        return False, failures
     for metric in ["rmse", "mae", "mape"]:
         base_val = base_metrics[metric]
         new_val = new_metrics[metric]
-        if base_val > 0:
-            pct_change = (new_val - base_val) / base_val * 100
-            if pct_change > max_regression_pct:
-                failures.append(
-                    f"  {metric.upper()}: {new_val:.2f} is {pct_change:.1f}% worse "
-                    f"than base {base_val:.2f} (max allowed: {max_regression_pct}%)"
-                )
+        if base_val < 0 or new_val < 0:
+            failures.append(f"  {metric.upper()}: error metrics must be nonnegative")
+            continue
+        limit = base_val * (1 + max_regression_pct / 100)
+        # Relative-only tolerance preserves the exact zero-error requirement.
+        if new_val > limit and not math.isclose(new_val, limit, rel_tol=1e-12):
+            failures.append(
+                f"  {metric.upper()}: {new_val:.6g} exceeds {limit:.6g} "
+                f"(base {base_val:.6g}, max regression {max_regression_pct}%)"
+            )
     # R2: higher is better, check absolute difference
     r2_diff = base_metrics["r2"] - new_metrics["r2"]
-    if r2_diff > max_regression_pct / 100:
+    r2_limit = max_regression_pct / 100
+    if r2_diff > r2_limit and not math.isclose(r2_diff, r2_limit, rel_tol=1e-12):
         failures.append(
             f"  R2: {new_metrics['r2']:.4f} is {r2_diff:.4f} below "
             f"base {base_metrics['r2']:.4f}"
         )
     return len(failures) == 0, failures
+
+
+def evaluate_acceptance(
+    all_results: Dict[str, Dict[str, Any]],
+) -> Dict[str, Dict[str, Any]]:
+    """Evaluate each model's applicable gates for reporting and exit status.
+
+    Args:
+        all_results: Results keyed by model name, including VonMises and
+            TemporalVM, with a metrics dictionary for every model.
+
+    Returns:
+        Per-model finite, absolute and regression checks, aggregate pass status,
+        and failure reasons. SinCos also receives absolute thresholds; the
+        other baselines receive only the finite-metric gate.
+    """
+    acceptance = {}
+    for name, result in all_results.items():
+        metrics = result["metrics"]
+        finite, failures = check_finite_metrics(metrics)
+        checks = {"finite_metrics": finite}
+        if name in {"VonMises", "TemporalVM", "SinCos"}:
+            absolute, absolute_failures = check_thresholds(metrics)
+            checks["absolute_thresholds"] = absolute
+            failures.extend(f for f in absolute_failures if f not in failures)
+        if name == "TemporalVM":
+            regression, regression_failures = check_regression(
+                metrics, all_results["VonMises"]["metrics"]
+            )
+            checks["regression_vs_base"] = regression
+            failures.extend(regression_failures)
+        acceptance[name] = {
+            "checks": checks, "passed": all(checks.values()), "failures": failures,
+        }
+    return acceptance
 
 
 def print_report(
@@ -804,12 +912,12 @@ def main() -> None:
     )
     parser.add_argument(
         "--skip-baselines", action="store_true",
-        help="Skip baseline models (only run VM forecaster)"
+        help="Skip SinCos, LSTM, Transformer and hand-crafted baselines (run both VMs)"
     )
     args = parser.parse_args()
 
     run_baselines = not args.skip_baselines
-    n_phases = 8 if run_baselines else 5
+    n_phases = 9 if run_baselines else 5
 
     seed_everything(42)
 
@@ -864,7 +972,7 @@ def main() -> None:
     vm_result["params"] = _count_params(vm_model_tmp)
     del vm_model_tmp
 
-    # Check VM thresholds (the only model with acceptance criteria)
+    # The detailed aggregate checks are evaluated after all models finish.
     vm_passed, vm_failures = check_thresholds(vm_result["metrics"])
 
     # Collect all results for comparison
@@ -888,18 +996,23 @@ def main() -> None:
     del tvm_model_tmp
     all_results["TemporalVM"] = tvm_result
 
-    # Check SC3: TemporalVM must not regress >10% vs. base VonMises
-    tvm_ok, tvm_failures = check_regression(
-        tvm_result["metrics"], vm_result["metrics"]
-    )
-    if not tvm_ok:
-        print("\n  WARNING: TemporalVM regressed vs. base VonMises:")
-        for f in tvm_failures:
-            print(f"    {f}")
-
     if run_baselines:
-        # --- Phase 5: Train & evaluate LSTM baseline ---
-        print(f"\n[5/{n_phases}] Training LSTMForecaster (baseline)...")
+        # --- Phase 5: Train & evaluate matched Cartesian baseline ---
+        print(f"\n[5/{n_phases}] Training SinCosForecaster (matched baseline)...")
+        seed_everything(42)
+        sincos_result = _run_and_report(
+            "SinCos", benchmark_sincos, data, args.epochs, device
+        )
+        sincos_model_tmp = SinCosForecaster(
+            input_size=data["X_train"].shape[2], hidden_size=64,
+            num_vm_layers=2, dropout=0.1, output_size=data["horizon"],
+        )
+        sincos_result["params"] = _count_params(sincos_model_tmp)
+        del sincos_model_tmp
+        all_results["SinCos"] = sincos_result
+
+        # --- Phase 6: Train & evaluate LSTM baseline ---
+        print(f"\n[6/{n_phases}] Training LSTMForecaster (baseline)...")
         seed_everything(42)
         lstm_result = _run_and_report(
             "LSTM", benchmark_lstm, data, args.epochs, device
@@ -912,8 +1025,8 @@ def main() -> None:
         del lstm_model_tmp
         all_results["LSTM"] = lstm_result
 
-        # --- Phase 6: Train & evaluate Transformer baseline ---
-        print(f"\n[6/{n_phases}] Training TransformerForecaster (baseline)...")
+        # --- Phase 7: Train & evaluate Transformer baseline ---
+        print(f"\n[7/{n_phases}] Training TransformerForecaster (baseline)...")
         seed_everything(42)
         transformer_result = _run_and_report(
             "Transformer", benchmark_transformer, data, args.epochs, device
@@ -927,8 +1040,8 @@ def main() -> None:
         del tf_model_tmp
         all_results["Transformer"] = transformer_result
 
-        # --- Phase 7: Train & evaluate HandCrafted baseline ---
-        print(f"\n[7/{n_phases}] Training HandCraftedLinear (baseline)...")
+        # --- Phase 8: Train & evaluate HandCrafted baseline ---
+        print(f"\n[8/{n_phases}] Training HandCraftedLinear (baseline)...")
         seed_everything(42)
         hc_result = _run_and_report(
             "HandCrafted", benchmark_handcrafted,
@@ -944,6 +1057,8 @@ def main() -> None:
 
     # --- Final phase: Report ---
     print(f"\n[{n_phases}/{n_phases}] Generating report...")
+    acceptance = evaluate_acceptance(all_results)
+    all_passed = all(result["passed"] for result in acceptance.values())
 
     if run_baselines:
         print_comparison_report(
@@ -954,6 +1069,13 @@ def main() -> None:
             vm_result["metrics"], vm_result["time_seconds"],
             args.lookback, args.horizon, device,
         )
+
+    print("  Acceptance checks (VMs and SinCos: absolute; other baselines: finite only):")
+    for name, result in acceptance.items():
+        print(f"  {name}: {'PASS' if result['passed'] else 'FAIL'}")
+        for failure in result["failures"]:
+            print(f"    {failure.strip()}")
+    print(f"  OVERALL RESULT: {'PASS' if all_passed else 'FAIL'}\n")
 
     # Save results to JSON
     output_dir = Path(args.output_dir)
@@ -970,24 +1092,30 @@ def main() -> None:
             "device": str(device),
         },
         "thresholds": THRESHOLDS,
+        "regression_limits": {
+            "error_metrics_relative_percent": 10.0,
+            "r2_absolute_decrease": 0.10,
+        },
+        "acceptance": acceptance,
         "results": {},
-        "all_passed": vm_passed,
+        "all_passed": all_passed,
     }
 
     for name, res in all_results.items():
-        is_vm = name == "VonMises"
         json_results["results"][name] = {
-            **res["metrics"],
+            # JSON has no NaN/Infinity; failure reasons retain the bad value.
+            **{key: value if math.isfinite(value) else None
+               for key, value in res["metrics"].items()},
             "params": res["params"],
             "time_seconds": res["time_seconds"],
-            "passed": vm_passed if is_vm else None,
+            "passed": acceptance[name]["passed"],
         }
 
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(json_results, f, indent=2)
+        json.dump(json_results, f, indent=2, allow_nan=False)
     print(f"Results saved to: {output_path}")
 
-    sys.exit(0 if vm_passed else 1)
+    sys.exit(0 if all_passed else 1)
 
 
 if __name__ == "__main__":

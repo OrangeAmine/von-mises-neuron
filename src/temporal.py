@@ -2,7 +2,7 @@
 
 Extends the Von Mises neuron with explicit temporal features:
   1. Angular time extraction: timestamps → raw angles in [0, 2π)
-  2. Frequency bank: frozen-κ multi-scale VM layer
+  2. Frequency bank: frozen-κ amplitude bands over calendar angles
   3. Phase fusion: time-conditioned Δμ shifts for sensor VM neurons
   4. Temporal conv bridges: depthwise Conv1d for local temporal mixing
 
@@ -25,31 +25,63 @@ from src.von_mises_neuron import VonMisesLinear
 def extract_angular_time_features(
     index: pd.DatetimeIndex,
     periods: Optional[List[int]] = None,
+    *,
+    phase_origin: Optional[pd.Timestamp] = None,
 ) -> np.ndarray:
     """Convert a DatetimeIndex into angular time features in [0, 2π).
 
-    Each period maps a cyclic time component to an angle using a unified
-    formula: θ = 2π · (fractional_position_within_period).
+    Periods 24 and 168 encode local wall-clock day and Monday-based week.
+    Period 8766 is a calendar-year sentinel: January 1 midnight has phase
+    zero, and each year spans 365 or 366 days. All calendar features include
+    fractional hours through nanoseconds. Calendar phases wrap at their
+    boundaries; use sine/cosine when measuring continuity across the wrap.
 
-      - 24   → θ = 2π · hour / 24               (daily cycle)
-      - 168  → θ = 2π · (dow·24 + hour) / 168    (weekly cycle, continuous)
-      - 8766 → θ = 2π · day_of_year / 365.25     (annual cycle)
-
-    The weekly formula uses continuous hours within the week (not discrete
-    dayofweek) so the angle interpolates smoothly between days.
+    Calendar features use the timezone of ``index`` (naive timestamps are
+    taken literally). They skip/repeat wall-clock hours across DST; callers
+    wanting UTC calendar cycles should first call ``index.tz_convert("UTC")``.
+    Other periods use elapsed hours from a fixed origin, independent of how
+    the data is sliced. For timezone-aware timestamps this is absolute elapsed
+    time, so these cycles advance normally across DST and are timezone-invariant.
 
     Args:
         index: DatetimeIndex from a sensor DataFrame.
-        periods: List of periods in hours. Default [24, 168, 8766].
+        periods: Nonempty list of positive finite periods in hours. Default
+            [24, 168, 8766]; the three special values denote calendar cycles.
+        phase_origin: Origin for non-calendar periods. Defaults to Unix epoch
+            (UTC for an aware index, naive otherwise). To use a dataset-relative
+            origin, pass the same training-start timestamp for every split.
+            Origin and index must both be timezone-aware or both naive.
 
     Returns:
         np.ndarray of shape (T, len(periods)), dtype float64, values in [0, 2π).
+
+    Raises:
+        TypeError: If index is not a DatetimeIndex.
+        ValueError: If timestamps contain NaT, periods are invalid, or the
+            origin is missing or has incompatible timezone awareness.
     """
+    if not isinstance(index, pd.DatetimeIndex):
+        raise TypeError("index must be a pandas DatetimeIndex")
+    if index.hasnans:
+        raise ValueError("index must not contain NaT")
     if periods is None:
         periods = [24, 168, 8766]
+    if not len(periods) or not np.all(np.isfinite(periods)) or np.any(np.asarray(periods) <= 0):
+        raise ValueError("periods must be nonempty, positive, and finite")
 
-    # Fractional hour within the day (0.0 to ~23.99)
-    hours = index.hour + index.minute / 60.0 + index.second / 3600.0
+    origin = (
+        pd.Timestamp("1970-01-01", tz="UTC" if index.tz is not None else None)
+        if phase_origin is None else pd.Timestamp(phase_origin)
+    )
+    if pd.isna(origin):
+        raise ValueError("phase_origin must not be NaT")
+    if (index.tz is None) != (origin.tzinfo is None):
+        raise ValueError("phase_origin and index must have matching timezone awareness")
+
+    hours = (
+        index.hour + index.minute / 60.0 + index.second / 3600.0
+        + index.microsecond / 3.6e9 + index.nanosecond / 3.6e12
+    )
 
     features = []
     for p in periods:
@@ -62,11 +94,12 @@ def extract_angular_time_features(
             weekly_hours = index.dayofweek * 24.0 + hours
             theta = 2.0 * np.pi * weekly_hours / 168.0
         elif p == 8766:
-            # Annual: day-of-year → angle (day_of_year starts at 1)
-            theta = 2.0 * np.pi * index.dayofyear / 365.25
+            # Calendar years wrap at Jan 1, including leap days and time of day.
+            days_in_year = np.where(index.is_leap_year, 366.0, 365.0)
+            theta = 2.0 * np.pi * (index.dayofyear - 1 + hours / 24.0) / days_in_year
         else:
-            # Generic: compute hours since start, mod by period
-            t_hours = (index - index[0]).total_seconds() / 3600.0
+            # A shared origin prevents validation/test slices resetting phase.
+            t_hours = (index - origin).total_seconds() / 3600.0
             theta = 2.0 * np.pi * (t_hours % p) / p
 
         # Wrap to [0, 2π) for safety
@@ -77,15 +110,18 @@ def extract_angular_time_features(
 
 
 class FrequencyBankVonMises(nn.Module):
-    """Von Mises layer with frozen κ organized into frequency bands.
+    """Log-output Von Mises layer with fixed or learnable κ amplitudes.
 
     Neurons are divided equally among bands. Each band has a frozen
-    concentration κ (stored as a buffer) that controls its temporal
-    resolution: high κ → sharp/fast, low κ → broad/slow. Only the
-    phase shifts μ are learned.
+    κ (stored as a buffer) scaling its cosine response amplitude.
+    Phase shifts μ and biases are learned. The historical "frequency bank"
+    name does not imply that κ changes frequency or sharpens these log
+    responses: periods come from the input timestamp angles.
 
-    This forces multi-scale decomposition: the network *must* use all
-    timescales rather than collapsing to a single dominant one.
+    The downstream learned phase projection can absorb the fixed scales;
+    this parameterization does not force temporal decomposition.
+    With ``learnable_kappa=True``, each neuron's positive amplitude is learned
+    independently through softplus, initialized at its band's original value.
 
     Eq:  z_j = κ_band(j) · cos(θᵢ + μⱼᵢ)   (summed over i)
 
@@ -93,6 +129,8 @@ class FrequencyBankVonMises(nn.Module):
         in_features: Number of angular input features (= len(time_periods)).
         out_features: Total number of neurons across all bands.
         freq_bands: List of κ values, one per band. Default [0.5, 2.0, 8.0].
+        learnable_kappa: Learn per-neuron positive amplitudes instead of storing
+            the original frozen kappa buffer. Defaults to False.
     """
 
     def __init__(
@@ -100,14 +138,18 @@ class FrequencyBankVonMises(nn.Module):
         in_features: int,
         out_features: int,
         freq_bands: Optional[List[float]] = None,
+        learnable_kappa: bool = False,
     ) -> None:
         super().__init__()
         if freq_bands is None:
             freq_bands = [0.5, 2.0, 8.0]
+        if not freq_bands or any(not math.isfinite(k) or k <= 0 for k in freq_bands):
+            raise ValueError("freq_bands must contain positive finite amplitudes")
 
         self.in_features = in_features
         self.out_features = out_features
         self.freq_bands = freq_bands
+        self.learnable_kappa = learnable_kappa
         n_bands = len(freq_bands)
 
         # Allocate neurons to bands: equal split, remainder to first bands
@@ -115,11 +157,18 @@ class FrequencyBankVonMises(nn.Module):
         remainder = out_features % n_bands
         band_sizes = [base_count + (1 if i < remainder else 0) for i in range(n_bands)]
 
-        # Build frozen κ buffer: (out_features,)
+        # Keep the historical frozen state dictionary and RNG sequence by default.
         kappa_values = []
         for band_kappa, size in zip(freq_bands, band_sizes):
             kappa_values.extend([band_kappa] * size)
-        self.register_buffer("kappa", torch.tensor(kappa_values, dtype=torch.float32))
+        initial_kappa = torch.tensor(kappa_values, dtype=torch.float32)
+        if learnable_kappa:
+            # Stable inverse softplus: log(exp(kappa) - 1).
+            self.raw_kappa = nn.Parameter(
+                initial_kappa + torch.log(-torch.expm1(-initial_kappa))
+            )
+        else:
+            self.register_buffer("kappa", initial_kappa)
 
         # Learnable μ: phase shifts, (out_features, in_features)
         self.mu = nn.Parameter(torch.empty(out_features, in_features))
@@ -141,13 +190,17 @@ class FrequencyBankVonMises(nn.Module):
         cos_term = torch.cos(x.unsqueeze(-2) + self.mu)  # (..., out, in)
 
         # κ: (out,) → (out, 1) for broadcasting over in_features
-        kappa_expanded = self.kappa.unsqueeze(-1)  # (out, 1)
+        kappa_expanded = self.get_kappa().unsqueeze(-1)  # (out, 1)
 
         # z_j = Σᵢ κ_band(j) · cos(θᵢ + μⱼᵢ)
         z = (kappa_expanded * cos_term).sum(dim=-1)  # (..., out)
 
         # No exp() here — the Δμ projection expects unbounded reals, not positive values
         return z + self.bias
+
+    def get_kappa(self) -> Tensor:
+        """Return effective positive per-neuron amplitudes without detaching."""
+        return F.softplus(self.raw_kappa) if self.learnable_kappa else self.kappa
 
     def get_band_indices(self) -> List[List[int]]:
         """Return neuron indices for each frequency band."""
@@ -175,6 +228,12 @@ class TemporalVonMisesEncoder(nn.Module):
           → [DepthwiseConv1d → Residual]  (if use_temporal_conv)
           → Dropout
 
+    The encoder preserves 2π shifts of individual time-angle inputs. The
+    default convolution bridge adds a raw-sensor residual, so sensor inputs
+    do not have the same periodicity guarantee when that bridge is enabled.
+    Disabling time conditioning omits both the bank and phase projections,
+    avoiding unused parameters; trailing time columns are accepted but ignored.
+
     Args:
         sensor_size: Number of sensor input features.
         time_size: Number of angular time features (= len(time_periods)).
@@ -184,6 +243,8 @@ class TemporalVonMisesEncoder(nn.Module):
         dropout: Dropout rate.
         use_temporal_conv: If True, add depthwise Conv1d + residual per layer.
         conv_kernel_size: Kernel size for depthwise Conv1d.
+        learnable_kappa: Learn bank amplitudes when time conditioning is enabled.
+        use_time_conditioning: Include calendar-conditioned phase shifts.
     """
 
     def __init__(
@@ -196,6 +257,8 @@ class TemporalVonMisesEncoder(nn.Module):
         dropout: float = 0.0,
         use_temporal_conv: bool = True,
         conv_kernel_size: int = 3,
+        learnable_kappa: bool = False,
+        use_time_conditioning: bool = True,
     ) -> None:
         super().__init__()
         self.sensor_size = sensor_size
@@ -203,6 +266,7 @@ class TemporalVonMisesEncoder(nn.Module):
         self.hidden_size = hidden_size
         self.num_vm_layers = num_vm_layers
         self._use_temporal_conv = use_temporal_conv
+        self._use_time_conditioning = use_time_conditioning
 
         if freq_bands is None:
             freq_bands = [0.5, 2.0, 8.0]
@@ -212,12 +276,13 @@ class TemporalVonMisesEncoder(nn.Module):
             in_features=time_size,
             out_features=hidden_size,
             freq_bands=freq_bands,
-        )
+            learnable_kappa=learnable_kappa,
+        ) if use_time_conditioning else None
 
         # Per-layer Δμ projections: map freq_bank output to phase shifts
         self.delta_mu_projections = nn.ModuleList([
             nn.Linear(hidden_size, hidden_size)
-            for _ in range(num_vm_layers)
+            for _ in range(num_vm_layers if use_time_conditioning else 0)
         ])
 
         # VM layers for sensor features
@@ -272,7 +337,7 @@ class TemporalVonMisesEncoder(nn.Module):
         x_time = x[..., self.sensor_size:]
 
         # Run frequency bank once on angular time features
-        freq_out = self.freq_bank(x_time)  # (B, T, hidden_size)
+        freq_out = self.freq_bank(x_time) if self.freq_bank is not None else None
 
         # Process sensor features through VM layers with time-conditioned phases
         h = x_sensor
@@ -281,7 +346,10 @@ class TemporalVonMisesEncoder(nn.Module):
 
             # Compute time-conditioned phase shift for this layer
             # (B, T, hidden_size) → unsqueeze → (B, T, hidden_size, 1)
-            delta_mu = self.delta_mu_projections[i](freq_out).unsqueeze(-1)
+            delta_mu = (
+                self.delta_mu_projections[i](freq_out).unsqueeze(-1)
+                if freq_out is not None else None
+            )
 
             # VM layer with phase conditioning
             h = self.vm_layers[i](h, phase_shift=delta_mu)
@@ -305,7 +373,7 @@ class TemporalVonMisesEncoder(nn.Module):
 
 
 class TemporalVonMisesForecaster(nn.Module):
-    """Time-aware Von Mises forecaster with multi-scale periodic encoding.
+    """Time-aware Von Mises forecaster with calendar-conditioned phases.
 
     Architecture::
 
@@ -329,6 +397,9 @@ class TemporalVonMisesForecaster(nn.Module):
         use_temporal_conv: If True, add depthwise Conv1d bridges.
         conv_kernel_size: Kernel size for temporal convolutions.
         use_lstm: If True, use LSTM backbone. If False, mean pool over time.
+        learnable_kappa: Learn positive bank amplitudes independently per neuron.
+        use_time_conditioning: If False, omit bank/phase-projection parameters
+            and ignore trailing time columns. Sensor and backbone paths remain.
     """
 
     def __init__(
@@ -343,6 +414,8 @@ class TemporalVonMisesForecaster(nn.Module):
         use_temporal_conv: bool = True,
         conv_kernel_size: int = 3,
         use_lstm: bool = True,
+        learnable_kappa: bool = False,
+        use_time_conditioning: bool = True,
     ) -> None:
         super().__init__()
         if time_periods is None:
@@ -368,6 +441,8 @@ class TemporalVonMisesForecaster(nn.Module):
             dropout=dropout,
             use_temporal_conv=use_temporal_conv,
             conv_kernel_size=conv_kernel_size,
+            learnable_kappa=learnable_kappa,
+            use_time_conditioning=use_time_conditioning,
         )
 
         # --- Temporal backbone ---
@@ -411,6 +486,6 @@ class TemporalVonMisesForecaster(nn.Module):
         """Return VM layers from the encoder for interpretability."""
         return [layer for layer in self.encoder.vm_layers if isinstance(layer, VonMisesLinear)]
 
-    def get_freq_bank(self) -> FrequencyBankVonMises:
-        """Return the frequency bank for interpretability."""
+    def get_freq_bank(self) -> Optional[FrequencyBankVonMises]:
+        """Return the bank for interpretability, or None without conditioning."""
         return self.encoder.freq_bank

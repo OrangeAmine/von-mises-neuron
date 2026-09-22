@@ -1,5 +1,9 @@
 # Temporal Von Mises Encoder Implementation Plan
 
+> Historical implementation plan; the temporal architecture is implemented.
+> Its unchecked boxes are not the current work queue. Follow
+> [project state](../../project_state.md) and repository guidance for next work.
+
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Add time-aware temporal features to the Von Mises neuron forecaster via angular time extraction, a frozen-κ frequency bank, time-conditioned phase fusion, and depthwise temporal convolutions.

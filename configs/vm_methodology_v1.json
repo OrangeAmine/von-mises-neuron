@@ -1,0 +1,568 @@
+{
+  "schema_version": 1,
+  "protocol_id": "vm_methodology_v1",
+  "status": "design_ready_not_confirmation_locked",
+  "designed_date": "2026-09-08",
+  "plan": "docs/vm_methodology_plan.md",
+  "implementation_status": "planned",
+  "claim_scope": "Synthetic mechanism tests; no novelty, general superiority, or deployment claim",
+  "preserve_legacy_sources": true,
+  "results_root": "results/vm_methodology_v1",
+  "training_workers": 1,
+  "device": "cuda_if_available_else_cpu",
+  "seed_derivation": {
+    "method": "numpy.random.SeedSequence",
+    "components": [
+      "role_root",
+      "stage_id",
+      "family_id",
+      "replicate_id",
+      "split_id"
+    ],
+    "pair_task_and_observation_roots_by_position": true,
+    "stage_ids": {
+      "A": 1,
+      "B": 2
+    },
+    "split_ids": {
+      "function": 0,
+      "train": 1,
+      "validation": 2,
+      "test_noise": 3,
+      "initialization": 4,
+      "bootstrap": 5
+    }
+  },
+  "seeds": {
+    "pilot": {
+      "task": [
+        101
+      ],
+      "observation": [
+        201
+      ],
+      "initialization": [
+        301
+      ]
+    },
+    "development": {
+      "task": [
+        1101,
+        1102
+      ],
+      "observation": [
+        2101,
+        2102
+      ],
+      "initialization": [
+        3101,
+        3102
+      ]
+    },
+    "confirmation": {
+      "task": [
+        5101,
+        5102,
+        5103,
+        5104,
+        5105,
+        5106,
+        5107,
+        5108
+      ],
+      "observation": [
+        6101,
+        6102,
+        6103,
+        6104,
+        6105,
+        6106,
+        6107,
+        6108
+      ],
+      "initialization": [
+        7101,
+        7102
+      ]
+    },
+    "analysis": 9001
+  },
+  "data": {
+    "domain": [
+      -3.141592653589793,
+      3.141592653589793
+    ],
+    "endpoint": "right_excluded",
+    "validation_observations": 256,
+    "clean_evaluation_grid": {
+      "points": 4096,
+      "placement": "midpoints"
+    },
+    "separate_test_noise": true,
+    "model_batch_order_shared": true
+  },
+  "engineering": {
+    "module": "src/circular_layers_v2.py",
+    "concentration_init": [
+      "constant",
+      "unit_variance"
+    ],
+    "inverse_softplus": "k + log(-expm1(-k))",
+    "kernel_log_feature": "-2*kappa*sin((theta-center)/2)^2",
+    "parity": {
+      "float64": {
+        "atol": 1e-10,
+        "rtol": 1e-10
+      },
+      "float32": {
+        "atol": 0.00001,
+        "rtol": 0.0001
+      }
+    },
+    "profile": {
+      "warmup": 20,
+      "iterations": 100,
+      "shapes": [
+        [
+          32,
+          72,
+          8,
+          64
+        ],
+        [
+          32,
+          72,
+          64,
+          64
+        ],
+        [
+          8,
+          168,
+          32,
+          128
+        ]
+      ],
+      "measure": [
+        "median_ms",
+        "p90_ms",
+        "peak_cuda_allocated_bytes"
+      ],
+      "cuda_synchronize": true
+    },
+    "full_tests_required": true,
+    "forecaster_gates": {
+      "rmse_max": 35,
+      "mae_max": 25,
+      "r2_min": 0.2,
+      "mape_percent_max": 5,
+      "temporal_error_relative_max": 0.1,
+      "temporal_r2_drop_max": 0.1
+    }
+  },
+  "A": {
+    "family_ids": {
+      "phase_only": 1,
+      "amplitude_only": 2,
+      "both": 3,
+      "weak_phase": 4
+    },
+    "models": [
+      "polar",
+      "cartesian"
+    ],
+    "trainable_parameters": 3,
+    "train_observations": 128,
+    "full_batch": true,
+    "initialization": "known_prechange_function_exact_conversion",
+    "optimizer_state": "reset_before_adaptation",
+    "initialization_seed_repeats": false,
+    "noise_std_fraction_of_signal_std": 0.1,
+    "target_standardization": false,
+    "conditions": [
+      {
+        "id": "phase_only",
+        "amplitude_before": 1,
+        "amplitude_after": 1,
+        "phase_change": 1.5707963267948966
+      },
+      {
+        "id": "amplitude_only",
+        "amplitude_before": 0.25,
+        "amplitude_after": 1,
+        "phase_change": 0
+      },
+      {
+        "id": "both",
+        "amplitude_before": 0.25,
+        "amplitude_after": 1,
+        "phase_change": 1.5707963267948966
+      },
+      {
+        "id": "weak_phase",
+        "amplitude_before": 0.02,
+        "amplitude_after": 0.02,
+        "phase_change": 1.5707963267948966
+      }
+    ],
+    "optimizers": {
+      "Adam": {
+        "pilot_learning_rates": [
+          0.001,
+          0.01,
+          0.1
+        ],
+        "selected_learning_rate": null
+      },
+      "SGD": {
+        "momentum": 0,
+        "pilot_learning_rates": [
+          0.003,
+          0.03,
+          0.3
+        ],
+        "selected_learning_rate": null
+      }
+    },
+    "native_weight_decay": 0,
+    "explicit_amplitude_penalties": [
+      0,
+      0.001
+    ],
+    "objective": "0.5*MSE + 0.5*lambda*(a^2+b^2); polar substitute kappa^2; no bias penalty",
+    "updates": 200,
+    "record_every": 10,
+    "early_stopping": false,
+    "pilot": {
+      "conditions": [
+        "phase_only",
+        "amplitude_only"
+      ],
+      "task_pairs": 1,
+      "updates": 40,
+      "gradient_fits": 48,
+      "incomplete_learning_rate": "ineligible; if no complete candidate revise before development"
+    },
+    "development": {
+      "task_pairs": 2,
+      "gradient_fits": 64
+    },
+    "confirmation": {
+      "task_pairs": 8,
+      "gradient_fits": 256
+    },
+    "learning_rate_selection": "one per optimizer, pooled pilot validation-curve area across both coordinates/penalties/conditions; smallest LR breaks 1e-12 tie",
+    "primary": {
+      "optimizer": "Adam",
+      "penalty": 0,
+      "conditions": [
+        "phase_only",
+        "both"
+      ],
+      "metric": "trapezoidal clean MSE curve area / (200*postchange clean variance)"
+    },
+    "phase_error_defined_when": "predicted_amplitude >= max(0.001,0.05*true_amplitude)",
+    "closed_form_reference_solve_count": 84,
+    "diagnostics": {
+      "parameter_phase_shift": 6.283185307179586,
+      "coordinate_rotation": 1.0471975511965976,
+      "full_additional_refits": false,
+      "scope": "stored-state functional/objective/gradient checks only; no optimizer-origin robustness claim"
+    },
+    "stochastic_family_id": 0,
+    "shared_condition_randomness": [
+      "prechange_phase",
+      "input_angles",
+      "standard_normal_noise"
+    ]
+  },
+  "B": {
+    "family_ids": {
+      "smooth": 1,
+      "narrow": 2,
+      "multimodal": 3,
+      "nonperiodic": 4
+    },
+    "train_observations": [
+      32,
+      128,
+      512
+    ],
+    "nested_train_prefixes": true,
+    "generator_normalization": {
+      "grid_points": 65536,
+      "center": true,
+      "variance": 1,
+      "scope": "declared target generation; not model-fitted preprocessing"
+    },
+    "training_target_normalization": "none after declared generator normalization",
+    "noise_std_by_replicate_parity": [
+      0.05,
+      0.2
+    ],
+    "pilot_noise_std": 0.1,
+    "generators": {
+      "smooth": {
+        "harmonics": [
+          1,
+          2,
+          3
+        ],
+        "coefficient_distribution": "Normal(0,1/h^2)"
+      },
+      "narrow": {
+        "count_inclusive": [
+          1,
+          2
+        ],
+        "profile": "(1-(wrap(theta-c)/w)^2)^3 inside |wrap(theta-c)|<w, otherwise zero",
+        "width_uniform": [
+          0.15,
+          0.45
+        ],
+        "amplitude_uniform": [
+          0.5,
+          1.5
+        ],
+        "count_distribution": "uniform discrete inclusive"
+      },
+      "multimodal": {
+        "count_inclusive": [
+          3,
+          5
+        ],
+        "profile": "max(1-abs(wrap(theta-c))/w,0)",
+        "width_uniform": [
+          0.2,
+          0.8
+        ],
+        "amplitude_absolute_uniform": [
+          0.5,
+          1.5
+        ],
+        "sign": "independent equiprobable +/-1",
+        "count_distribution": "uniform discrete inclusive"
+      },
+      "nonperiodic": {
+        "formula": "theta/pi + 0.2*sin(theta+phase)",
+        "primary_gate_included": false,
+        "phase_uniform": [
+          0,
+          6.283185307179586
+        ]
+      }
+    },
+    "models": [
+      {
+        "id": "learned_vm",
+        "kind": "gradient",
+        "kernels": 16,
+        "learn_centers": true,
+        "learn_widths": true,
+        "parameters": 49
+      },
+      {
+        "id": "fourier_ridge",
+        "kind": "ridge",
+        "harmonic_max": 24,
+        "features": 48,
+        "parameters": 49
+      },
+      {
+        "id": "fixed_vm_ridge",
+        "kind": "ridge",
+        "centers": 16,
+        "widths": [
+          1,
+          4,
+          16
+        ],
+        "features": 48,
+        "parameters": 49
+      },
+      {
+        "id": "learned_geodesic",
+        "kind": "gradient",
+        "kernels": 16,
+        "parameters": 49,
+        "feature": "exp(-kappa*wrap(theta-center)^2/2)"
+      },
+      {
+        "id": "sincos_mlp",
+        "kind": "gradient",
+        "inputs": 2,
+        "hidden": 12,
+        "activation": "tanh",
+        "parameters": 49
+      },
+      {
+        "id": "raw_angle_mlp",
+        "kind": "gradient",
+        "inputs": 1,
+        "hidden": 16,
+        "activation": "tanh",
+        "input": "theta/pi",
+        "parameters": 49,
+        "primary_comparator_eligible": false
+      }
+    ],
+    "kernel_initialization": {
+      "centers": "even grid plus seed-controlled uniform global rotation",
+      "width": 4,
+      "readout_std": 0.25,
+      "bias": 0,
+      "vm_geodesic_shared": true
+    },
+    "optimizer": {
+      "name": "Adam",
+      "native_weight_decay": 0,
+      "readout_penalty": 0.0001,
+      "pilot_learning_rates": [
+        0.001,
+        0.01
+      ],
+      "selected_learning_rates": null,
+      "max_updates": 600,
+      "batch_size": 64,
+      "validation_every": 20,
+      "include_initial_checkpoint": true,
+      "patience_evaluations": 5,
+      "min_delta": 0.000001
+    },
+    "ridge": {
+      "lambda_grid": [
+        0,
+        0.0001,
+        0.01,
+        1
+      ],
+      "alpha_conversion": "n_train*lambda",
+      "zero_penalty_solver": "SVD minimum norm",
+      "bias_penalized": false,
+      "tie_tolerance": 1e-12,
+      "tie_break": "smaller_lambda"
+    },
+    "pilot": {
+      "task_pairs": 1,
+      "train_observations": 128,
+      "max_updates": 100,
+      "gradient_fits": 32,
+      "ridge_configurations": 8,
+      "learning_rate_selection": "mean best eligible noisy-validation checkpoint MSE across all four pilot task families; complete finite candidates only"
+    },
+    "development": {
+      "task_pairs": 2,
+      "initialization_seeds": 2,
+      "gradient_fits": 192,
+      "ridge_configurations": 48
+    },
+    "confirmation": {
+      "task_pairs": 6,
+      "initialization_seeds": 2,
+      "gradient_fits": 576,
+      "ridge_configurations": 144,
+      "all_models_retained": true
+    },
+    "primary_metric": "clean grid MSE / clean grid variance",
+    "proper_comparators": [
+      "fourier_ridge",
+      "fixed_vm_ridge",
+      "learned_geodesic",
+      "sincos_mlp"
+    ],
+    "comparator_selection": "lowest balanced development primary metric across periodic families/tasks/initializations/sample sizes",
+    "selected_primary_comparator": null,
+    "primary_gate_families": [
+      "smooth",
+      "narrow",
+      "multimodal"
+    ],
+    "boundary_audits": {
+      "full_additional_refits": false,
+      "scope": "stored-state mapped geometry only; no optimizer robustness or independent task claim"
+    },
+    "conditional_center_width_ablation": {
+      "status": "deferred_requires_separate_lock",
+      "kernels": 16,
+      "learn_centers": [
+        false,
+        true
+      ],
+      "learn_widths": [
+        false,
+        true
+      ]
+    },
+    "mlp_initialization": {
+      "weights_and_bias": "independent Uniform(-1/sqrt(fan_in),1/sqrt(fan_in))",
+      "stream": "dedicated recorded initialization"
+    },
+    "fixed_kernel_centers": "unrotated -pi+2*pi*j/16 for j=0..15"
+  },
+  "analysis": {
+    "aggregation": "mean initialization seeds and sample sizes within task, tasks within family, then equally weighted families",
+    "improvement": "1 - ratio_of_balanced_aggregate_errors",
+    "bootstrap": {
+      "resamples": 10000,
+      "confidence": 0.95,
+      "interval": "percentile",
+      "A_cluster": "whole paired task bundle across conditions",
+      "B_cluster": "whole paired task bundle within family"
+    },
+    "missing_primary_run": "no complete success claim; retain all failures",
+    "A_gate": {
+      "relative_improvement_min": 0.1,
+      "each_primary_condition_improves": true,
+      "bootstrap_lower_improvement_above": 0
+    },
+    "B_gate": {
+      "relative_improvement_min": 0.1,
+      "periodic_families_improving_min": 2,
+      "periodic_family_relative_regression_max": 0.1,
+      "bootstrap_lower_improvement_above": 0
+    },
+    "powered_population_inference_claim": false
+  },
+  "execution": {
+    "timeouts_minutes": {
+      "A_pilot": 10,
+      "B_pilot": 10,
+      "A_development": 15,
+      "A_confirmation": 15,
+      "B_development": 45,
+      "B_confirmation": 45
+    },
+    "total_stage_ceiling_minutes": 140,
+    "progress_interval_seconds_max": 60,
+    "total_gradient_fits": 1168,
+    "total_B_ridge_configurations": 200,
+    "total_B_ridge_solves": 800,
+    "total_A_reference_solves": 84,
+    "confirmation_requires_lock": [
+      "source_hashes",
+      "config_hash",
+      "generator_hashes",
+      "pilot_hyperparameters",
+      "development_results_hashes",
+      "B_primary_comparator",
+      "analysis_rules"
+    ],
+    "failed_run_retry": "never silently; no survivor selection",
+    "timeout": "retain incomplete; no silent budget reductions",
+    "phase_C": "deferred_requires_new_protocol_and_unused_seeds"
+  },
+  "training_numeric": {
+    "training_dtype": "float32",
+    "metric_and_closed_form_dtype": "float64",
+    "Adam": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-8,
+      "amsgrad": false
+    },
+    "A_gradient_clipping": null,
+    "B_gradient_clip_norm": 1,
+    "record_determinism_settings": true
+  }
+}

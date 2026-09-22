@@ -1,0 +1,4 @@
+# Experiment locks hash exact source, configuration and report bytes.
+# Preserve those bytes on commit and checkout, including mixed historical
+# line endings; normalization would invalidate the frozen provenance.
+* -text

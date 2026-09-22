@@ -1,0 +1,91 @@
+{
+  "protocol_id": "vm_locality_v2_20260921",
+  "schema_version": 2,
+  "question": "When does adapting circular basis locations and widths improve prediction under equal label and computation budgets?",
+  "seeds": {
+    "pilot": {"task": 2026092101, "observation": 2026092201},
+    "development": {"task": 2026092301, "observation": 2026092401},
+    "confirmation": {"task": 2026092501, "observation": 2026092601},
+    "initialization": 2026092701,
+    "analysis": 2026092801
+  },
+  "tasks": {
+    "families": ["smooth", "narrow", "multimodal", "nonperiodic"],
+    "periodic_families": ["smooth", "narrow", "multimodal"],
+    "replicates": {"pilot": 1, "development": 3, "confirmation": 8},
+    "initializations": {"pilot": 1, "development": 2, "confirmation": 2},
+    "label_budgets": [64, 128, 512],
+    "pilot_label_budgets": [128],
+    "pilot_timing_label_budget": 512,
+    "pilot_timing_learning_rate": 0.03,
+    "train_fraction": 0.75,
+    "noise_levels": [0.05, 0.2],
+    "normalization_points": 65536,
+    "grid_points": 4096,
+    "generators": {
+      "smooth": {"harmonics": [1, 2, 3], "coefficient_distribution": "Normal(0,1/h^2)"},
+      "narrow": {"count_inclusive": [1, 2], "width_uniform": [0.15, 0.45], "amplitude_uniform": [0.5, 1.5], "profile": "(1-(wrap(theta-c)/w)^2)^3 on abs(wrap(theta-c))<w, else0"},
+      "multimodal": {"count_inclusive": [3, 5], "width_uniform": [0.2, 0.8], "amplitude_absolute_uniform": [0.5, 1.5], "sign": "independent equiprobable +/-1", "profile": "max(1-abs(wrap(theta-c))/w,0)"},
+      "nonperiodic": {"phase_uniform": [0, 6.283185307179586], "formula": "theta/pi+0.2*sin(theta+phase)"}
+    }
+  },
+  "models": [
+    {"id": "fixed16", "kind": "ridge", "features": 16, "parameters": 17},
+    {"id": "vp_centers", "kind": "vp", "geometry": "centers", "features": 16, "parameters": 33},
+    {"id": "vp_widths", "kind": "vp", "geometry": "widths", "features": 16, "parameters": 33},
+    {"id": "vp_both", "kind": "vp", "geometry": "both", "features": 16, "parameters": 49},
+    {"id": "joint_both", "kind": "joint", "geometry": "both", "features": 16, "parameters": 49},
+    {"id": "fixed32", "kind": "ridge", "features": 32, "parameters": 33},
+    {"id": "fixed48", "kind": "ridge", "features": 48, "parameters": 49},
+    {"id": "fourier16", "kind": "ridge", "features": 16, "parameters": 17},
+    {"id": "fourier32", "kind": "ridge", "features": 32, "parameters": 33},
+    {"id": "fourier48", "kind": "ridge", "features": 48, "parameters": 49}
+  ],
+  "initialization": {"kernels": 16, "concentration": 4.0, "centers": "even_grid_plus_shared_seeded_global_rotation", "fixed32_widths": [4.0, 16.0], "fixed48_widths": [1.0, 4.0, 16.0], "joint_readout": "same_exact_ridge_solution_as_vp"},
+  "training": {
+    "dtype": "float64",
+    "device": "cuda_if_available",
+    "cpu_threads": 1,
+    "penalty": 0.001,
+    "objective": "0.5*mean_squared_error+0.5*penalty*sum(readout_weight^2)",
+    "bias_penalized": false,
+    "optimizer": "Adam",
+    "adam_betas": [0.9, 0.999],
+    "adam_epsilon": 1e-8,
+    "width_parameterization": "softplus_unconstrained_raw_kappa",
+    "native_weight_decay": 0.0,
+    "pilot_learning_rates": [0.01, 0.03, 0.1],
+    "max_updates": 6000,
+    "validation_every": 10,
+    "early_stopping": false,
+    "clip_gradient_norm": null,
+    "time_budgets_seconds": [0.25, 0.75, 2.0],
+    "primary_time_seconds": 2.0,
+    "checkpoint_rule": "minimum_noisy_validation_MSE_among_checkpoints_completed_within_time_allowance;earliest_exact_tie",
+    "timing": "prewarmed_device;synchronized;includes_transfer_initialization_readout_solves_updates_validation_and_state_copy;excludes_postfit_clean_scoring_and_disk_io",
+    "overshoot": "retain_late_checkpoint_and_final_state_but_never_select_after_allowance;stop_after_current_block"
+  },
+  "phases": {
+    "pilot_ceiling_seconds": 600,
+    "development_ceiling_seconds": 2700,
+    "confirmation_ceiling_seconds": 5400,
+    "pilot_rate_selection": "minimum_equal_family_noise_mean_primary_budget_noisy_validation_MSE_per_adaptive_model;smaller_rate_on_exact_tie;all_candidates_must_complete",
+    "feasibility": "adaptive_full_caps_plus_maxshape_fixed_duration_p90_plus_all_fit_nonfit_overhead_p90_plus_adaptive_max_observed_block_overshoot_plus_60seconds_must_fit_phase_ceiling",
+    "confirmation_requires": ["complete_pilots", "complete_development", "independent_numerical_and_protocol_audit", "full_test_suite", "feasibility_pass", "source_config_evidence_bound_lock"]
+  },
+  "analysis": {
+    "primary_metric": "clean_grid_MSE/clean_grid_variance_at_primary_time_allowance",
+    "aggregation": "mean_initializations_noise_and_label_budgets_within_target;mean_targets_within_family;equal_periodic_family_mean",
+    "vp_selection": "lowest_balanced_development_error_of_vp_centers_vp_widths_vp_both;config_order_tie",
+    "capacity_comparator": "lowest_balanced_development_error_of_fixed_and_fourier_models_with_same_parameter_count_as_selected_VP;config_order_tie",
+    "co_primary_comparators": ["fixed16", "selected_capacity_comparator"],
+    "optimizer_contrast": "vp_both_vs_joint_both_only",
+    "bootstrap_resamples": 10000,
+    "bootstrap_unit": "whole_target_function_bundle_within_family;retain_noise_budget_and_initialization_pairs",
+    "bootstrap_confidence": 0.95,
+    "primary_gate": {"both_comparisons_relative_improvement_min": 0.1, "both_comparisons_lower_bootstrap_improvement_above": 0.0, "each_comparison_improving_periodic_families_min": 2, "each_comparison_max_family_regression": 0.1},
+    "secondary": ["all_models_families_noise_levels_label_budgets_time_allowances", "parameter_and_basis_counts", "actual_time_and_updates", "geometry", "conditioning", "prediction_sensitivity"],
+    "missing_or_failed_fit": "retain_record;no_complete_success_claim;no_silent_retry",
+    "powered_population_claim": false
+  }
+}

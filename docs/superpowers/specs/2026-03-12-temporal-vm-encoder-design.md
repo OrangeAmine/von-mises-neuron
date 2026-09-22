@@ -1,5 +1,12 @@
 # Temporal Von Mises Encoder — Design Spec
 
+> Historical specification, preserved as design intent. The encoder is now
+> implemented; see [project state](../../project_state.md) for audited evidence.
+> Kappa bands in its log-output bank scale amplitude, not frequency or sharpness.
+> The quoted LSTM contribution percentages below are informal interpretations
+> of an ablation, not a measured decomposition of temporal learning. Reduced
+> LSTM dependence and forced temporal specialization are unverified hypotheses.
+
 **Date:** 2026-03-12
 **Status:** Approved
 **Priority stack:** A (explicit time) → C (multi-scale) → B (reduce LSTM dependency)

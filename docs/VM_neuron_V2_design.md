@@ -1,3 +1,8 @@
+> Historical design notes. See [project state](project_state.md) for audited
+> implementation and evidence. Frozen kappa values in the implemented log-output
+> bank scale amplitude, not frequency or peak sharpness; temporal decomposition
+> and reduced LSTM dependence are hypotheses requiring controlled comparisons.
+
   #Proposed Approaches
   1. A: Teach VM about time directly (explicit temporal inputs)
   2. C: Multi-scale periodic decomposition (hierarchy of timescales)

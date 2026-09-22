@@ -1,5 +1,10 @@
 # CLAUDE.md - Project Instructions
 
+> Historical project guidance. `AGENTS.md` and `docs/project_state.md` supersede
+> outdated map, environment and mathematical claims below. In particular,
+> novelty is unestablished, and composed-model periodicity requires checking
+> projections and residuals. Use the current benchmark's explicit gates.
+
 ## Project Overview
 
 Von Mises neuron research project. Implements a novel neural network layer

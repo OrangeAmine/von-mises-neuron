@@ -142,6 +142,96 @@ class TestExtractAngularTimeFeatures:
         result = extract_angular_time_features(index)
         assert result.dtype == np.float64
 
+    @pytest.mark.parametrize("explicit_origin", [False, True])
+    def test_custom_period_is_independent_of_split(self, explicit_origin):
+        """A 48-hour phase stays aligned when splits start mid-cycle."""
+        index = pd.date_range("2024-02-27 05:30", periods=113, freq="1h")
+        kwargs = {"phase_origin": index[0]} if explicit_origin else {}
+        whole = extract_angular_time_features(index, [48], **kwargs)
+        splits = [index[:53], index[53:81], index[81:]]
+        separate = np.concatenate([
+            extract_angular_time_features(part, [48], **kwargs) for part in splits
+        ])
+        np.testing.assert_array_equal(separate, whole)
+        steps = np.diff(whole[:, 0]) % (2 * np.pi)
+        np.testing.assert_allclose(steps, 2 * np.pi / 48, atol=1e-10)
+        if explicit_origin:
+            assert whole[0, 0] == 0
+
+    def test_custom_epoch_negative_and_fractional_hours(self):
+        """Elapsed cycles wrap before the epoch and resolve fractional hours."""
+        index = pd.DatetimeIndex(["1969-12-31 23:30", "1970-01-01 00:30"])
+        result = extract_angular_time_features(index, [48])
+        np.testing.assert_allclose(result[:, 0], 2 * np.pi * np.array([47.5, 0.5]) / 48)
+
+    def test_calendar_fractional_seconds(self):
+        """Daily, weekly, and yearly positions preserve sub-second time."""
+        index = pd.DatetimeIndex(["2024-01-01 06:30:15.123456789"])
+        hours = 6 + 30 / 60 + 15.123456789 / 3600
+        expected = 2 * np.pi * np.array([hours / 24, hours / 168, hours / (366 * 24)])
+        np.testing.assert_allclose(extract_angular_time_features(index)[0], expected, atol=1e-14)
+
+    @pytest.mark.parametrize("year,days", [(2023, 365), (2024, 366)])
+    def test_annual_year_boundary(self, year, days):
+        """The final fractional day approaches 2π and Jan 1 resets to zero."""
+        index = pd.DatetimeIndex([
+            f"{year}-01-01", f"{year}-12-31 23:30", f"{year + 1}-01-01"
+        ])
+        result = extract_angular_time_features(index, [8766])[:, 0]
+        expected = np.array([0, 2 * np.pi * (1 - 0.5 / (days * 24)), 0])
+        np.testing.assert_allclose(result, expected)
+        circular_step = (result[2] - result[1]) % (2 * np.pi)
+        np.testing.assert_allclose(circular_step, 2 * np.pi * 0.5 / (days * 24))
+
+    def test_leap_day_is_continuous(self):
+        """Leap day consumes one ordinary calendar day in the leap year."""
+        index = pd.date_range("2024-02-28", periods=3, freq="1D")
+        result = extract_angular_time_features(index, [8766])[:, 0]
+        np.testing.assert_allclose(np.diff(result), 2 * np.pi / 366)
+
+    def test_week_and_day_boundary(self):
+        """Sunday midnight wraps both cycles with the expected circular step."""
+        index = pd.DatetimeIndex(["2024-01-07 23:30", "2024-01-08 00:00"])
+        result = extract_angular_time_features(index, [24, 168])
+        np.testing.assert_allclose(result[1], 0)
+        np.testing.assert_allclose((result[1] - result[0]) % (2 * np.pi),
+                                   2 * np.pi * 0.5 / np.array([24, 168]))
+
+    @pytest.mark.parametrize("start,local_hours", [
+        ("2024-03-31 00:00", [1, 3, 4]),
+        ("2024-10-27 00:00", [2, 2, 3]),
+    ])
+    def test_dst_calendar_and_elapsed_semantics(self, start, local_hours):
+        """Calendar cycles follow local clocks; elapsed cycles follow UTC."""
+        utc_index = pd.date_range(start, periods=3, freq="1h", tz="UTC")
+        local_index = utc_index.tz_convert("Europe/Budapest")
+        local = extract_angular_time_features(local_index, [24, 48])
+        utc = extract_angular_time_features(utc_index, [24, 48])
+        np.testing.assert_allclose(local[:, 0], 2 * np.pi * np.array(local_hours) / 24)
+        np.testing.assert_array_equal(local[:, 1], utc[:, 1])
+        np.testing.assert_allclose(np.diff(local[:, 1]) % (2 * np.pi), 2 * np.pi / 48)
+
+    @pytest.mark.parametrize("periods", [[], [0], [-48], [np.inf], [np.nan]])
+    def test_invalid_periods(self, periods):
+        with pytest.raises(ValueError, match="periods"):
+            extract_angular_time_features(pd.date_range("2024-01-01", periods=2), periods)
+
+    def test_empty_index(self):
+        result = extract_angular_time_features(pd.DatetimeIndex([]), [24, 48, 8766])
+        assert result.shape == (0, 3)
+        assert result.dtype == np.float64
+
+    def test_rejects_missing_timestamp(self):
+        with pytest.raises(ValueError, match="NaT"):
+            extract_angular_time_features(pd.DatetimeIndex([pd.NaT]))
+
+    def test_rejects_timezone_mismatch(self):
+        with pytest.raises(ValueError, match="timezone awareness"):
+            extract_angular_time_features(
+                pd.date_range("2024-01-01", periods=2, tz="UTC"),
+                [48], phase_origin=pd.Timestamp("2024-01-01"),
+            )
+
 
 from src.temporal import FrequencyBankVonMises
 

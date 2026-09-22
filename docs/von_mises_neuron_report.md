@@ -1,5 +1,11 @@
 # Von Mises Neuron — Project Report
 
+> Historical report. See [project state](project_state.md) and the
+> [current comparison protocol](controlled_comparison_plan.md) for audited claims.
+> Core periodicity does not certify composed models with raw-input residuals.
+> Log VM layers have a matched Cartesian sine/cosine representation. Synthetic
+> domains and single-seed results do not establish real-world superiority.
+
 ## 1. The Problem: Standard Neurons Break Periodicity
 
 A standard neuron computes `s = f(W·θ + b)`. When the input `θ` is an angle
