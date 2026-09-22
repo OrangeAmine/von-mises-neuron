@@ -1,0 +1,202 @@
+{
+  "schema": "vm_n04_context_receipt_v1",
+  "created_utc": "2026-09-22T14:53:50.702726+00:00",
+  "purpose": "Read-only cross-project scientific context and provisional design audit for VM-N04; not independent replay of historical evidence.",
+  "receiving_project": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron",
+  "inherited_baseline": {
+    "research_baseline_commit": "a7431a926c751868b11a3918c6cdd29be6540a32",
+    "shared_archive_sha256": "18191869b3383ee437e33de713b4aaed6a7f103e9ae88c5581ce8ea8a44f31b5",
+    "archive_verification_owner": "Parent VM-N04 implementation agent; this audit did not duplicate extraction or verification."
+  },
+  "context": {
+    "root": "D:\\Desktop\\Claude\\Hybrid_models_forecasting",
+    "authorization": "User explicitly supplied this absolute checkout read-only.",
+    "task_classes": [
+      "implementation",
+      "evidence"
+    ],
+    "validator": {
+      "status": "passed",
+      "execution_owner": "Parent VM-N04 agent before delegation; result reused, not rerun by this audit agent.",
+      "python": "py -3.11",
+      "head": "beb32d5c1a205a155242e7bc52de6d552caaa349",
+      "checkout_state": "dirty",
+      "manifest_sha256": "49aed2956b668ffdbf00c531a4f4967515724ebd9747132b1618eb934f0af337",
+      "scope": "Navigation validation only, not scientific payload validation."
+    },
+    "routing": {
+      "selected_catalog_ids": [],
+      "catalog_note": "Evidence catalog was checked for the explicitly named synthetic occupancy owner; it has no dedicated ev-* record. Direct named study README/protocol/report owner used; unrelated Paper4/Paper6 evidence not consulted.",
+      "owners": [
+        "docs/research/synthetic_occupancy_2026-09-16/README.md",
+        "docs/research/synthetic_occupancy_2026-09-16/protocol.md",
+        "docs/research/synthetic_occupancy_2026-09-16/v2_protocol.md",
+        "docs/learning/explainers/04a-first-order-systems.md",
+        "docs/learning/labs/sensor_timing.md"
+      ]
+    },
+    "files": [
+      {
+        "path": ".agents/skills/research-workspace-context/SKILL.md",
+        "sha256": "961927f5e59817bf5320e2d6b5b7e80c8aab5a6eb8db225a766b914cd5f9d524",
+        "bytes": 2235
+      },
+      {
+        "path": ".agents/skills/research-workspace-context/references/authority-routing.md",
+        "sha256": "a6ca490c3047a70afe5d038b236af78f998b3e2c91bf9964e9e608246b63b650",
+        "bytes": 1736
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "5064a953f084a932f99eca94ee89d54e1afc03a3e44ed91294d1d13255a3c7ef",
+        "bytes": 8962
+      },
+      {
+        "path": "START_HERE.md",
+        "sha256": "e4830ac2df8f3f9f279752db93756633d4ef880fc21d739449b5787d54897365",
+        "bytes": 3318
+      },
+      {
+        "path": "docs/research/authority.md",
+        "sha256": "82a029fade81f67240d8e35c6093afd266032ff0ad9803ebd205e434c2f7317d",
+        "bytes": 11519
+      },
+      {
+        "path": "docs/research/evidence.md",
+        "sha256": "3ea6f582a8132a41a7e74f6c534db7eb4db7e8ef77899b7e31e0cc89245b78f3",
+        "bytes": 13177
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/README.md",
+        "sha256": "83574772375311e4a350564ec979840f73ab67d98a175a0cd80194a1d33859f1",
+        "bytes": 6090
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/protocol.md",
+        "sha256": "a9c654d0a0f2e03465ea2687394b7ad89aea6f0b57de52077876411bad660dec",
+        "bytes": 11196
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/v2_protocol.md",
+        "sha256": "7306629c2f61c02f0a64a39ca2d18280a0c22c669ec1b26f1f17e882e6ac561d",
+        "bytes": 7823
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/milestone_6.md",
+        "sha256": "4501ff71477b9f38d7eb8615a726a88c41a048c902c051624db1b87a0e8a27ae",
+        "bytes": 6413
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/statistical_assessment.md",
+        "sha256": "58b8a8b131760917dd0c415e8e2f29a70c3e0e93960c3fde633dcd6ec5c5c76a",
+        "bytes": 3318
+      },
+      {
+        "path": "docs/research/synthetic_occupancy_2026-09-16/v2_statistical_assessment.md",
+        "sha256": "2e6360756c4a1d829dfd5b46e73eaababf0ae37ad8e93e737e30a142ee3afe74",
+        "bytes": 6784
+      },
+      {
+        "path": "docs/learning/explainers/04a-first-order-systems.md",
+        "sha256": "6fa5bdfbdb2783473561dd11a5b2d89db34f7b86f4e1be9f99c2652749bc138d",
+        "bytes": 31352
+      },
+      {
+        "path": "docs/learning/labs/sensor_timing.md",
+        "sha256": "64117eb0d8d8a0a31e9dd0545784aede016c95eeb2d46496e5b257f06e70c8ff",
+        "bytes": 12087
+      }
+    ],
+    "unavailable_resources": [],
+    "resources_not_accessed": [
+      "Raw sensor data",
+      "Ignored historical experiment arrays or checkpoints",
+      "Generated thesis binaries",
+      "Sibling source/model implementations or executable study imports"
+    ],
+    "missing_resource_note": "All required named text sources were available. Optional-local payload availability and integrity were not established."
+  },
+  "receiving_sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "3271727b9574c753373478ba808e6fd7598ef2159c32395bdf7c3294c92bf562",
+      "bytes": 8120
+    },
+    {
+      "path": "docs/project_state.md",
+      "sha256": "5b2abcf93e3303845ea8ecfe7ada0473de7a73955588198a67c7d2ef3f5e0959",
+      "bytes": 35960
+    },
+    {
+      "path": "docs/controlled_comparison_results.md",
+      "sha256": "2611cd824212a45f03bee248a875bfe60b39f7520cec4620cf752697a3354370",
+      "bytes": 13531
+    },
+    {
+      "path": "docs/vm_locality_v2_results.md",
+      "sha256": "aa8b1ce414e6dceec12603177eff77e47eb8dac8f3521dcb788f83cd1a246dde",
+      "bytes": 22656
+    },
+    {
+      "path": "docs/proposed_tasks_from_forecasting.md",
+      "sha256": "25678be84fd0bd240b6017ff72ac22ecac7b5479539cd5c4c79b8ce1b97d7362",
+      "bytes": 18473
+    }
+  ],
+  "current_original_dispatch_source": {
+    "path": "docs/proposed_tasks_from_forecasting.md",
+    "sha256": "ebee6c9c868b235554adea7817072b7b96dcf13993a611bb637dd7f3ebc5ad35",
+    "bytes": 21251
+  },
+  "source_findings": [
+    {
+      "source": "docs/controlled_comparison_results.md",
+      "finding": "A held-out DST/elapsed-clock mismatch reversed an apparent convolution/residual benefit. With aligned clocks, calendar SinCos was competitive with TemporalVM. Occupancy forecasts remained worse than persistence. Clock semantics and simple references are necessary before interpreting architectural differences.",
+      "status": "Reported historical result; not replayed in this audit."
+    },
+    {
+      "source": "docs/vm_locality_v2_results.md",
+      "finding": "The locked locality-v2 scientific gate failed despite aggregate gains against fixed banks because smooth-family error regressed. Larger Fourier bases were stronger in well-sampled cells and joint Adam beat variable projection overall. Static scalar approximation does not establish forecasting benefit.",
+      "status": "Reported historical result; not replayed in this audit."
+    },
+    {
+      "source": "docs/research/synthetic_occupancy_2026-09-16/milestone_6.md",
+      "finding": "The value of clock information changed with training attendance distribution. Variable training helped variable attendance and harmed perfect routines. Numeric versus cyclic clock had no consistent ranking; probability inference and next-day presence are different targets from future concentration.",
+      "status": "Reported sibling result; no payload replay or metrics re-estimation."
+    },
+    {
+      "source": "docs/research/synthetic_occupancy_2026-09-16/v2_protocol.md",
+      "finding": "Paired training regimes use identical held-out trajectories, with independent noise/attendance streams. Six rooms are the independent units. Independent future-day attendance remains unobservable from present sensors; a known-law probability is privileged and is not a universal short-lead optimal forecast.",
+      "status": "Design context, not a claim about VM-N04 outcomes."
+    },
+    {
+      "source": "docs/learning/explainers/04a-first-order-systems.md",
+      "finding": "The scalar zero-order-hold update x_next=x_ss+(x-x_ss)*exp(-dt/tau) is exact only for a first-order model with inputs/coefficients constant across that interval. It is not proof of real-building model fidelity.",
+      "status": "Adapted mathematical contract; receiving implementation requires its own numerical checks."
+    },
+    {
+      "source": "docs/learning/labs/sensor_timing.md",
+      "finding": "Use both corrected event time and availability time at issuance. An aggregate is available after bin completion and all required arrivals. Causal controls must mutate unavailable historical values as well as future events. Preserve cadence and validate the entire input/target span.",
+      "status": "Adapted timing contract; receiving pipeline requires its own tests."
+    }
+  ],
+  "provisional_design_review": {
+    "reviewed_design": "24 factorial test regimes: tau/event ratio .25,1,4; stable/test+3h phase shift; regular/irregular attendance; no outage/bounded2h outage.56days with28/14/14 splits at15min cadence,24-step history,16-step horizon. Four neural calendar branches and three simple references.6confirmation rooms with2nested initialization seeds; paired room-cluster analysis.",
+    "assessment": "Scientifically bounded and suitable for a conditional synthetic answer if the following choices are fixed prospectively and disclosed; this receipt is not a frozen-protocol approval or result acceptance.",
+    "recommendations": [
+      "Use six training cells and reuse each fitted model over its four shifted/outage test variants. Pair room, noise and attendance streams where the intervention is intended to preserve them.",
+      "Define whether changing tau holds source rate or steady-state gain fixed. x_next=a*x+(1-a)*(baseline+amplitude*attendance) holds gain fixed and changes source rate amplitude/tau; describe it as smoothing isolation rather than an isolated airflow change.",
+      "Use a declared useful fixed-kernel width. For exp(kappa*(cos(delta)-1)), kappa about20 gives about2hours full width at half maximum on a24hour circle. Width choice and64extra learned center/width parameters remain capacity differences. Fourier16harmonics supplies32features and is a capable control.",
+      "Hourly origins may alias grid-aligned event edges. Prefer all15min test origins or a prospective rotating phase, otherwise report coverage and scope conclusions to hourly issuance.",
+      "Average nested initializations within room/regime, then compare paired whole rooms. Six rooms remain n=6. Bootstrap intervals are descriptive small-sample synthetic uncertainty, not population precision. Include direction counts and ranges.",
+      "Count unique training and validation target observations separately from overlapping window-label uses; selection labels belong in the information budget.",
+      "Split-contained windows exclude the first6hours after a test-boundary shift. Report excluded counts and avoid claiming immediate adaptation at the shift boundary. Six-hour history is shorter than the slowest tau8hours, a scope limitation.",
+      "Declare response indexing explicitly: forcing over[t,t+dt) affects the later state. Quantized attendance edges must align with integration intervals or the solver must split at transitions.",
+      "Keep raw angular inputs unnormalized, normalize sensor values only on train rows, provide identical future clock coordinates to calendar arms, and claim periodicity only at the calendar boundary.",
+      "Keep the regular timestamp grid during outage, causally carry forward only already available readings with age/missing indicators, and use common eligible origins and unchanged target truth for scoring.",
+      "Fix normalization denominator, room/regime aggregation order, practical5percent co-primary benefit threshold and every10percent regime guard before reserved access. A gate failure is a completed study.",
+      "Keep clock-consistency diagnostics separate from actual routine shifts; equality at arrival/issuance and complete-bin availability must be explicit."
+    ]
+  },
+  "preservation": "Only docs/vm_n04_context_receipt.json was written by this audit. Sibling source, historical studies, owner notes, frozen sources/configuration, and original checkout were not modified."
+}

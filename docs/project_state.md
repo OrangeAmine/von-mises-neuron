@@ -1,5 +1,73 @@
 # Project state: ownership handoff
 
+## Completed VM-N04 — dynamics and changing routines (2026-09-22)
+
+The authorized synthetic forecasting delivery is complete in this isolated
+worktree. See [the report](vm_n04_report_v1.md),
+[prospective protocol](vm_n04_protocol_v1.md),
+[configuration](../configs/vm_n04_v1.json),
+[672 result cells](vm_n04_cells_v1.csv),
+[machine-readable results](vm_n04_results_v1.json) and
+[reproduction guide](vm_n04_usage.md).
+
+**The locked scientific gate failed.** Across six independent confirmation
+room draws and 24 paired regimes, learned kernels improved one-hour balanced
+normalized RMSE only **1.58% over Fourier** (paired room bootstrap 95% interval
+1.24–1.91%), below the 5% minimum, and were **2.10% worse than fixed kernels**
+(improvement interval -2.92% to -1.30%). The fastest regular stable/outage cell
+also regressed 12.86% against Fourier, failing the unchanged 10% regime guard.
+No arm replaced the prespecified candidate or comparator after seeing results.
+
+Calendar information helped under stable routines: learned reduced one-hour
+normalized error 42.23% against the matched sensor-only model. A three-hour
+test-only routine shift reversed that benefit, increasing error 68.42%.
+Fourier/fixed controls show the same conditional calendar-value pattern. This
+does not establish adaptive-locality superiority, building-population validity
+or deployment readiness. All three calendar arms helped versus sensor-only in
+every stable one-hour regime and harmed it in every shifted regime.
+
+New versioned data, models, training, runner and analysis files leave inherited
+scientific sources/configs intact. The regular UTC 15-minute grid separates
+forcing, exact first-order response, noise and delayed availability. All models
+share causal history and eligible origins; no outage origins were dropped.
+Each split keeps its own normalization/window boundaries, with raw future clock
+angles. Known future sensors and realized attendance never enter predictors.
+
+All **432 neural fits completed without refits or dropped arms**. Original
+pilot final-summary serialization failed after all 48 fits; its bytes remain
+preserved. A separately locked storage-only v1.1 controller recovered those
+completed records, retaining missing original reference timers and explicitly
+estimated pilot duration. Rate 0.01 was selected solely from the original
+validation histories. Development's 96 fits took 85.52 seconds; confirmation's
+288 fits took 248.63 seconds, below unchanged 900/1800-second caps. Use
+`scripts/run_vm_n04_v1_1.py` for reproduction; v1 remains the exact original
+pilot source. The [recovery contract](vm_n04_storage_recovery_v1_1.md) explains
+the exception and timing limits.
+
+The unchanged standard benchmark passed. The four new neural adapters passed
+absolute thresholds but **failed base-VM RMSE/MAE/MAPE regression gates**, so
+they remain **unvalidated** under repository policy. Residual ridge passed both
+checks. Numerical tests or the completed study do not override failed model
+acceptance. See [engineering evidence](vm_n04_engineering_v1.json).
+
+Independent replay passed 52,663 checks, covering all 288 confirmation
+checkpoints, 1,584 prediction arrays and 2,342 artifact hashes. All 42,768
+metric comparisons matched exactly; maximum CPU/GPU discrepancy was
+2.30e-6 normalized units. [Replay receipt](vm_n04_replay_v1.json).
+The final full suite passed **1,465 tests in 81.49 seconds**, and the separate
+[statistical review](vm_n04_review_v1.md) confirmed the paired analysis and
+covered all eleven declared statistical/interpretation checks.
+The original/successor source locks are
+`35144cbadfced8c4f10ce6dc11d8a96195b8abdf10a99c9505959c65f140e7e9` and
+`069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74`.
+
+Full arrays/checkpoints are ignored local artifacts under
+`results/vm_n04/study_v1_1/`; the failed original pilot is under `study_v1/`.
+Inherited baseline is `a7431a926c751868b11a3918c6cdd29be6540a32`; all 130 supplied
+snapshot entries were verified before use. No original/sibling checkout,
+historical results, source/config locks or owner notes were modified. Real-data
+replication, VM-N05/N06, and sibling-task results were not used or launched.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed

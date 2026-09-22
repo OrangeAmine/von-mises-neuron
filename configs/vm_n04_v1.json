@@ -1,0 +1,36 @@
+{
+  "version": "vm_n04_v1",
+  "baseline_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "data": {
+    "dt_minutes": 15, "split_days": [28, 14, 14], "event_duration_hours": 2.0,
+    "lookback": 24, "horizon": 16, "stride": 4, "max_fill_age_steps": 12,
+    "delay_steps": 1, "noise_ppm": 10.0, "baseline_ppm": 420.0,
+    "shift_hours": 3.0, "start_utc": "2026-01-05T00:00:00Z",
+    "outage_test_days": [2, 6, 10]
+  },
+  "tau_ratios": [0.25, 1.0, 4.0],
+  "attendance": [false, true],
+  "test_shift": [false, true],
+  "test_outage": [false, true],
+  "arms": ["none", "fourier", "fixed", "learned"],
+  "references": ["ridge", "persistence", "seasonal"],
+  "model": {"hidden_size": 32, "calendar_features": 32, "fourier_harmonics": 16, "initial_kappa": 32.0},
+  "training": {
+    "epochs": 80, "batch_size": 256, "validation_every": 5,
+    "learning_rates": [0.003, 0.01], "weight_decay": 0.0001,
+    "gradient_clip": 1.0, "ridge_penalties": [0.0001, 0.01, 1.0]
+  },
+  "stages": {
+    "pilot": {"room_seeds": [410101], "initialization_seeds": [701], "cap_seconds": 600},
+    "development": {"room_seeds": [420101, 420103], "initialization_seeds": [701, 709], "cap_seconds": 900},
+    "confirmation": {"room_seeds": [430101, 430103, 430107, 430109, 430111, 430113], "initialization_seeds": [701, 709], "cap_seconds": 1800}
+  },
+  "analysis": {
+    "endpoint_steps": [1, 4, 16], "primary_step": 4,
+    "primary_comparators": ["fourier", "fixed"],
+    "minimum_improvement": 0.05, "maximum_regime_regression": 0.10,
+    "bootstrap_seed": 94004, "bootstrap_draws": 10000,
+    "normalization": "per-training-trajectory observed sensor standard deviation",
+    "clock_defect_minutes": 60
+  }
+}
