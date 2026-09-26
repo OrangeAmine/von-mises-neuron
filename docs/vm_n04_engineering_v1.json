@@ -1,0 +1,133 @@
+{
+  "full_suite_completed": true,
+  "standard_benchmarks_completed": true,
+  "full_suite": {
+    "passed": 1433,
+    "seconds": 82.83
+  },
+  "supplemental": {
+    "passed": 134,
+    "seconds": 4.16,
+    "scope": "All model tests incl CUDA plus new analyzer tests; overlaps full suite"
+  },
+  "standard_unchanged_passed": true,
+  "new_model_acceptance": {
+    "all_runs_attempted": true,
+    "all_passed": false,
+    "acceptance": {
+      "VonMises": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "absolute"
+      },
+      "DynamicsNone": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.54378 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.12477 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.858146 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsFourier": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.49082 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.0786 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.850063 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsFixed": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.46692 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.06276 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.847506 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsLearned": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.48245 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.07751 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.849813 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "ResidualRidge": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": true
+      },
+      "Persistence": {
+        "passed": true,
+        "absolute_passed": false,
+        "failures": [],
+        "gate_policy": "finite-only reference",
+        "diagnostic_regression_vs_base": false,
+        "diagnostic_regression_failures": [
+          "  RMSE: 52.1991 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 43.2424 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 7.24343 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+          "  R2: -0.9976 is 1.9766 below base 0.9790"
+        ]
+      },
+      "Seasonal": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "finite-only reference",
+        "diagnostic_regression_vs_base": false,
+        "diagnostic_regression_failures": [
+          "  RMSE: 13.233 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 11.0735 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 1.84759 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+          "  R2: 0.8716 is 0.1073 below base 0.9790"
+        ]
+      }
+    },
+    "candidates": {
+      "DynamicsNone": false,
+      "DynamicsFourier": false,
+      "DynamicsFixed": false,
+      "DynamicsLearned": false,
+      "ResidualRidge": true
+    }
+  },
+  "evidence_sha256": {
+    "results/vm_n04/engineering/full_suite.xml": "bf6a7692c286dbaaa753373b5758787ce4a9eefcfc1207f421d159663f62cc17",
+    "results/vm_n04/engineering/supplemental.xml": "89e909d69b9e0be36bdd166f6da1f28b13901370e28a346024379a198e19a268",
+    "results/vm_n04/standard_unchanged/benchmark_results.json": "8a2d227629732294c0b57402115d9f9e257313eb34166164a25606c79c16280e",
+    "results/vm_n04/standard_adapters_v1/results.json": "e849f3140fd59bb89b04e815e86196a35c2dc08fd0eff7f4a0f056257d4086ba",
+    "results/vm_n04/standard_adapters_v1/validation.json": "5bfd510f1c25d464b39e6819ff6b5e67993d00f01a1a45c482eae7b582a4f321",
+    "results/vm_n04/standard_adapters_v1/manifest.json": "56e947fabc73ab7bd4e197a120052e8df3da71b6cc48004cc7905f8549adb21b",
+    "results/vm_n04/engineering/supplemental_final.xml": "572c7080d20d3554f21be450b68744ebf51af881859b5e2f8a02516d6fd6f48e",
+    "results/vm_n04/engineering/storage_repair.xml": "0e1759e6856473a2395671aa637a5775d0287ae521534d98549842a8337bbb57"
+  },
+  "scope": "Four new neural arms pass absolute gates but fail base-VM RMSE/MAE/MAPE regression; unvalidated. Ridge passes both. No gates or models retuned.",
+  "gpu_resident_context": "Read-only process identity check found an existing marimo forecast_lab.py app, not another launched GPU study; local study fits serialized.",
+  "storage_repair_tests": {
+    "passed": 19,
+    "seconds": 5.65
+  },
+  "storage_recovery": "No fit rerun; original pilot failed finalization retained separately; v1.1 changes JSON scalar serialization only.",
+  "post_confirmation_final_full_suite": {
+    "passed": 1465,
+    "seconds": 81.49,
+    "junit_sha256": "03ed4a651860f0e3a903e89b48c5de0489dcaf32307ff55a096b79ae4011abf0",
+    "timing": "After confirmation and all storage/analysis additions; original pre-confirmation engineering receipt unchanged."
+  }
+}
