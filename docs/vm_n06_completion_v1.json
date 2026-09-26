@@ -1,0 +1,80 @@
+{
+  "completed_utc": "2026-09-26T19:00:12.033248+00:00",
+  "status": "complete",
+  "worktree": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron",
+  "branch": "codex/vm-n06-decision-v1",
+  "dependency_commit": "c0ee369",
+  "preservation": {
+    "inherited_files_unchanged": 155,
+    "only_inherited_edit": "docs/project_state.md N06 addition",
+    "frozen_n06_sources_unchanged": 13,
+    "owner_notes": "VM_exploration.md byte-identical, untracked",
+    "gitattributes": "Original global byte-preservation rule retained verbatim; appended N06-only CRLF whitespace declarations."
+  },
+  "engineering": {
+    "full_suite_passed": true,
+    "full_suite": {
+      "passed": 1494,
+      "seconds": 85.76
+    },
+    "supplement": {
+      "passed": 32,
+      "seconds": 1.49,
+      "overlaps_full_suite": true
+    },
+    "standard_adapter_completed": true,
+    "standard_adapters_passed": false,
+    "evidence": {
+      "results/vm_n06/engineering/full_suite.xml": "ac6f96b4e53cc62f5f7b2ef0ac85a8f82c4cc5f11963e85343c301a636e4cce3",
+      "results/vm_n06/engineering/n06_supplement.xml": "4b8e0fed6489177b346c6789a9d8090aedc115e5541548f5a8fef0dcc8a63951",
+      "results/vm_n06/engineering/calendar_standard_v1/acceptance.json": "d99695c1ce57cab2b3d53ad00a1255f8f679108166c923d96a7c9bc9d5016edf"
+    }
+  },
+  "rollout_audit": {
+    "status": "passed",
+    "rollouts_checked": 360,
+    "intervals_checked": 103680,
+    "quadrature_rollouts": 20,
+    "max_state_error_ppm": 7.958078640513122e-13,
+    "max_quadrature_severity_error_ppm_hours": 1.8189894035458565e-12,
+    "runtime_seconds": 11.59587790002115,
+    "source_sha256": "aad41f37a354299c510d5c4b17147a1b3cc27545c8d94d42e69ca20164a442f4",
+    "scope": "Independent mass-balance formula, command delay, own-history observation, capacity, effort, starts/switches for all saved evaluation rollouts; root finding and numerical exposure quadrature for first room, all arms/regimes at margin 200. No refits or generator reruns."
+  },
+  "ui": {
+    "browser": "Codex in-app browser",
+    "three_views_visually_inspected": true,
+    "controls_checked": [
+      "timing both/first/last",
+      "reset restores both rows",
+      "normal/limited/long-delay/zero capacity",
+      "objective weights 0.02 and 2",
+      "all three explanation reveals"
+    ],
+    "console_errors": [],
+    "rendering": "source and duty use step paths; controlled states connect 15-minute boundary samples",
+    "fixed_setting_objective_winners": [
+      "vm",
+      "reactive"
+    ],
+    "optional_mobile_check": "not performed"
+  },
+  "docs_links_checked": true,
+  "scientific_gate_passed": false,
+  "new_calendar_adapters_validated": false,
+  "n05_intervals_used": false,
+  "delivery_file_hashes": {
+    "docs/vm_n06_demo/index.html": "2889649c1ac902343272c03ce54b6b8ef683741ddcab9460a852bf0c6bdfb003",
+    "docs/vm_n06_demo/data.js": "34be8eaba6dff6bb3287164e2e47734ba143f7939f65a34d0025c669217c5426",
+    "docs/figures/vm_n06_tradeoffs_v1.png": "90cd241292da8189245d5bef3fdea9c8571ba8ddfad2fc30720346c74548551c",
+    "docs/figures/vm_n06_timing_v1.png": "e6c40196442cf051779ea1852f62093d8d4bdcf7b3874334a2bcab43a0e6b2c0",
+    "scripts/render_vm_n06_timing.py": "a6017f73747ebc87ccb1b779361821d294082c0076560a04e76bc1483efdc97c",
+    "scripts/launch_vm_n06.py": "7592244f3372fab4c4176b70519927027753e51767bacff8efc8f734e2909975",
+    "scripts/prepare_n06_engineering.py": "7b08e81a9b16c6540e4b2ab807eda05790d2fc00aeca2e062fe7175ecc03c7a1",
+    "docs/vm_n06_rollout_audit_v1.json": "428562f130548283cf6b68582ef908a4d85075a7b4e2e74a0702e91c91f172e5",
+    ".gitattributes": "335af3187440f21915d56155fc3fb20f53d13b4a7eeb1fa718eb4a8f146224e7",
+    "scripts/bootstrap_n06_dependency.py": "513f266ae7ebca52de69dc24f056fcbf19f0975e570bb44722943abe541da168"
+  },
+  "git_diff_check_passed": true,
+  "bootstrap_repeat_rejected_without_mutation": true
+}

@@ -1,0 +1,491 @@
+{
+  "objectives": {
+    "exceedance_priority": {
+      "weight": 0.02,
+      "arms": {
+        "reactive": {
+          "mean_objective": 6.099521288307379,
+          "room_sd": 1.1277174496366296,
+          "room_objectives": [
+            7.0830550688099745,
+            7.0826124746314925,
+            5.75200121496408,
+            5.755821830614002,
+            6.760413430567021,
+            4.163223710257701
+          ],
+          "selected_margin_ppm": 200.0
+        },
+        "seasonal": {
+          "mean_objective": 3.4962576499825597,
+          "room_sd": 0.8181125834532735,
+          "room_objectives": [
+            4.236580073034867,
+            4.238631266216307,
+            2.842805429328421,
+            2.958309250528618,
+            4.213317980259613,
+            2.4879019005275285
+          ],
+          "selected_margin_ppm": 200.0
+        },
+        "fourier": {
+          "mean_objective": 3.402610516821475,
+          "room_sd": 0.793291177925515,
+          "room_objectives": [
+            4.239568766216307,
+            4.238631266216307,
+            2.842805429328421,
+            2.961479351838188,
+            3.778391606811964,
+            2.3547866805176616
+          ],
+          "selected_margin_ppm": 200.0
+        },
+        "vm": {
+          "mean_objective": 3.30969085079817,
+          "room_sd": 0.704226015664107,
+          "room_objectives": [
+            4.239568766216307,
+            3.8306780631711583,
+            2.848800218119587,
+            2.961479351838188,
+            3.6228320249261197,
+            2.3547866805176616
+          ],
+          "selected_margin_ppm": 200.0
+        },
+        "oracle": {
+          "mean_objective": 2.161368174831527,
+          "room_sd": 0.4209950676412268,
+          "room_objectives": [
+            2.560805373736314,
+            2.559361623736314,
+            1.941392953002064,
+            1.942152424556282,
+            2.4337031506863744,
+            1.5307935232718126
+          ],
+          "selected_margin_ppm": 200.0
+        }
+      },
+      "contrasts": {
+        "reactive": {
+          "relative_improvement": 0.4573851464142342,
+          "paired_95_interval": [
+            0.42898523673399636,
+            0.48474258596887143
+          ],
+          "paired_room_difference_vm_minus_control": [
+            -2.843486302593668,
+            -3.251934411460334,
+            -2.903200996844493,
+            -2.7943424787758135,
+            -3.1375814056409013,
+            -1.8084370297400394
+          ],
+          "regime_improvements": {
+            "stable": 0.9743583348088592,
+            "late_routine": -0.0201156834235261,
+            "low_capacity": 0.05198710762375447,
+            "long_delay": 0.9289863904389871
+          },
+          "practical_effect_passed": true,
+          "positive_interval_passed": true,
+          "regime_guard_passed": true,
+          "gate_passed": true
+        },
+        "seasonal": {
+          "relative_improvement": 0.05336185655119563,
+          "paired_95_interval": [
+            0.005821501679556973,
+            0.10343440049546261
+          ],
+          "paired_room_difference_vm_minus_control": [
+            0.0029886931814395723,
+            -0.40795320304514826,
+            0.005994788791165995,
+            0.0031701013095699615,
+            -0.5904859553334934,
+            -0.13311522000986686
+          ],
+          "regime_improvements": {
+            "stable": -0.06440677966101704,
+            "late_routine": -0.0018252642784943873,
+            "low_capacity": 6.119869061405048e-06,
+            "long_delay": 0.5954512662925936
+          },
+          "practical_effect_passed": true,
+          "positive_interval_passed": true,
+          "regime_guard_passed": true,
+          "gate_passed": true
+        },
+        "fourier": {
+          "relative_improvement": 0.02730834621357292,
+          "paired_95_interval": [
+            -0.000681371861441793,
+            0.061535309609758546
+          ],
+          "paired_room_difference_vm_minus_control": [
+            0.0,
+            -0.40795320304514826,
+            0.005994788791165995,
+            0.0,
+            -0.15555958188584418,
+            0.0
+          ],
+          "regime_improvements": {
+            "stable": -0.02614379084967311,
+            "late_routine": -0.0009514790067983725,
+            "low_capacity": 8.764996117460733e-06,
+            "long_delay": 0.42276047738462597
+          },
+          "practical_effect_passed": false,
+          "positive_interval_passed": false,
+          "regime_guard_passed": true,
+          "gate_passed": false
+        }
+      }
+    },
+    "effort_priority": {
+      "weight": 2.0,
+      "arms": {
+        "reactive": {
+          "mean_objective": 10.254671043590141,
+          "room_sd": 1.5933690602421806,
+          "room_objectives": [
+            11.439605128698403,
+            11.424627424993819,
+            10.116955763057915,
+            10.13548520888249,
+            11.166200235385238,
+            7.245152500522986
+          ],
+          "selected_margin_ppm": 0.0
+        },
+        "seasonal": {
+          "mean_objective": 10.888503363467004,
+          "room_sd": 1.5251716313619563,
+          "room_objectives": [
+            12.04020536373308,
+            12.546446522800696,
+            9.55799733272578,
+            10.082566968253646,
+            12.118613325718195,
+            8.985190667570638
+          ],
+          "selected_margin_ppm": 0.0
+        },
+        "fourier": {
+          "mean_objective": 10.931640156229792,
+          "room_sd": 1.6638755289115283,
+          "room_objectives": [
+            12.090830218492847,
+            13.016888083701659,
+            9.406122332725781,
+            9.981316995899652,
+            12.067989367487051,
+            9.026693939071766
+          ],
+          "selected_margin_ppm": 0.0
+        },
+        "vm": {
+          "mean_objective": 10.926206164351676,
+          "room_sd": 1.7659336611611136,
+          "room_objectives": [
+            12.090830218492847,
+            13.174647257693442,
+            9.406122332725781,
+            10.102203439957695,
+            12.067989367487051,
+            8.71544436975324
+          ],
+          "selected_margin_ppm": 0.0
+        },
+        "oracle": {
+          "mean_objective": 9.078496788027856,
+          "room_sd": 2.408651553748823,
+          "room_objectives": [
+            11.520901813967432,
+            11.520901813967432,
+            7.664591346693777,
+            7.659455162073381,
+            10.393446361530337,
+            5.711684229934772
+          ],
+          "selected_margin_ppm": 0.0
+        }
+      },
+      "contrasts": {
+        "reactive": {
+          "relative_improvement": -0.06548577891060581,
+          "paired_95_interval": [
+            -0.1333487184050075,
+            0.0030372479328806268
+          ],
+          "paired_room_difference_vm_minus_control": [
+            0.651225089794444,
+            1.750019832699623,
+            -0.7108334303321335,
+            -0.03328176892479462,
+            0.901789132101813,
+            1.4702918692302536
+          ],
+          "regime_improvements": {
+            "stable": -0.107968730254558,
+            "late_routine": -0.8586775477686026,
+            "low_capacity": -0.012741608651855696,
+            "long_delay": 0.39070514835093617
+          },
+          "practical_effect_passed": false,
+          "positive_interval_passed": false,
+          "regime_guard_passed": false,
+          "gate_passed": false
+        },
+        "seasonal": {
+          "relative_improvement": -0.0034626247176605673,
+          "paired_95_interval": [
+            -0.024521269141342783,
+            0.016094394163597814
+          ],
+          "paired_room_difference_vm_minus_control": [
+            0.05062485475976786,
+            0.6282007348927454,
+            -0.15187499999999865,
+            0.019636471704048475,
+            -0.05062395823114407,
+            -0.2697462978173988
+          ],
+          "regime_improvements": {
+            "stable": -0.029780065410311307,
+            "late_routine": -0.019924213976786564,
+            "low_capacity": -0.0023992191644288674,
+            "long_delay": 0.04914740408450158
+          },
+          "practical_effect_passed": false,
+          "positive_interval_passed": false,
+          "regime_guard_passed": true,
+          "gate_passed": false
+        },
+        "fourier": {
+          "relative_improvement": 0.0004970884332502479,
+          "paired_95_interval": [
+            -0.0084246806972248,
+            0.014749558801393281
+          ],
+          "paired_room_difference_vm_minus_control": [
+            0.0,
+            0.15775917399178319,
+            0.0,
+            0.12088644405804239,
+            0.0,
+            -0.31124956931852665
+          ],
+          "regime_improvements": {
+            "stable": -0.010845953476317227,
+            "late_routine": 0.006469526558117278,
+            "low_capacity": -0.0004551386219768805,
+            "long_delay": 0.0028551283092648205
+          },
+          "practical_effect_passed": false,
+          "positive_interval_passed": false,
+          "regime_guard_passed": true,
+          "gate_passed": false
+        }
+      }
+    }
+  },
+  "primary_gate_passed": false,
+  "independent_units": [
+    630601,
+    630602,
+    630603,
+    630604,
+    630605,
+    630606
+  ],
+  "selection": {
+    "exceedance_priority": {
+      "reactive": {
+        "margin_ppm": 200.0,
+        "development_objectives": {
+          "0.0": 5.781580240182121,
+          "100.0": 5.782574946878105,
+          "200.0": 5.6466812022824975
+        }
+      },
+      "seasonal": {
+        "margin_ppm": 200.0,
+        "development_objectives": {
+          "0.0": 3.8772173562338152,
+          "100.0": 3.6084730010281043,
+          "200.0": 3.6010852525120587
+        }
+      },
+      "fourier": {
+        "margin_ppm": 200.0,
+        "development_objectives": {
+          "0.0": 3.821726638818166,
+          "100.0": 3.6077979796255004,
+          "200.0": 3.6041001936064663
+        }
+      },
+      "vm": {
+        "margin_ppm": 200.0,
+        "development_objectives": {
+          "0.0": 3.8210048546647455,
+          "100.0": 3.6075448546255005,
+          "200.0": 3.6041001936064663
+        }
+      },
+      "oracle": {
+        "margin_ppm": 200.0,
+        "development_objectives": {
+          "0.0": 2.624034186351456,
+          "100.0": 2.6316223019591916,
+          "200.0": 2.0140034450687923
+        }
+      }
+    },
+    "effort_priority": {
+      "reactive": {
+        "margin_ppm": 0.0,
+        "development_objectives": {
+          "0.0": 9.170164615182124,
+          "100.0": 9.272324946878104,
+          "200.0": 9.514178077282498
+        }
+      },
+      "seasonal": {
+        "margin_ppm": 0.0,
+        "development_objectives": {
+          "0.0": 10.659026731233816,
+          "100.0": 10.857129251028105,
+          "200.0": 11.93286337751206
+        }
+      },
+      "fourier": {
+        "margin_ppm": 0.0,
+        "development_objectives": {
+          "0.0": 10.678714138818165,
+          "100.0": 11.0430073546255,
+          "200.0": 12.247728318606466
+        }
+      },
+      "vm": {
+        "margin_ppm": 0.0,
+        "development_objectives": {
+          "0.0": 10.606526729664747,
+          "100.0": 11.0176948546255,
+          "200.0": 12.247728318606466
+        }
+      },
+      "oracle": {
+        "margin_ppm": 0.0,
+        "development_objectives": {
+          "0.0": 8.323649811351455,
+          "100.0": 9.083947301959192,
+          "200.0": 8.743837820068794
+        }
+      }
+    }
+  },
+  "matches": [
+    {
+      "regime": "stable",
+      "control": "reactive",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "stable",
+      "control": "seasonal",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "stable",
+      "control": "fourier",
+      "status": "attained_mean_effort_match",
+      "pairs": [
+        {
+          "vm_margin": 0.0,
+          "control_margin": 0.0,
+          "effort_m3": 4387.5,
+          "vm_exceedance_hours": 0.5024430827618003,
+          "control_exceedance_hours": 0.40290000628336053
+        }
+      ]
+    },
+    {
+      "regime": "late_routine",
+      "control": "reactive",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "late_routine",
+      "control": "seasonal",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "late_routine",
+      "control": "fourier",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "low_capacity",
+      "control": "reactive",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "low_capacity",
+      "control": "seasonal",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "low_capacity",
+      "control": "fourier",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "long_delay",
+      "control": "reactive",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "long_delay",
+      "control": "seasonal",
+      "status": "no_match",
+      "pairs": []
+    },
+    {
+      "regime": "long_delay",
+      "control": "fourier",
+      "status": "no_match",
+      "pairs": []
+    }
+  ],
+  "runtime_seconds": 8.135417099809274,
+  "environment": {
+    "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19044-SP0",
+    "numpy": "1.26.4",
+    "torch": "2.5.1+cu121",
+    "cuda": "12.1",
+    "device": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "torch_threads": 1,
+    "simulation_device": "cpu scalar exact recurrence"
+  },
+  "evaluation_rows": 360,
+  "source_lock_sha256": "c8c6e49ab7513cee2412d5fb6e467f65eb7d67c22043a6605dfa212e4a2dfd90",
+  "evaluation_lock_sha256": "4eb7a62d987ed05a09d33e519aef1f9a74bea743eef93fdd065f3aae77b9755b",
+  "analysis_source_sha256": "d4ea419afaf10f83577a4d9bf085b905b35124f74bb3e5e637e21bbc500f757f",
+  "eligibility": "All new calendar concentration adapters failed base regression gates; diagnostic only. N04 gates unchanged."
+}

@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-09-26T18:34:55.550188+00:00",
+  "status": "before any N06 study generation",
+  "files": {
+    "configs/vm_n06_v1.json": "f40a06e328c3ba5aab7fb54883be69c731e79ea9e2fe82ca8cf6a2239d551d10",
+    "docs/vm_n06_protocol_v1.md": "7f38cc3022f53e88301b0710c0306d12ca0c88f8a5d288ce9a70c91ed2d7885f"
+  }
+}

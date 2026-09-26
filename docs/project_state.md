@@ -1,5 +1,51 @@
 # Project state: ownership handoff
 
+## Completed VM-N06 — forecast timing and a simulated decision (2026-09-26)
+
+The authorized first delivery is complete on `codex/vm-n06-decision-v1` in the
+isolated `a3a8` worktree. Open [the offline demonstrator](vm_n06_demo/index.html),
+[guide](vm_n06_guide.md), [completion report](vm_n06_report_v1.md),
+[frozen contract](vm_n06_protocol_v1.md), [all achieved operating points](vm_n06_achieved_points_v1.csv)
+and [paired effects](vm_n06_results_v1.json). Launch with
+`py -3.11 scripts/launch_vm_n06.py`; it needs no sibling checkout or service.
+
+New separate `decision_*_v1.py` modules implement an exact controlled mass
+balance, training-only fixed-calendar source estimators and causal feedback/
+anticipatory policies. Airflow changes both removal and source equilibrium;
+attendance remains exogenous. Every policy receives its own delayed controlled
+observations, paired on common source/noise streams. Oracle information feeds a
+heuristic reference, not a mathematical bound. No concentration forecast is
+scored against changed truth as though its target were still uncontrolled.
+
+All 120 development and 360 evaluation rollouts completed: two development
+rooms, six new evaluation rooms, four paired regimes, five policies and three
+margin settings. Combined measured study-loop time was 8.14 seconds. Under the
+primary low effort penalty, VM improved the declared objective 45.74% over
+reactive and 5.34% over seasonal, but only **2.73% over Fourier** (paired 95%
+interval -0.07% to +6.15%). The prespecified 5% practical-benefit requirement
+and positive-interval requirement therefore failed; the **overall gate failed**.
+Routine shift removed most benefit; limited capacity defeated even oracle
+anticipation. The higher effort penalty favored reactive among non-oracle arms.
+The only attained mean-effort VM/Fourier match favored Fourier, and every failed
+match remains recorded. No energy saving or field-validation claim follows.
+
+The three deterministic teaching views explain equal-error timing differences,
+delay/capacity and poor oracle use, and objective-dependent rankings. Point
+forecasts only; N05 intervals are deferred. N04's scientific gate and four
+neural-adapter regression failures remain unchanged; its ridge acceptance is
+preserved. New calendar concentration adapters also passed absolute thresholds
+but failed base-VM regression and remain diagnostic/unvalidated.
+
+Full suite: 1,494 passed in 85.76 s. Final N06 supplement: 32 passed in 1.49 s
+(overlaps the full suite; do not sum). Additional saved-rollout and UI checks
+are recorded in [the completion receipt](vm_n06_completion_v1.json).
+Full arrays/readouts/source snapshots are local and ignored under
+`results/vm_n06/`. The dependency archive and all 156 files were verified;
+inherited dependency commit `c0ee369` is separate from N06 additions. All frozen
+N04/v1/v2 source/config files and owner notes are preserved. Only this state
+addition changes an inherited document. These evaluation seeds are now consumed;
+future scientific selection needs a new prospective contract and fresh draws.
+
 ## Completed VM-N04 — dynamics and changing routines (2026-09-22)
 
 The authorized synthetic forecasting delivery is complete in this isolated
