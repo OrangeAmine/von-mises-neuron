@@ -1,0 +1,25 @@
+{
+  "study": "N07-calendar-trust-v1",
+  "development_seeds": [720701, 720702],
+  "confirmation_seeds": [730701, 730702, 730703, 730704, 730705, 730706, 730707, 730708, 730709, 730710, 730711, 730712],
+  "eta_candidates": [0.5, 2.0, 8.0],
+  "feedback_half_life_updates": 24,
+  "ridge_penalties": [0.0001, 0.01, 1.0],
+  "regimes": ["stable", "shifted"],
+  "primary_step": 4,
+  "diagnostic_steps": [1, 16],
+  "bootstrap_seed": 740701,
+  "bootstrap_replicates": 10000,
+  "minimum_gain_percent": 5.0,
+  "maximum_regime_regression_percent": 10.0,
+  "development_cap_seconds": 180,
+  "confirmation_cap_seconds": 600,
+  "engineering_cap_seconds": 900,
+  "data": {
+    "tau_ratio": 1.0, "irregular": false, "outage": false,
+    "dt_minutes": 15, "split_days": [28, 14, 14],
+    "event_duration_hours": 2.0, "lookback": 24, "horizon": 16,
+    "stride": 4, "max_fill_age_steps": 12, "delay_steps": 1,
+    "noise_ppm": 10.0, "baseline_ppm": 420.0, "shift_hours": 3.0
+  }
+}

@@ -9,6 +9,12 @@ Start with [the audited project state](docs/project_state.md) and
 [the controlled comparison protocol](docs/controlled_comparison_plan.md).
 Historical design documents contain hypotheses, not established results.
 
+The latest follow-ups are complete: [N07 adaptive calendar trust](docs/calendar_trust_report_v1.md)
+passed its narrow synthetic scientific gate but failed the standard base-VM
+regression gate, so the mixtures remain unvalidated. The separate
+[source-uncertainty/control bridge](docs/source_interval_bridge_results_v1.md)
+is implemented and tested; it does not establish coverage or policy benefit.
+
 The six subsequent studies **N01–N06 are complete and integrated**. Start with
 the [consolidated research account](docs/research_account_n01_n06.md) or
 [interactive findings explorer](learning/vm_playground/research.html).

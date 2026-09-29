@@ -1,5 +1,45 @@
 # Project state: ownership handoff
 
+## Completed next steps 3 and 4 — calendar trust and target alignment (2026-09-29)
+
+The owner authorized the two previously deferred follow-ups. Next step 3 is
+complete as **N07**, a new frozen synthetic study of causal expert mixing;
+next step 4 is complete as a tested source-uncertainty/control interface, with
+no combined scientific campaign. See the [N07 report](calendar_trust_report_v1.md)
+and [interface completion](source_interval_bridge_results_v1.md).
+
+N07 selected eta 8 on two development rooms and evaluated 12 fresh paired rooms.
+The scientific intersection gate passed: balanced one-hour gains were 33.41%
+versus sensor-only, 45.93% versus seasonal-only and 30.38% versus fixed 50:50;
+all paired room-bootstrap lower bounds exceeded zero. Stable error was 7.21%
+worse than seasonal and shifted error 8.25% worse than sensor, both within the
+prospective 10% safeguards. Adaptation uses only received past errors, with no
+shift flag. The result is limited to the fixed synthetic generator and does
+not test VM superiority.
+
+**Engineering acceptance failed for both mixtures.** Their fresh standard
+benchmark absolute gates passed, but RMSE/MAE/MAPE regression against base VM
+exceeded 10%. Adaptive RMSE was 6.208 ppm versus base VM 5.357; sensor ridge
+passed both absolute and relative gates. The mixtures remain diagnostic and
+unvalidated under project rules despite the narrower scientific pass.
+
+The bridge accepts source generation in ppm*m3/h, rejects N05 CO2/ppm intervals,
+calibrates on fully arrived source paths and propagates conditional bounds under
+a named airflow plan. It preserves sensor delay and queued actions; inadequate
+calibration remains unbounded. Its two-plan example verifies deterministic
+containment, not statistical coverage or decision benefit. A later combined
+study still needs an explicit source-label/inference model, state/parameter
+uncertainty, causal calibration pools and a fallback policy.
+
+Fresh checks: **1,848 tests passed in 108.97 seconds**, 46 added for these
+follow-ups. All 24 confirmation cells and 96 arm/room/regime records replayed
+exactly, as did engineering forecasts/metrics. This was same-agent artifact
+review, not an independent replication. All 153 imported delivery files and
+owner notes remain unchanged from the integrated baseline. No new dependencies.
+Raw artifacts are local/ignored under `results/calendar_trust_v1/run_20260929/`
+and `results/source_interval_bridge_v1/`; compact tracked evidence accompanies
+both reports. Older state entries below retain their historical context.
+
 ## Completed integration — N01–N06 (2026-09-29)
 
 All six separately delivered tasks are integrated into this checkout. Original
@@ -32,7 +72,8 @@ inspection. See the integration record for scope and receipts; these counts are
 not additional scientific replications.
 
 No scientific campaign was rerun during integration. Adaptive trust in calendar
-information and reconciliation of N05/N06 targets remain deferred for discussion.
+information and reconciliation of N05/N06 targets were deferred at that point;
+the subsequent completion is recorded above.
 No general VM superiority, field validation, causal interpretation or energy
 saving is established. Sections below retain the earlier handoff and historical
 test counts.

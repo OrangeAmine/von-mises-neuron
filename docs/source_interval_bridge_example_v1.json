@@ -1,0 +1,209 @@
+{
+  "schema_version": "source-interval-bridge-v1",
+  "material_passport": "ENGINEERING EXAMPLE",
+  "scope": "deterministic conditional containment, not a coverage or policy study",
+  "plant": {
+    "volume_m3": 150.0,
+    "outdoor_ppm": 420.0,
+    "base_flow_m3h": 45.0,
+    "extra_flow_m3h": 405.0,
+    "dt_hours": 0.25,
+    "sensor_delay_steps": 1,
+    "actuator_delay_steps": 2,
+    "noise_ppm": 10.0,
+    "initial_ppm": 600.0,
+    "limit_ppm": 900.0
+  },
+  "source": {
+    "issue_ns": 900000000000000,
+    "start_ns": 899100000000000,
+    "step_ns": 900000000000,
+    "point": [
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0,
+      60000.0
+    ],
+    "lower": [
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0,
+      57000.0
+    ],
+    "upper": [
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0,
+      63000.0
+    ],
+    "model_id": "illustrative-fixed-source-v1",
+    "calibration_cutoff_ns": 303300000000000,
+    "calibration_paths": 20,
+    "target": "source_generation",
+    "units": "ppm*m3/h",
+    "scope": "conditional simultaneous source path; empirical, no coverage guarantee"
+  },
+  "received_state": {
+    "event_ns": 899100000000000,
+    "arrival_ns": 900000000000000,
+    "lower_ppm": 590.0,
+    "upper_ppm": 610.0
+  },
+  "plans": [
+    {
+      "plan": {
+        "plan_id": "base_after_queue",
+        "flow_m3_h": [
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0,
+          45.0
+        ],
+        "locked_prefix_m3_h": [
+          45.0,
+          45.0,
+          45.0
+        ]
+      },
+      "envelope": {
+        "issue_ns": 900000000000000,
+        "endpoint_ns": [
+          900900000000000,
+          901800000000000,
+          902700000000000,
+          903600000000000,
+          904500000000000,
+          905400000000000,
+          906300000000000,
+          907200000000000
+        ],
+        "lower_ppm": [
+          742.7569191871866,
+          810.9605467605498,
+          874.2360179857161,
+          932.9394242592338,
+          987.4011270547886,
+          1037.9276170777262,
+          1084.803239083551,
+          1128.2917920670545
+        ],
+        "upper_ppm": [
+          778.54334852568,
+          853.7953753011537,
+          923.6099529751214,
+          988.3799726629236,
+          1048.4699365376543,
+          1104.2180091161538,
+          1155.937920326228,
+          1203.9207310648655
+        ],
+        "plan_id": "base_after_queue",
+        "source_model_id": "illustrative-fixed-source-v1",
+        "bounded": true,
+        "scope": "conditional on source/state containment, exact plant, and specified flow path"
+      },
+      "truth_ppm_fixture_only": [
+        755.2622274050076,
+        825.7736656117842,
+        891.9930432716843,
+        954.2304897162921,
+        1012.773725412904,
+        1067.889681150938,
+        1119.826000231577,
+        1168.8124321144257
+      ],
+      "contained": true,
+      "limit_signal": "exceedance throughout the envelope at one or more endpoints"
+    },
+    {
+      "plan": {
+        "plan_id": "high_after_queue",
+        "flow_m3_h": [
+          45.0,
+          45.0,
+          45.0,
+          450.0,
+          450.0,
+          450.0,
+          450.0,
+          450.0,
+          450.0
+        ],
+        "locked_prefix_m3_h": [
+          45.0,
+          45.0,
+          45.0
+        ]
+      },
+      "envelope": {
+        "issue_ns": 900000000000000,
+        "endpoint_ns": [
+          900900000000000,
+          901800000000000,
+          902700000000000,
+          903600000000000,
+          904500000000000,
+          905400000000000,
+          906300000000000,
+          907200000000000
+        ],
+        "lower_ppm": [
+          742.7569191871866,
+          810.9605467605498,
+          671.5102557171614,
+          605.6386024582648,
+          574.5230366850084,
+          559.8250841441089,
+          552.8822629700132,
+          549.6027064657083
+        ],
+        "upper_ppm": [
+          778.54334852568,
+          853.7953753011537,
+          698.7791086422586,
+          625.5546091418145,
+          590.9658047366036,
+          574.6272104362808,
+          566.9094049700034,
+          563.2637718071721
+        ],
+        "plan_id": "high_after_queue",
+        "source_model_id": "illustrative-fixed-source-v1",
+        "bounded": true,
+        "scope": "conditional on source/state containment, exact plant, and specified flow path"
+      },
+      "truth_ppm_fixture_only": [
+        755.2622274050076,
+        825.7736656117842,
+        681.4387745334784,
+        613.8460589804126,
+        582.5037803300503,
+        568.2849955947736,
+        562.1547766510478,
+        559.8453256468956
+      ],
+      "contained": true,
+      "limit_signal": "within limit conditional on envelope assumptions"
+    }
+  ]
+}
