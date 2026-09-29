@@ -1,0 +1,141 @@
+{
+  "created_utc": "2026-09-26T18:42:32.828546+00:00",
+  "revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "sources": {
+    "configs/vm_n06_v1.json": "f40a06e328c3ba5aab7fb54883be69c731e79ea9e2fe82ca8cf6a2239d551d10",
+    "docs/vm_n06_protocol_v1.md": "7f38cc3022f53e88301b0710c0306d12ca0c88f8a5d288ce9a70c91ed2d7885f",
+    "docs/vm_n06_contract_lock.json": "afee661e8a7b75d2482c2453adaa280dd4ad337bafa41dc526fc91cb25d3409d",
+    "docs/vm_n06_context_receipt.json": "1cf7c18fccb68a82369fcd6dcd5482da2453c2084859785ee6f1f6e180820688",
+    "src/decision_plant_v1.py": "6025d74cfd6b1ac752b36520198e4af84d833ad132af6dc61613f290b7f0d37e",
+    "src/decision_forecasts_v1.py": "add2e84c7f3fb0aaae9aa32d69119e8b3df985f8c3effa7d1a37965cf559c556",
+    "src/decision_policies_v1.py": "14e98b2b508ba6ffbf83ade0609cb9c2117ebcd6694fb5576919e0259d19a4f1",
+    "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+    "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0",
+    "scripts/run_vm_n06_v1.py": "dcc0edb44663cc37218d1e235dd52f9a0959d99b68d9922065c24faa7d0f2a6d",
+    "scripts/validate_n06_calendar_v1.py": "6dd04ce8f21790d63ce8884e35f579214392f831c0fe73e49a4e33a150c33eda",
+    "scripts/analyze_vm_n06_v1.py": "d4ea419afaf10f83577a4d9bf085b905b35124f74bb3e5e637e21bbc500f757f",
+    "tests/test_decision_n06_v1.py": "2e68c4b62adc90cdfc5bb97912b24e67ce132c4df006974515bf78778f996df6"
+  },
+  "config": {
+    "version": "vm_n06_v1",
+    "training_days": 14,
+    "evaluation_days": 3,
+    "development_seeds": [
+      620601,
+      620602
+    ],
+    "evaluation_seeds": [
+      630601,
+      630602,
+      630603,
+      630604,
+      630605,
+      630606
+    ],
+    "teaching_seed": 640601,
+    "start_utc": "2027-01-04T00:00:00Z",
+    "plant": {
+      "volume_m3": 150.0,
+      "outdoor_ppm": 420.0,
+      "base_flow_m3h": 45.0,
+      "extra_flow_m3h": 405.0,
+      "dt_hours": 0.25,
+      "sensor_delay_steps": 1,
+      "actuator_delay_steps": 2,
+      "noise_ppm": 10.0,
+      "initial_ppm": 600.0,
+      "limit_ppm": 900.0
+    },
+    "source": {
+      "person_generation_m3h": 0.018,
+      "people_range": [
+        8,
+        12
+      ],
+      "arrival_hour_range": [
+        8.0,
+        9.0
+      ],
+      "jitter_steps": [
+        -1,
+        0,
+        1
+      ],
+      "attendance_probability": 0.85,
+      "duration_hours": 2.0
+    },
+    "forecast": {
+      "features": 16,
+      "kappa": 16.0,
+      "ridge": 0.001,
+      "horizon_steps": 8,
+      "eligibility": "new diagnostic calendar-source models; no inherited neural adapter; acceptance reported separately"
+    },
+    "arms": [
+      "reactive",
+      "seasonal",
+      "fourier",
+      "vm",
+      "oracle"
+    ],
+    "margins_ppm": [
+      0.0,
+      100.0,
+      200.0
+    ],
+    "hysteresis_ppm": 50.0,
+    "objectives": {
+      "exceedance_priority": 0.02,
+      "effort_priority": 2.0
+    },
+    "regimes": {
+      "stable": {
+        "shift_hours": 0.0
+      },
+      "late_routine": {
+        "shift_hours": 3.0
+      },
+      "low_capacity": {
+        "shift_hours": 0.0,
+        "extra_flow_m3h": 60.0
+      },
+      "long_delay": {
+        "shift_hours": 0.0,
+        "actuator_delay_steps": 8
+      }
+    },
+    "objective_formula": "exceedance_hours + lambda * additional_air_m3 / 1000",
+    "selection": "per arm and objective: smallest mean development objective across rooms and regimes, ties smallest margin; no evaluation tuning",
+    "practical_effect": {
+      "primary_objective": "exceedance_priority",
+      "relative_improvement_min": 0.05,
+      "regime_max_regression": 0.1,
+      "comparators": [
+        "reactive",
+        "seasonal",
+        "fourier"
+      ]
+    },
+    "bootstrap": {
+      "seed": 650601,
+      "draws": 2000
+    },
+    "compute_cap_seconds": 180,
+    "standard_adapter_cap_seconds": 120,
+    "teaching": {
+      "arrival_hour": 8.0,
+      "source_ppm_m3h": 216000.0,
+      "early_miss_hours": [
+        8.0,
+        9.0
+      ],
+      "late_miss_hours": [
+        9.0,
+        10.0
+      ],
+      "delay_steps": 4,
+      "margin_ppm": 100.0,
+      "short_oracle_horizon_steps": 1
+    }
+  }
+}

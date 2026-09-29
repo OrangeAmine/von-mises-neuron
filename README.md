@@ -9,13 +9,22 @@ Start with [the audited project state](docs/project_state.md) and
 [the controlled comparison protocol](docs/controlled_comparison_plan.md).
 Historical design documents contain hypotheses, not established results.
 
-The current objective is **VM methodology**: separate the effects of periodic
+The six subsequent studies **N01–N06 are complete and integrated**. Start with
+the [consolidated research account](docs/research_account_n01_n06.md) or
+[interactive findings explorer](learning/vm_playground/research.html).
+N01, N04, N05 and N06 failed their overall scientific gates; N02 has mixed
+claim-level results, and N03 is teaching implementation. The
+[original lessons](learning/vm_playground/index.html) and
+[decision demonstrator](docs/vm_n06_demo/index.html) are available offline.
+See the [integration record](docs/integration_20260929.md) for current checks.
+
+The completed **VM methodology** objective separates the effects of periodic
 encoding, polar optimization, learned circular kernels and angular interactions.
 The [approved methodology v1](docs/vm_methodology_results.md) and the
 [circular-locality v2 follow-up](docs/vm_locality_v2_results.md) are implemented
 and completed through locked confirmation and independent audits. Both overall
 continuation gates failed; the reports retain the conditional gains, regressions
-and limitations. V2 completed 5,504 records, and the full repository suite passed
+and limitations. V2 completed 5,504 records; its historical repository suite passed
 1,262 tests. See the [saved literature review](docs/vm_literature_review.md),
 [v1 usage guide](docs/vm_methodology_usage.md), and
 [v2 protocol](docs/vm_locality_v2_protocol.md) for context and reproduction.

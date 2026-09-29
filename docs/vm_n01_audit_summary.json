@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-09-22T12:00:55.326797+00:00",
+  "evidence_sha256": {
+    "results/vm_n01_v1/confirmation_audit.json": "6bfb3f79caa43badca2b158f61e88f096aa02e32628e60225d84dfd82be4c52c",
+    "results/vm_n01_v1/development_audit.json": "4cda7c9b64aa315648ce5afbd37fe888e7d9805e2996465d6db54ae7fe6d7543",
+    "results/vm_n01_v1/pilot_audit.json": "4fe4aba481ffa3649c18ec622d63f43790c0e159b88aeb24eb5bdf39b6050f1c"
+  },
+  "observer_sha256": "361b42cbd7fb2d298f8b7969e15c703f15eb014e95e953682369e4ec0e55ff65",
+  "phases": {
+    "confirmation": {
+      "checks": 395108,
+      "config_sha256": "5f38d81c2c485e0915e579d9170b563bd830f6d3db027446c9b30ffd3fb0a47f",
+      "created_utc": "2026-09-22T11:57:48.878157+00:00",
+      "device": "cpu",
+      "elapsed_seconds": 22.514401099993847,
+      "findings": [],
+      "maximum_absolute_difference": 7.826073122885191e-12,
+      "observer_sha256": "361b42cbd7fb2d298f8b7969e15c703f15eb014e95e953682369e4ec0e55ff65",
+      "phase_directory": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\results\\vm_n01_v1\\confirmation",
+      "progress": {
+        "checkpoints": 10685,
+        "fits": 1320,
+        "tasks": 30
+      },
+      "status": "passed",
+      "threads": 1
+    },
+    "development": {
+      "checks": 66189,
+      "config_sha256": "5f38d81c2c485e0915e579d9170b563bd830f6d3db027446c9b30ffd3fb0a47f",
+      "created_utc": "2026-09-22T11:47:40.214930+00:00",
+      "device": "cpu",
+      "elapsed_seconds": 3.649065100005828,
+      "findings": [],
+      "maximum_absolute_difference": 8.326644929113058e-12,
+      "observer_sha256": "361b42cbd7fb2d298f8b7969e15c703f15eb014e95e953682369e4ec0e55ff65",
+      "phase_directory": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\results\\vm_n01_v1\\development",
+      "progress": {
+        "checkpoints": 1786,
+        "fits": 220,
+        "tasks": 10
+      },
+      "status": "passed",
+      "threads": 1
+    },
+    "pilot": {
+      "checks": 30284,
+      "config_sha256": "5f38d81c2c485e0915e579d9170b563bd830f6d3db027446c9b30ffd3fb0a47f",
+      "created_utc": "2026-09-22T11:45:46.032287+00:00",
+      "device": "cpu",
+      "elapsed_seconds": 1.5463800999568775,
+      "findings": [],
+      "maximum_absolute_difference": 8.215650382226158e-15,
+      "observer_sha256": "361b42cbd7fb2d298f8b7969e15c703f15eb014e95e953682369e4ec0e55ff65",
+      "phase_directory": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\results\\vm_n01_v1\\pilot",
+      "progress": {
+        "checkpoints": 870,
+        "fits": 75,
+        "tasks": 5
+      },
+      "status": "passed",
+      "threads": 1
+    }
+  },
+  "report_sha256": "54ec608e141974a4ddb23a0d326be506363e32d74b74b92b8bc23f06300f3f8c",
+  "scope": "Independent stored-state NumPy equation and selection replay; no refitting or regenerated targets",
+  "status": "passed",
+  "total_checkpoints": 13341,
+  "total_checks": 491581
+}

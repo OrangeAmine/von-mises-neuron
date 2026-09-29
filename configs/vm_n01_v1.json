@@ -1,0 +1,69 @@
+{
+  "protocol_id": "vm_n01_smooth_local_v1_20260922",
+  "version": 1,
+  "seeds": {"pilot": 31092201, "development": 31092202, "confirmation": 31092203, "initialization": 31092204, "analysis": 31092205},
+  "tasks": {
+    "families": ["smooth", "narrow", "multimodal", "mixed", "nonperiodic"],
+    "periodic_families": ["smooth", "narrow", "multimodal", "mixed"],
+    "replicates": {"pilot": 1, "development": 2, "confirmation": 6},
+    "initializations": {"pilot": 1, "development": 1, "confirmation": 2},
+    "label_budgets": [64, 256],
+    "pilot_label_budgets": [256],
+    "train_fraction": 0.75,
+    "noise_std": 0.1,
+    "normalization_points": 8192,
+    "grid_points": 2048,
+    "generators": {
+      "smooth": "harmonics 1,2,3; independent Normal(0,1/m^2) sine/cosine coefficients",
+      "narrow": "1 or 2 compact cubic bumps, widths Uniform(.15,.45), amplitudes Uniform(.5,1.5), uniform circular centers",
+      "multimodal": "3 to 5 triangular peaks, widths Uniform(.2,.8), signed Uniform(.5,1.5) amplitudes, uniform circular centers",
+      "mixed": "independent raw smooth function plus two compact cubic bumps, widths Uniform(.15,.45), signed Uniform(.5,1.5) amplitudes",
+      "nonperiodic": "theta/pi + .2*sin(theta+Uniform(0,2*pi))"
+    }
+  },
+  "models": [
+    {"id": "fourier16", "kind": "ridge", "harmonics": 8, "kernels": 0, "features": 16, "parameters": 17},
+    {"id": "fixed16", "kind": "ridge", "harmonics": 0, "kernels": 16, "features": 16, "parameters": 17},
+    {"id": "adaptive16_joint", "kind": "joint", "harmonics": 0, "kernels": 16, "features": 16, "parameters": 49},
+    {"id": "adaptive16_vp", "kind": "vp", "harmonics": 0, "kernels": 16, "features": 16, "parameters": 49},
+    {"id": "hybrid_fixed16", "kind": "ridge", "harmonics": 3, "kernels": 10, "features": 16, "parameters": 17},
+    {"id": "hybrid_joint", "kind": "joint", "harmonics": 3, "kernels": 10, "features": 16, "parameters": 37},
+    {"id": "hybrid_vp", "kind": "vp", "harmonics": 3, "kernels": 10, "features": 16, "parameters": 37},
+    {"id": "fourier36", "kind": "ridge", "harmonics": 18, "kernels": 0, "features": 36, "parameters": 37},
+    {"id": "fixed36", "kind": "ridge", "harmonics": 0, "kernels": 36, "features": 36, "parameters": 37, "concentration_bands": [1.0, 4.0, 16.0]},
+    {"id": "hybrid_fixed36", "kind": "ridge", "harmonics": 3, "kernels": 30, "features": 36, "parameters": 37, "concentration_bands": [1.0, 4.0, 16.0]},
+    {"id": "line_rbf16", "kind": "ridge", "harmonics": 0, "kernels": 0, "features": 16, "parameters": 17, "unrestricted": true, "line_rbf_count": 15, "line_rbf_width": 0.45}
+  ],
+  "initialization": {"concentration": 4.0, "centers": "even_grid_plus_shared_seeded_global_rotation", "readout": "exact_training_ridge_solution", "feature_scaling": "raw_features;no_fitted_centering_or_scaling_except_internal_ridge_intercept_elimination"},
+  "training": {
+    "dtype": "float64", "device": "cuda_if_available", "cpu_threads": 1,
+    "penalty": 0.001, "bias_penalized": false,
+    "objective": "0.5*mean_squared_error+0.5*penalty*sum(readout_weight^2)",
+    "optimizer": "Adam", "adam_betas": [0.9, 0.999], "adam_epsilon": 1e-8,
+    "pilot_learning_rates": [0.01, 0.05], "max_updates": 3000,
+    "validation_every": 10, "time_budgets_seconds": [0.25, 1.0], "primary_time_seconds": 1.0,
+    "checkpoint_rule": "lowest_noisy_validation_MSE_among_fully_captured_checkpoints_in_allowance;earliest_tie",
+    "clip_gradient_norm": null, "weight_decay": 0.0, "early_stopping": false
+  },
+  "phases": {
+    "ceiling_seconds": {"pilot": 240, "development": 600, "confirmation": 1800},
+    "planned_fits": {"pilot": 75, "development": 220, "confirmation": 1320},
+    "pilot_rate_selection": "minimum_equal_family_mean_primary_noisy_validation_MSE_per_adaptive_model;smaller_rate_tie",
+    "feasibility": "adaptive_count*(full_cap+maximum_pilot_block_overshoot)+fixed_count*maximum_pilot_fixed_time+all_fit_count*maximum_pilot_nonfit_time+60seconds+measured_lock_verification;must_fit_ceiling",
+    "confirmation_requires": ["all_pilot_and_development_records", "full_tests", "standard_adapter_gate", "independent_review", "measured_feasibility", "source_config_evidence_lock"]
+  },
+  "analysis": {
+    "primary_metric": "clean_grid_MSE/clean_grid_variance_at_1_second",
+    "aggregation": "average_labels_and_initializations_within_function_then_functions_within_family_then_equal_periodic_families",
+    "hybrid_candidates": ["hybrid_joint", "hybrid_vp"],
+    "capacity_candidates": ["fourier36", "fixed36", "hybrid_fixed36"],
+    "selection": "lowest_balanced_development_primary_error;configuration_order_tie",
+    "equal_basis_comparators": ["fourier16", "hybrid_fixed16"],
+    "bootstrap_resamples": 10000, "confidence": 0.95,
+    "bootstrap_unit": "whole_function_bundle_resampled_within_each_periodic_family",
+    "gate": {"each_comparison_min_relative_improvement": 0.1, "each_comparison_lower_interval_above": 0.0, "each_comparison_max_smooth_regression": 0.1, "each_comparison_min_improving_local_families": 2},
+    "failure_policy": "retain_every_attempt_and_partial_state;no_retry_or_success_claim_with_missing_or_failed_cells",
+    "powered_population_claim": false
+  },
+  "engineering": {"adapter": "per_sensor_M3_K10_adaptive_features_linear32_layernorm_dropout0.1_LSTM64_head12", "seed": 42, "standard_days": 90, "lookback": 72, "horizon": 12, "max_epochs": 50, "scope": "standard_adapter_integration_only;not_static_scientific_superiority"}
+}

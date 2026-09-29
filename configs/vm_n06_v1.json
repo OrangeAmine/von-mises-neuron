@@ -1,0 +1,29 @@
+{
+  "version": "vm_n06_v1",
+  "training_days": 14,
+  "evaluation_days": 3,
+  "development_seeds": [620601, 620602],
+  "evaluation_seeds": [630601, 630602, 630603, 630604, 630605, 630606],
+  "teaching_seed": 640601,
+  "start_utc": "2027-01-04T00:00:00Z",
+  "plant": {"volume_m3": 150.0, "outdoor_ppm": 420.0, "base_flow_m3h": 45.0, "extra_flow_m3h": 405.0, "dt_hours": 0.25, "sensor_delay_steps": 1, "actuator_delay_steps": 2, "noise_ppm": 10.0, "initial_ppm": 600.0, "limit_ppm": 900.0},
+  "source": {"person_generation_m3h": 0.018, "people_range": [8, 12], "arrival_hour_range": [8.0, 9.0], "jitter_steps": [-1, 0, 1], "attendance_probability": 0.85, "duration_hours": 2.0},
+  "forecast": {"features": 16, "kappa": 16.0, "ridge": 0.001, "horizon_steps": 8, "eligibility": "new diagnostic calendar-source models; no inherited neural adapter; acceptance reported separately"},
+  "arms": ["reactive", "seasonal", "fourier", "vm", "oracle"],
+  "margins_ppm": [0.0, 100.0, 200.0],
+  "hysteresis_ppm": 50.0,
+  "objectives": {"exceedance_priority": 0.02, "effort_priority": 2.0},
+  "regimes": {
+    "stable": {"shift_hours": 0.0},
+    "late_routine": {"shift_hours": 3.0},
+    "low_capacity": {"shift_hours": 0.0, "extra_flow_m3h": 60.0},
+    "long_delay": {"shift_hours": 0.0, "actuator_delay_steps": 8}
+  },
+  "objective_formula": "exceedance_hours + lambda * additional_air_m3 / 1000",
+  "selection": "per arm and objective: smallest mean development objective across rooms and regimes, ties smallest margin; no evaluation tuning",
+  "practical_effect": {"primary_objective": "exceedance_priority", "relative_improvement_min": 0.05, "regime_max_regression": 0.10, "comparators": ["reactive", "seasonal", "fourier"]},
+  "bootstrap": {"seed": 650601, "draws": 2000},
+  "compute_cap_seconds": 180,
+  "standard_adapter_cap_seconds": 120,
+  "teaching": {"arrival_hour": 8.0, "source_ppm_m3h": 216000.0, "early_miss_hours": [8.0, 9.0], "late_miss_hours": [9.0, 10.0], "delay_steps": 4, "margin_ppm": 100.0, "short_oracle_horizon_steps": 1}
+}

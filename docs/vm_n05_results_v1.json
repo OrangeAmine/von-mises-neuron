@@ -1,0 +1,92 @@
+{
+  "primary_improvement": 0.07504048542849162,
+  "paired_room_95_interval": [
+    -0.043448581260674156,
+    0.17432223591883156
+  ],
+  "room_effects": {
+    "530101": 0.27917531024125597,
+    "530103": 0.13199821115842747,
+    "530107": 0.07174586828907659,
+    "530109": -0.0408008884727451,
+    "530111": 0.2372377979548257,
+    "530113": -0.1295791345595818,
+    "530117": -0.06445107493248381,
+    "530119": -0.11615081584169396
+  },
+  "room_effect_sample_sd": 0.15849999722161712,
+  "replication_unit": "independently generated and independently fitted room pipeline; all scenarios paired",
+  "method_uncertainty_scope": "joint room/scale-fit/calibration variability; does not isolate factor variance from room heterogeneity",
+  "conditional_fixed_interval_block_95_interval": [
+    0.046520140678685984,
+    0.10247226992591348
+  ],
+  "conditional_scope": "two-day evaluation blocks, factors and issued quantiles fixed; omits refitting uncertainty",
+  "scenario_guards": [
+    {
+      "scenario": "stable",
+      "relative_score_regression": -0.11843768374998098,
+      "vm_coverage": 0.9039909638554217,
+      "regression_passed": true,
+      "coverage_passed": true
+    },
+    {
+      "scenario": "shifted",
+      "relative_score_regression": -0.032265338598376325,
+      "vm_coverage": 0.8599397590361446,
+      "regression_passed": true,
+      "coverage_passed": true
+    },
+    {
+      "scenario": "noisy",
+      "relative_score_regression": -0.060416601058500885,
+      "vm_coverage": 0.8369728915662651,
+      "regression_passed": true,
+      "coverage_passed": false
+    },
+    {
+      "scenario": "shifted_noisy_outage",
+      "relative_score_regression": -0.09584133467094791,
+      "vm_coverage": 0.8332078313253012,
+      "regression_passed": true,
+      "coverage_passed": false
+    }
+  ],
+  "useful_effect_passed": true,
+  "room_interval_passed": false,
+  "scientific_gate_passed": false,
+  "bootstrap_draws": 5000,
+  "bootstrap_seed": 95005,
+  "independent_rooms": 8,
+  "no_coverage_guarantee": true,
+  "version": "vm_n05_v1",
+  "source_id": "468673446a1438bb0459c67bd0cd6f962568e7a69b76b1c141c140f0691311d6",
+  "config_id": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+  "manifest_sha256": "19927bf4197ef20d7d96a297a4cf8800fca5bc18343cd685f6dce07162a9944c",
+  "run_seconds": 21.952481500105932,
+  "interval_rows": 191232,
+  "total_scale_fits": 72,
+  "total_scale_fit_seconds": 0.4917445997707546,
+  "environment": {
+    "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Amine\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "platform": "Windows-10-10.0.19044-SP0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "torch": "2.5.1+cu121",
+    "cuda_available": true,
+    "cuda_runtime": "12.1",
+    "device": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+    "blas_threads": 1,
+    "torch_threads": 1
+  },
+  "flags": {
+    "scale_fallback": 0,
+    "scale_floor": 11,
+    "scale_ceiling": 54,
+    "small_pool_fallback": 0,
+    "infinite_interval": 0
+  },
+  "analysis_seconds": 6.92524249991402
+}

@@ -1,0 +1,112 @@
+{
+  "created_utc": "2026-09-22T12:03:37.425187+00:00",
+  "independent_checks": {
+    "allowance_rows": 3230,
+    "cell_and_function_tables_match": true,
+    "cell_rows_recomputed": 440,
+    "confirmation_gate": {
+      "capacity_comparator": "fourier36",
+      "comparison_passed": {
+        "fourier16": true,
+        "fourier36": true,
+        "hybrid_fixed16": false
+      },
+      "complete_evidence": true,
+      "nonperiodic_in_gate": false,
+      "passed": false,
+      "selected_hybrid": "hybrid_joint"
+    },
+    "fit_counts": {
+      "confirmation": 1320,
+      "development": 220,
+      "pilot": 75
+    },
+    "function_rows_recomputed": 880,
+    "independent_full_checkpoint_audit": "Inspected separate observer receipts: 13,341 checkpoints and 491,581 passed checks. This final reviewer did not repeat that full checkpoint audit.",
+    "label_reversal": {
+      "total_labels256": {
+        "fourier36": 0.01572284509762124,
+        "hybrid_joint": 0.061857938191932214
+      },
+      "total_labels64": {
+        "fourier36": 0.3023561116714855,
+        "hybrid_joint": 0.12770496198717374
+      }
+    },
+    "method": "Directly subset stored phase summary rows by declared cell; average initializations within function, recompute means and sample function SDs; recompute function rows across labels/initializations. Separate NumPy implementation recomputed all three paired function-stratified bootstrap intervals and smooth guards.",
+    "primary_contrast_intervals_match": true,
+    "report_numeric_claims_checked": [
+      "All primary relative improvements and bootstrap intervals",
+      "All model/family and label-budget table entries",
+      "Smooth paired variability and four-of-six direction count",
+      "Optimizer descriptive contrasts and kernel-only capacity distinction",
+      "Runtime averages/maxima and selected-step averages",
+      "Declared fit/label/checkpoint/check counts",
+      "Engineering metrics and native-GPU artifact replay description"
+    ],
+    "smooth_guard": {
+      "candidate": "hybrid_joint",
+      "candidate_error": 0.002045124389298859,
+      "comparator": "hybrid_fixed16",
+      "comparator_error": 0.0018265711850539077,
+      "functions": 6,
+      "functions_with_higher_candidate_error": 4,
+      "maximum_allowed": 0.1,
+      "paired_difference_sd": 0.00048822740193357533,
+      "relative_regression": 0.11965216906588894
+    },
+    "total_fits": 1615
+  },
+  "limits": [
+    "This checks reported evidence consistency, not a second timed training reproduction or unseen-domain validation.",
+    "The failed smooth point-estimate guard remains a failure despite small absolute differences and positive aggregate intervals.",
+    "Completion record intentionally excluded because root finalizes it after this receipt."
+  ],
+  "open_actionable_findings": [],
+  "phase_summary_sha256": {
+    "confirmation": "330e065126527f98e4c44e1a36d279e78c5e21538ef4716ca298200b5641b9e6",
+    "development": "bf29c8acec6d08893f8274df5394b1a01a3c752431c4191d9a0cc0d7de82e598",
+    "pilot": "4e34aea0bf0be935d60d44c4822a03d8f4e5a92ca187e4c316877c851812823d"
+  },
+  "preservation": {
+    "authorized_changed_files": [
+      "docs/project_state.md"
+    ],
+    "frozen_scientific_files_checked": 84,
+    "frozen_scientific_source_drift": [],
+    "historical_project_state_body_exact_suffix": true,
+    "inherited_files_checked": 130,
+    "unchanged_files": 129
+  },
+  "prose_scope_review": {
+    "adapter_integration_separated_from_scientific_superiority": true,
+    "failed_benefit_gate_clear": true,
+    "fixed_and_adaptive_cost_difference_disclosed": true,
+    "function_level_uncertainty_clear": true,
+    "no_unapproved_followup_claimed": true,
+    "small_within_generator_scope_and_nonidentifiability_disclosed": true,
+    "stronger_fourier_with_more_labels_disclosed": true
+  },
+  "review_id": "vm_n01_final_review_v1_20260922",
+  "reviewed_path_sha256": {
+    "docs/figures/vm_n01_confirmation.png": "097f0ca41d9294814d1bcf79a456c95804ca6b1785b975eb8929a51a8a2f1f7d",
+    "docs/project_state.md": "019b083efbb5bd7c28dbc8d1459091956b7e829b375a03d711cc0b6ba348ddbc",
+    "docs/vm_n01_audit_summary.json": "c90b83f4f19c28dc96a3c252b5dc816988e62012a992eb4b853467f176080e6f",
+    "docs/vm_n01_cells.csv": "d88b0c07dc7bc2d5f962ede7c05edaf2f98f89b3df6bf615e07bbe5cc8b15247",
+    "docs/vm_n01_function_results.csv": "0bd0c8e6a13c51847b8670f7b80b35ace2ca25221a136b87f3e4f4818f3701e1",
+    "docs/vm_n01_pilot_results.csv": "5f6aa1014a272f0343626f3aebc2ca5ca77c057d9b91195b96535cd00e108779",
+    "docs/vm_n01_preservation.json": "424ef4c5d19004e2ade15cbd3d7140d878986cb3c4e12cd02f387a5f8a170fe0",
+    "docs/vm_n01_results.md": "4f43b72c5322c0aa2a3e342851402ce4aeabfefc094a75b8ada3c0ee6a6d1ead",
+    "docs/vm_n01_run_record.json": "54ec608e141974a4ddb23a0d326be506363e32d74b74b92b8bc23f06300f3f8c",
+    "docs/vm_n01_runtime.csv": "9fd83d2caf807194db292a4073158b3796abe2c898c08f1a92c79a881621068a"
+  },
+  "scope": "Read-only independent final numerical, prose, visual and preservation review. Only this new review receipt was written; no fitting, target generation or prior bound evidence edits.",
+  "status": "passed",
+  "visual_review": {
+    "clipping_or_overlap_findings": [],
+    "figure": "docs/figures/vm_n01_confirmation.png",
+    "interpretation": "Figure shows selected family means and whole-function intervals. FAIL title and report caption explain that positive aggregate intervals coexist with the failed smooth guard.",
+    "opened_and_inspected": true,
+    "readable": true
+  }
+}

@@ -1,0 +1,37 @@
+case,claim,metric,mean,ci95,threshold,criterion,verdict
+isolated,Accurate complete response,clean_nrmse,0.004286893120185815,"[0.0033740117680521194, 0.005309966878710849]",0.1,mean <=,survived
+isolated,Stable complete response across initializations,curve_pair_nrmse,0.002638964596463908,"[0.0015523020977314856, 0.0037648562939431307]",0.05,mean <=,survived
+isolated,Fitted component deletion worsens prediction error,primary_deletion_delta_nmse,1.3139656621984008,"[1.27590778980375, 1.3571833265206725]",0.1,mean >=,survived
+isolated,phase_plus reaches declared practical error increase,phase_plus_delta_nmse,2.5061980334284875,"[2.490771948737078, 2.5201303195338722]",0.1,mean >=,survived
+isolated,phase_minus reaches declared practical error increase,phase_minus_delta_nmse,2.5059998887566497,"[2.4908745685816838, 2.5197013943694073]",0.1,mean >=,survived
+isolated,width_0p5 reaches declared practical error increase,width_0p5_delta_nmse,0.14981679088741762,"[0.14282197102109986, 0.1579230280740565]",0.1,mean >=,survived
+isolated,width_2p0 reaches declared practical error increase,width_2p0_delta_nmse,0.09991062320153983,"[0.09622515678905989, 0.10404263365382913]",0.1,mean >=,failed
+redundant,Accurate complete response,clean_nrmse,0.050732915497514304,"[0.03467289716483256, 0.065974156730496]",0.1,mean <=,survived
+redundant,Stable complete response across initializations,curve_pair_nrmse,0.0720875219921678,"[0.04875855202153972, 0.09371732591704865]",0.05,mean <=,failed
+redundant,Fitted component deletion worsens prediction error,primary_deletion_delta_nmse,5.795131127940528,"[3.768779328050366, 7.810917696924122]",0.1,mean >=,survived
+redundant,phase_plus reaches declared practical error increase,phase_plus_delta_nmse,4.238059461951612,"[3.421482383545494, 5.173810549206]",0.1,mean >=,survived
+redundant,phase_minus reaches declared practical error increase,phase_minus_delta_nmse,4.246053118802629,"[3.424562826898135, 5.185567643926137]",0.1,mean >=,survived
+redundant,width_0p5 reaches declared practical error increase,width_0p5_delta_nmse,0.5659631387053469,"[0.3987838069524543, 0.754486239847725]",0.1,mean >=,survived
+redundant,width_2p0 reaches declared practical error increase,width_2p0_delta_nmse,0.4945510685882042,"[0.3239430452010234, 0.666023479111416]",0.1,mean >=,survived
+redundant,Matched center dispersion stays below descriptive instability flag,matched_center_distance,1.1174792183680413,"[0.7551583987429855, 1.4467488075036423]",0.2,mean <=,failed
+redundant,Matched width dispersion stays below descriptive instability flag,matched_log_kappa_distance,0.6432452185176697,"[0.4193360527622424, 0.8526168757520575]",0.3,mean <=,failed
+isolated,Isolated positive peak parameters recover under declared conditions,recovered,1.0,"[1.0, 1.0]",0.9,mean >=,survived
+proxy,Aligned proxy meets demanding prediction threshold,aligned_clean_nrmse,0.14585135957638476,"[0.1430910485971681, 0.1483818808451601]",0.1,mean <=,failed
+proxy,Clock reliance in aligned data,aligned_delete_delta_nmse,0.9003822898237092,"[0.8887988022874971, 0.9120062477567321]",0.1,lower CI >,survived
+proxy,Clock-associated prediction degrades relative to retrained sensor-only under shift,shifted_full_minus_sensor_nmse,1.4767109123624904,"[1.4472248588451402, 1.5068610846410178]",0.1,lower CI >,survived
+proxy,Combined predictive-proxy reliance criterion,both paired lower confidence bounds,,,0.1,both lower CI >,survived
+isolated,Derivative depends on readout randomization,random_readout_attribution_relative_l2,1.6572445441642563,"[1.5980189246683234, 1.7205292668041001]",0.2,mean >=,survived
+isolated,Derivative depends on geometry randomization,random_geometry_attribution_relative_l2,1.2771278550531993,"[1.1759446788503736, 1.382557827284958]",0.2,mean >=,survived
+isolated,Derivative depends on both randomization,random_both_attribution_relative_l2,1.2634426639851333,"[1.1860558564411994, 1.3484480127846166]",0.2,mean >=,survived
+isolated,"Exact representations, zero perturbations and coordinate controls",maximum_exact_control_error,3.1086244689504383e-15,,1e-10,every control <=,survived
+redundant,Derivative depends on readout randomization,random_readout_attribution_relative_l2,1.301521221848737,"[1.1474234091721103, 1.4571895687597924]",0.2,mean >=,survived
+redundant,Derivative depends on geometry randomization,random_geometry_attribution_relative_l2,1.911441164524833,"[1.7235157405333148, 2.102664136736624]",0.2,mean >=,survived
+redundant,Derivative depends on both randomization,random_both_attribution_relative_l2,1.330048254415672,"[1.2410119942609228, 1.4324597529118677]",0.2,mean >=,survived
+redundant,"Exact representations, zero perturbations and coordinate controls",maximum_exact_control_error,4.884981308350689e-15,,1e-10,every control <=,survived
+proxy,Derivative depends on readout randomization,random_readout_attribution_relative_l2,0.8272888726788459,"[0.6817234195307782, 0.9798756756195052]",0.2,mean >=,survived
+proxy,Derivative depends on geometry randomization,random_geometry_attribution_relative_l2,1.3847465206475054,"[0.9827983365117064, 1.7301965828663093]",0.2,mean >=,survived
+proxy,Derivative depends on both randomization,random_both_attribution_relative_l2,2.1027822010895263,"[1.7105689639580601, 2.4377349700602142]",0.2,mean >=,survived
+proxy,"Exact representations, zero perturbations and coordinate controls",maximum_exact_control_error,4.773959005888173e-15,,1e-10,every control <=,survived
+redundant,Unique component phase/width meaning follows from accurate predictions,exact split and cancellation counterexamples,,,,logical identifiability,refuted by exact counterexample
+proxy,Predictive clock reliance establishes a direct physical role,generator equation conditional on latent oscillator,0,,,direct recorded-clock intervention,refuted in this generator
+redundant,Matched centers/widths identify physical sources,no unique generator-to-kernel correspondence,,,,identifiability,unidentifiable

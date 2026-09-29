@@ -1,0 +1,85 @@
+{
+  "task": "VM-N03",
+  "completed_utc": "2026-09-22T11:41:37.708052+00:00",
+  "worktree": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron",
+  "baseline_head": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "delivery_head": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "branch": "detached HEAD",
+  "work_status": "uncommitted teaching delivery",
+  "environment": {
+    "python": "3.11.4",
+    "node": "v24.14.1",
+    "browser": "Codex in-app browser"
+  },
+  "checks": {
+    "core_node_tests": {
+      "passed": 12,
+      "failed": 0,
+      "duration_ms": 598.4964
+    },
+    "evidence_pytest": {
+      "passed": 10,
+      "failed": 0,
+      "duration_seconds": 0.39
+    },
+    "export_freshness": "passed; five pinned source hashes, 720 CSV/JSON cells and aggregates",
+    "local_html_links_and_assets_checked": 54,
+    "new_text_trailing_whitespace": "passed",
+    "inherited_files_verified": 130,
+    "inherited_files_byte_identical": 129,
+    "authorized_changed_inherited_files": [
+      "docs/project_state.md"
+    ],
+    "inherited_state_title_and_body_byte_preservation": true
+  },
+  "browser_checks": {
+    "default_viewport": [
+      1280,
+      720
+    ],
+    "narrow_viewport": [
+      390,
+      844
+    ],
+    "lesson_reveals": 3,
+    "lesson_resets": 3,
+    "equations_and_plots_inspected": true,
+    "zero_nearzero_wrap_and_phase_keyboard": true,
+    "locality_zero_harmonic_timestamp_controls": true,
+    "historical_family_label_noise_compute_views": true,
+    "runtime_disclosure": true,
+    "selection_controls_and_repeated_reset_values": true,
+    "guide_navigation_and_answer_disclosure": true,
+    "narrow_page_overflow": false,
+    "wide_tables_scroll_locally": true,
+    "console_errors_or_warnings": 0,
+    "temporary_viewport_override_reset": true
+  },
+  "limitations": [
+    "Browser tool URL policy blocked direct file:// validation; loopback HTTP was tested.",
+    "No cross-browser matrix or formal assistive-technology audit.",
+    "No new scientific experiment, model benchmark or learner-outcome evaluation.",
+    "Historical exact arrays and checkpoints are not included."
+  ],
+  "task_owned_file_sha256": {
+    "learning/vm_playground/app.js": "50bf8b76de6353246d688701d02ea8e628b1980551b058668eb4df1c1d2ceb32",
+    "learning/vm_playground/core.js": "cbc6bb495225a627a503eb26344b5682cd7995787e6900f38bc6bf7c4405ae18",
+    "learning/vm_playground/core.test.cjs": "8cff08ca95a777aa13ee109a39d6988666e997f730aed7080e6b15987ade6eb6",
+    "learning/vm_playground/evidence.js": "d2187f00bef188b7123f74ed2d8d198a8beb97885df96794f32f4737d6154494",
+    "learning/vm_playground/guide.html": "7910a5c6cf5445b737c8d76a26c6212bcfa9244e54a90e5a6e17f95b15b52152",
+    "learning/vm_playground/index.html": "6709a21e4b4ac21725bceffdb476e3d0647a708502e3bd1d23c281d1ece5e676",
+    "learning/vm_playground/README.md": "aed1c92c1517dbf7a21f1f49f3f850f6f900f0a820f1aaf5cadf0b175eba3710",
+    "learning/vm_playground/style.css": "e387180cf863b8c0162a348a03b49f33e06183a097414a87ff37c0a862ddcea5",
+    "scripts/learning/build_vm_playground_evidence.py": "d35f7266cfc66964f6315430d54e52554fe6a4c5fccdaaf49bd37c764447a736",
+    "docs/learning/vm_n03_completion.md": "c4ff069d02416c1bae8f9433fd7d750019db7dc16ad464136158178c98680738",
+    "docs/learning/vm_n03_inherited_snapshot.json": "78792e667441610a534651b4dc1ad6dcebb612961b4bfc31e25af6a2ba03a1c2",
+    "docs/learning/vm_playground_guide.md": "8d7c01291d0adc7962151312d9d02771b6a7d0251125ebe6317733cf3c0520f2",
+    "tests/test_vm_playground_evidence.py": "2a91399ec9d7c3e93194ec5ef6bb16cb3236053ddd8a446c379b243788f59522"
+  },
+  "commands": [
+    "node learning/vm_playground/core.test.cjs",
+    "py -3.11 scripts/learning/build_vm_playground_evidence.py --check",
+    "py -3.11 -m pytest tests/test_vm_playground_evidence.py -q",
+    "git diff --check"
+  ]
+}

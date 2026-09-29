@@ -1,0 +1,14 @@
+{
+  "version": "vm_n02_interpretation_v1",
+  "seed_namespace": 9226202,
+  "pools": {"pilot": {"seed_offset": 10000, "units": 2, "cap_seconds": 180}, "development": {"seed_offset": 20000, "units": 3, "cap_seconds": 240}, "evaluation": {"seed_offset": 30000, "units": 12, "cap_seconds": 900}},
+  "cases": ["isolated", "redundant", "proxy"],
+  "initializations": [11, 29, 47],
+  "samples": {"train": 256, "validation": 128, "evaluation": 512, "curve": 1024},
+  "peak": {"noise_sd": 0.01, "amplitude_range": [0.8, 1.4], "kappa_range": [3.0, 9.0], "bias_range": [-0.3, 0.3], "separation_range": [1.4, 3.8], "kernels": {"isolated": 1, "redundant": 4}, "steps": 600, "learning_rate": 0.03, "ridge": 0.00001, "validate_every": 25, "initial_kappa_range": [2.0, 8.0], "isolated_center_jitter": 0.5},
+  "proxy": {"latent_jitter_sd": 0.15, "sensor_noise_sd": 0.65, "target_noise_sd": 0.01, "shift_radians": 1.5707963267948966, "ridge": 0.00001, "cycles": 8},
+  "diagnostics": {"phase_offset_radians": 1.5707963267948966, "coordinate_rotation_radians": 0.7, "active_component_rms_over_target_sd": 0.02, "phase_component_sd_over_target_sd": 0.02, "width_factors": [0.5, 1.0, 2.0], "bootstrap_draws": 5000, "bootstrap_seed": 992202, "identity_atol": 1e-10, "quality_nrmse_max": 0.1, "curve_pair_nrmse_max": 0.05, "center_error_radians_max": 0.1, "kappa_relative_error_max": 0.2, "recovery_fraction_min": 0.9, "randomized_attribution_relative_l2_min": 0.2, "intervention_normalized_mse_effect_min": 0.1, "matched_center_dispersion_radians": 0.2, "matched_log_kappa_dispersion": 0.3, "randomization": {"draws_per_fit": 1, "peak_seed_addend": 9071, "peak_readout": "independent standard normal weights and bias", "proxy_seed": 8802, "proxy_amplitude_range": [0.2, 1.8], "phase_range": [0.0, 6.283185307179586], "zero_derivative_norm": 1e-14}},
+  "compute": {"device": "cuda_if_available", "dtype": "float64", "cpu_threads": 1, "pilot_projection_safety_factor": 1.5, "no_retries": true},
+  "selection": "Fixed settings; earliest minimum noisy validation MSE among step 0 and every 25 steps, including 600. No cross-pool hyperparameter selection.",
+  "replication": "Average initializations and all unordered initialization pairs within each independent function before bootstrap. Proxy uses one deterministic ridge optimum per independent trajectory; no fictitious initialization replication."
+}

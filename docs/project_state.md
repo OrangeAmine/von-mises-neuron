@@ -1,5 +1,42 @@
 # Project state: ownership handoff
 
+## Completed integration — N01–N06 (2026-09-29)
+
+All six separately delivered tasks are integrated into this checkout. Original
+source trees and 8,250 local result files were preserved with hashes; 153 unique
+delivery files were imported, with N04 dependencies included once. See the
+[integration record](integration_20260929.md) for provenance and current checks.
+Raw results remain ignored local files; compact tracked records travel with a
+fresh clone. Owner research notes and earlier frozen experiments are preserved.
+
+The [consolidated research account](research_account_n01_n06.md) is the current
+entry point. Completion is distinct from scientific success:
+
+| Task | Completed outcome |
+| --- | --- |
+| [N01: smooth/local hybrid](vm_n01_results.md) | Overall gate failed: balanced gains but 11.97% smooth regression against the fixed hybrid. Separate forecasting adapter passed standard absolute acceptance. |
+| [N02: interpretation](vm_n02_interpretation_results.md) | Claim-specific outcomes, no overall gate. Isolated recovery succeeded; redundant stability and several other claims failed. Reliance is not causality. |
+| [N03: teaching](learning/vm_n03_completion.md) | Three lessons complete; integration adds a separate findings explorer and updates both reading companions. No learner-outcome claim. |
+| [N04: changing routines](vm_n04_report_v1.md) | Overall gate failed. Four neural adapters failed base-VM regression acceptance and remain unvalidated; residual ridge passed. |
+| [N05: uncertainty](vm_n05_report_v1.md) | Overall gate failed: room-level interval crosses zero and noisy coverage fails. Same persistence point forecast for all arms; fixed VM geometry. |
+| [N06: decision timing](vm_n06_report_v1.md) | Overall gate failed versus matched Fourier. Source forecasting and objective-dependent decisions; new neural calendar adapters remain diagnostic/unvalidated. |
+
+Open the [playground](../learning/vm_playground/index.html),
+[findings explorer](../learning/vm_playground/research.html),
+[companion](../learning/vm_playground/guide.html#new-findings), or
+[N06 demonstrator](vm_n06_demo/index.html). View changes never revise a gate.
+
+Fresh integration checks passed **1,802 Python tests**, **12 JavaScript checks**,
+both pinned evidence exporters, preservation checks and desktop/mobile browser
+inspection. See the integration record for scope and receipts; these counts are
+not additional scientific replications.
+
+No scientific campaign was rerun during integration. Adaptive trust in calendar
+information and reconciliation of N05/N06 targets remain deferred for discussion.
+No general VM superiority, field validation, causal interpretation or energy
+saving is established. Sections below retain the earlier handoff and historical
+test counts.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed

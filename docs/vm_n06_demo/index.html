@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>N06 · Forecasts into decisions</title>
+<style>
+:root{--ink:#152f35;--muted:#536e73;--line:#cedbd9;--paper:#f4f6f1;--teal:#086e78;--orange:#d36837;--blue:#5360b4}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}header,main,footer{max-width:1280px;margin:auto;padding:24px 32px}header{padding-bottom:16px}.eyebrow{font-size:12px;letter-spacing:.17em;text-transform:uppercase;color:var(--teal);font-weight:750}h1{font-size:clamp(28px,4vw,46px);line-height:1.13;margin:10px 0 12px;letter-spacing:-.025em}h2{font-size:23px;line-height:1.3;margin:8px 0 12px}h3{font-size:16px;margin:16px 0 6px}p{margin:8px 0 14px}.intro{max-width:800px;color:var(--muted)}.notice{font-size:13px;padding:12px 16px;background:#e5ede7;border-left:3px solid var(--teal)}nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}button,select{font:inherit;cursor:pointer;border:1px solid var(--line);border-radius:6px;padding:9px 12px;background:white;color:var(--ink)}button[aria-selected=true]{background:var(--ink);color:white;border-color:var(--ink)}button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #eba97e;outline-offset:3px}main{padding-top:0}.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:24px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:20px}.step{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:750}.control{margin:22px 0}.control label{display:block;font-size:14px;font-weight:650;margin-bottom:7px}select{width:100%}.small{font-size:13px;color:var(--muted)}.plot{overflow:auto}.plot svg{display:block;width:100%;min-width:530px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:right;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-weight:600}.tablewrap{overflow:auto}details{margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:8px;background:#f7faf6}summary{cursor:pointer;font-weight:650}a{color:var(--teal)}.pill{display:inline-block;background:#edf2ed;border-radius:50px;font-size:12px;padding:4px 10px;margin:0 5px 8px 0}.outcome{border-left:3px solid var(--orange);padding:10px 14px;margin:16px 0;background:#fff6eb}.study{margin-top:24px}footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line)}.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;margin:10px 0}.swatch{display:inline-block;width:14px;height:4px;margin:0 6px 3px 0}#reset{width:100%}[hidden]{display:none!important}@media(max-width:800px){header,main,footer{padding:20px 16px}.grid{grid-template-columns:1fr;gap:16px}.control{margin:12px 0}.panel{padding:16px}h1{max-width:480px}nav button{flex:1;font-size:13px;padding:9px 7px}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">Von Mises Neuron · N06 decision laboratory</div>
+<h1>When is a forecast early enough to help?</h1>
+<p class="intro">Follow a forecast through a decision, an actuator and a changing room. Predict what will happen, change one assumption, then inspect the concentration and effort together.</p>
+<div class="notice">Synthetic teaching simulator · airflow is an effort proxy · oracle is a heuristic reference, not a bound. New calendar adapters and N04 neural adapters remain unvalidated under the repository’s regression gates.</div>
+<nav aria-label="Lessons" role="tablist">
+<button role="tab" aria-selected="true" data-tab="timing">01 · Error timing</button>
+<button role="tab" aria-selected="false" data-tab="limits">02 · Useful lead time</button>
+<button role="tab" aria-selected="false" data-tab="objective">03 · Change the objective</button>
+</nav>
+</header>
+<main>
+<div class="grid">
+<aside class="panel">
+<div class="step">1 / Predict</div><h2 id="question"></h2><p id="prediction" class="small"></p>
+<div class="step">2 / Manipulate</div>
+<div class="control" id="timingControls"><label for="focus">Forecast comparison</label><select id="focus"><option value="both">Compare both errors</option><option value="early_miss">Miss the first hour</option><option value="late_miss">Miss the last hour</option></select></div>
+<div class="control" id="limitControls" hidden><label for="constraint">Actuator condition</label><select id="constraint"><option value="normal">405 m³/h extra · 30 min delay</option><option value="limited">60 m³/h extra · 30 min delay</option><option value="long_delay">405 m³/h extra · 2 h delay</option><option value="zero">Zero extra capacity</option></select></div>
+<div class="control" id="objectiveControls" hidden><label for="weight">Trade-off weight λ</label><select id="weight"><option value="0.02">0.02 · Prioritize exceedance</option><option value="2">2.00 · Prioritize effort</option></select></div>
+<button id="reset">Reset lesson</button>
+<h3 id="knownTitle">Known in this room</h3><p class="small" id="knownText">Volume 150 m³. Outdoor 420 ppm. Base airflow 45 m³/h. Attendance generates 216,000 ppm·m³/h from 08:00–10:00 UTC, independently of actions. Sensor delay 15 minutes; teaching noise is zero.</p>
+<p class="small">Each policy evolves its own state and observes its own delayed concentration. Forecast source and airflow determine a new conditional concentration path at every decision.</p>
+</aside>
+<section class="panel" aria-live="polite">
+<div class="step">3 / Observe</div><h2 id="chartTitle"></h2>
+<div id="badges"></div><div id="legend" class="legend"></div>
+<div id="plot" class="plot"></div>
+<p id="caption" class="small"></p><div id="outcome" class="outcome"></div>
+<div class="tablewrap"><table id="metrics"></table></div>
+<details id="explanation"><summary>4 / Explain · reveal the mechanism</summary><div id="explainText"></div></details>
+</section>
+</div>
+<section class="panel study">
+<div class="step">The bounded comparison</div><h2>What happened in six new simulated rooms?</h2>
+<p>Reactive, seasonal, Fourier, VM and oracle policies shared the plant, source/noise draws, delays and three-setting development budget. All 360 evaluation operating points are retained. These are conditional simulation results, not field validation.</p>
+<div class="tablewrap"><table id="studyTable"></table></div>
+<p class="small" id="studyGate"></p>
+<p><a href="../vm_n06_report_v1.md">Read the completion report</a> · <a href="../vm_n06_guide.md">Assumptions and reproduction guide</a> · <a href="../figures/vm_n06_tradeoffs_v1.png">All achieved trade-offs</a></p>
+</section>
+</main>
+<footer>Offline and deterministic. Controls select saved teaching scenarios; they do not train models or retune the evaluation. No external requests, model downloads or N05 intervals. <a href="../vm_n06_protocol_v1.md">Frozen contract</a></footer>
+<script src="data.js"></script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id), T=N06.teaching;
+const colors=['#087884','#d36837','#5360b4','#33444a','#a08b37'];
+const labels={early_miss:'Miss first hour',late_miss:'Miss last hour',reactive:'Reactive',oracle_short:'Oracle · 15 min lookahead',oracle:'Oracle · 2 h lookahead',vm:'VM',fourier:'Fourier',seasonal:'Seasonal'};
+let tab='timing';
+const fmt=(x,n=2)=>Number(x).toFixed(n);
+function seriesPlot(series,withSource){
+ const W=850,H=withSource?570:415,L=66,R=20,top=30,panel=withSource?145:155,gap=40;
+ let out=`<svg role="img" aria-label="Linked concentration, source and applied ventilation plots" viewBox="0 0 ${W} ${H}">`;
+ const fields=withSource?['source_forecast','states','actions']:['states','actions'];
+ fields.forEach((field,i)=>{
+  let y0=top+i*(panel+gap), max=field==='actions'?1.1:field==='source_forecast'?240000:Math.max(1050,...series.flatMap(s=>s.row.states))*1.05;
+  const x=t=>L+(t-5)/11*(W-L-R), y=v=>y0+panel-v/max*panel;
+  out+=`<rect x="${x(8)}" y="${y0}" width="${x(10)-x(8)}" height="${panel}" fill="#f2eddd"/><text x="${L}" y="${y0-10}" font-size="13" fill="#536e73">${field==='states'?'Controlled concentration (ppm)':field==='actions'?'Applied ventilation duty (0 / 1)':'Forecast source (ppm·m³/h)'}</text>`;
+  for(const v of (field==='actions'?[0,1]:[0,max/3,2*max/3,max])){out+=`<path d="M${L} ${y(v)} H${W-R}" stroke="#dbe4df"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#536e73">${Math.round(v).toLocaleString()}</text>`}
+  if(field==='states')out+=`<path d="M${L} ${y(900)} H${W-R}" stroke="#33444a" stroke-dasharray="5 4"/><text x="${W-R-6}" y="${y(900)-5}" text-anchor="end" font-size="11">900 ppm study limit</text>`;
+  const pathFor=values=>{let points=[];values.forEach((v,j)=>{const hour=j*.25;if(hour>=5&&hour<=16){if(field!=='states'&&j>20)points.push(`${x(hour)},${y(values[j-1])}`);points.push(`${x(hour)},${y(v)}`)}});return points.join(' ')};
+  if(field==='source_forecast')out+=`<polyline points="${pathFor(T.source)}" fill="none" stroke="#33444a" stroke-dasharray="4 4" stroke-width="2"/>`;
+  series.forEach((s,j)=>out+=`<polyline points="${pathFor(s.row[field])}" fill="none" stroke="${s.color||colors[j]}" stroke-width="2.6"/>`);
+  for(let tick=6;tick<=16;tick+=2)out+=`<text x="${x(tick)}" y="${y0+panel+17}" text-anchor="middle" font-size="11" fill="#536e73">${tick}:00</text>`;
+ });return out+`<text x="${W/2}" y="${H-5}" text-anchor="middle" font-size="12" fill="#536e73">UTC hour · shaded interval: actual attendance</text></svg>`;
+}
+function metricTable(series){return '<thead><tr><th>Policy / forecast</th><th>Above 900 (h)</th><th>Severity (ppm·h)</th><th>Extra air (m³)</th><th>Starts</th><th>Switches</th></tr></thead><tbody>'+series.map(s=>{const m=s.row.metrics;return `<tr><td>${s.label}</td><td>${fmt(m.exceedance_hours)}</td><td>${fmt(m.severity_ppm_hours,1)}</td><td>${fmt(m.additional_air_m3,0)}</td><td>${m.activations}</td><td>${m.switches}</td></tr>`}).join('')+'</tbody>'}
+function scatter(rows,best){const W=850,H=380,L=65,B=45,R=20,top=20,mx=Math.max(...rows.map(r=>r.additional_air_m3))*1.1,my=Math.max(...rows.map(r=>r.exceedance_hours))*1.1;
+ const x=v=>L+v/mx*(W-L-R),y=v=>H-B-v/my*(H-B-top);let out=`<svg role="img" aria-label="Achieved ventilation effort versus exceedance duration" viewBox="0 0 ${W} ${H}">`;
+ for(let t=0;t<=4;t++){let xv=mx*t/4,yv=my*t/4;out+=`<path d="M${x(xv)} ${top} V${H-B} M${L} ${y(yv)} H${W-R}" stroke="#dbe4df"/><text x="${x(xv)}" y="${H-B+17}" text-anchor="middle" font-size="11">${fmt(xv,0)}</text><text x="${L-8}" y="${y(yv)+4}" text-anchor="end" font-size="11">${fmt(yv,1)}</text>`}
+ rows.forEach(r=>{const i=['reactive','seasonal','fourier','vm','oracle'].indexOf(r.arm);out+=`<circle cx="${x(r.additional_air_m3)}" cy="${y(r.exceedance_hours)}" r="${r===best?9:5}" fill="${colors[i]}" stroke="${r===best?'#152f35':'white'}" stroke-width="2"><title>${labels[r.arm]}, margin ${r.margin_ppm}: ${fmt(r.exceedance_hours)} h; ${fmt(r.additional_air_m3,0)} m3</title></circle>`});return out+`<text x="${W/2}" y="${H-3}" text-anchor="middle" font-size="12">Additional ventilation (m³ / 3 days)</text><text x="16" y="${H/2}" transform="rotate(-90 16 ${H/2})" text-anchor="middle" font-size="12">Above 900 ppm (hours / 3 days)</text></svg>`}
+function render(){
+ $('knownTitle').textContent=tab==='objective'?'Study conditions':'Known in this room';
+ $('knownText').textContent=tab==='objective'?'Six independent simulated rooms, each scored for three days in four paired regimes. Volume 150 m³, outdoor 420 ppm, base airflow 45 m³/h. Sources correspond to 8–12 people with attendance and timing variation. Sensor delay 15 minutes; noise SD 10 ppm. See the contract for capacity and delay regimes.':'Volume 150 m³. Outdoor 420 ppm. Base airflow 45 m³/h. Attendance generates 216,000 ppm·m³/h from 08:00–10:00 UTC, independently of actions. Sensor delay 15 minutes; teaching noise is zero.';
+ document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
+ $('timingControls').hidden=tab!=='timing';$('limitControls').hidden=tab!=='limits';$('objectiveControls').hidden=tab!=='objective';
+ let series=[];
+ if(tab==='timing'){
+  $('question').textContent='Same error. Same consequence?';$('prediction').textContent='Both forecasts miss one hour of identical source generation. Predict which missing hour matters more when the actuator takes an hour to respond.';
+  const focus=$('focus').value;series=Object.entries(T.equal_error).filter(([k])=>focus==='both'||k===focus).map(([k,v],j)=>({label:labels[k],row:v,color:k==='early_miss'?colors[0]:colors[1]}));
+  $('chartTitle').textContent='Move the error across the arrival';$('badges').innerHTML=`<span class="pill">Both MAE: ${fmt(T.equal_error.early_miss.source_mae,0)} ppm·m³/h</span><span class="pill">Both RMSE: ${fmt(T.equal_error.early_miss.source_rmse,0)} ppm·m³/h</span>`;
+  $('plot').innerHTML=seriesPlot(series,true);$('metrics').innerHTML=metricTable(series);$('caption').textContent='Errors are scored against the same external source. Concentration and duty are separate closed-loop outcomes; the first plot’s dashed line is actual source.';
+  $('outcome').textContent='Missing the first hour gives 1.66 h above the study limit; missing the last gives 0 h. Extra airflow differs: 1,215 versus 1,620 m³. This is not a matched-effort comparison.';
+  $('explainText').innerHTML='<p>The early miss hides the approaching arrival while a command could still compensate for its delay. The later miss happens after the room and feedback have begun to respond. Equal total error says nothing about where the error falls relative to that opportunity.</p><p>These source forecasts are authored hypotheses, not claims that a trained model can produce them. More ventilation also contributes to the different outcome. The experiment separates equal forecast error from equal controller effort.</p><p><b>Change an assumption:</b> open the next lesson and remove actuator capacity. Why should every concentration curve coincide?</p>';
+ }else if(tab==='limits'){
+  const c=T.constraints[$('constraint').value];series=Object.entries(c.policies).map(([k,v])=>({label:labels[k],row:v}));
+  $('question').textContent='Can the room use the notice?';$('prediction').textContent='A perfect source forecast still needs an effective actuator and enough useful lookahead. Predict whether 15 minutes or two hours of notice can cover the selected delay.';
+  $('chartTitle').textContent='Information meets delay and capacity';$('badges').innerHTML=`<span class="pill">Extra capacity ${c.extra_flow_m3h} m³/h</span><span class="pill">Command delay ${c.delay_hours} h</span>`;
+  $('plot').innerHTML=seriesPlot(series,false);$('metrics').innerHTML=metricTable(series);$('caption').textContent='Both oracle policies know the future source exactly. They share the same heuristic and delayed sensor, but use different lookahead windows. Neither establishes a performance bound.';
+  $('outcome').textContent=$('constraint').value==='zero'?'Zero capacity: all three state curves coincide, with 6.70 hours of exceedance. Commands have no physical effect.':$('constraint').value==='limited'?'Limited capacity: even two-hour perfect information leaves 3.31 hours of exceedance. The actuator cannot hold the source-loaded equilibrium below the limit.':$('constraint').value==='long_delay'?'With two-hour actuation delay, the two-hour oracle still exceeds the limit for 1.66 hours. The heuristic does not optimally exploit perfect information.':'With normal capacity, two-hour lookahead prevents exceedance in this case. A 15-minute oracle still gives 1.67 hours above the limit, close to reactive control’s 1.73 hours.';
+  $('explainText').innerHTML='<p>Airflow changes both the removal rate and the equilibrium concentration. At only 105 m³/h total flow, this source has equilibrium 2,477 ppm, well above 900 ppm. Advance notice cannot change that capacity limit.</p><p>At zero extra capacity all commands apply the same base flow. Perfect information has no controllable effect. With a long delay, an oracle used by a short-lookahead or poorly timed threshold rule can still perform poorly.</p><p><b>Predict next:</b> which policy would you choose if every additional 1,000 m³ cost two hours-equivalent in your declared objective?</p>';
+ }else{
+  const weight=Number($('weight').value),rows=['reactive','seasonal','fourier','vm','oracle'].map(arm=>{
+   const margin=N06.analysis.selection.exceedance_priority[arm].margin_ppm;
+   const points=N06.study.filter(r=>r.arm===arm&&r.margin_ppm===margin);
+   const ex=points.reduce((s,r)=>s+r.exceedance_hours,0)/points.length;
+   const air=points.reduce((s,r)=>s+r.additional_air_m3,0)/points.length;
+   return {arm,margin_ppm:margin,exceedance_hours:ex,additional_air_m3:air,cost:ex+weight*air/1000};
+  });rows.sort((a,b)=>a.cost-b.cost);const best=rows.find(r=>r.arm!=='oracle');
+  $('question').textContent='What do you want to improve?';$('prediction').textContent='Fewer exceedance hours can require more airflow. Predict whether changing the cost of effort changes the preferred attained operating point.';
+  $('chartTitle').textContent='Choose a trade-off, then read both axes';$('badges').innerHTML=`<span class="pill">J = exceedance h + λ × extra m³ / 1,000</span><span class="pill">λ = ${weight}</span>`;
+  $('plot').innerHTML=scatter(rows,best);$('legend').innerHTML=['reactive','seasonal','fourier','vm','oracle'].map((k,i)=>`<span><i class="swatch" style="background:${colors[i]}"></i>${labels[k]}</span>`).join('');
+  $('metrics').innerHTML='<thead><tr><th>Fixed attained study point</th><th>Margin (ppm)</th><th>Above 900 (h)</th><th>Extra air (m³)</th><th>J (h-equivalent)</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${labels[r.arm]}</td><td>${r.margin_ppm}</td><td>${fmt(r.exceedance_hours)}</td><td>${fmt(r.additional_air_m3,0)}</td><td>${fmt(r.cost)}</td></tr>`).join('')+'</tbody>';
+  $('caption').textContent='Fixed primary development-selected settings, averaged over six rooms and four regimes. Only the objective weight changes. The outlined point is the lowest-cost non-oracle arm in this finite menu; the oracle remains a separate information reference.';
+  $('outcome').textContent=`Preferred non-oracle point: ${labels[best.arm]}, fixed margin ${best.margin_ppm} ppm; J = ${fmt(best.cost)} hours-equivalent. This is a retrospective teaching ranking, not a deployment choice.`;
+  $('explainText').innerHTML='<p>The physical outcomes do not change when you change λ; their ranking does. At 0.02, VM has the lowest cost among the four non-oracle arms. At 2.00, reactive control wins. Oracle information is not available to those arms and is displayed separately.</p><p>These settings were selected on development rooms for the primary objective and stay fixed in this view. The study table below also reports separately development-selected settings for the effort objective; that is a different comparison. No evaluation outcome changes the saved selections.</p><p>Air volume is an effort proxy. Neither weight turns it into electricity, money or health benefit. All calendar models remain diagnostic and unvalidated.</p><p><b>Explain the choice:</b> state the objective, attained effort, attained outcome and assumption that could reverse the ranking.</p>';
+ }
+ if(tab!=='objective')$('legend').innerHTML=series.map((s,i)=>`<span><i class="swatch" style="background:${s.color||colors[i]}"></i>${s.label}</span>`).join('');
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;$('explanation').open=false;render()}));
+['focus','constraint','weight'].forEach(id=>$(id).addEventListener('change',render));
+$('reset').addEventListener('click',()=>{$('focus').value='both';$('constraint').value='normal';$('weight').value='0.02';$('explanation').open=false;render()});
+const arms=N06.analysis.objectives;
+$('studyTable').innerHTML='<thead><tr><th>Policy</th><th>Exceedance-priority J</th><th>Selected margin</th><th>Effort-priority J</th><th>Selected margin</th></tr></thead><tbody>'+['reactive','seasonal','fourier','vm','oracle'].map(a=>`<tr><td>${labels[a]}</td><td>${fmt(arms.exceedance_priority.arms[a].mean_objective)}</td><td>${arms.exceedance_priority.arms[a].selected_margin_ppm} ppm</td><td>${fmt(arms.effort_priority.arms[a].mean_objective)}</td><td>${arms.effort_priority.arms[a].selected_margin_ppm} ppm</td></tr>`).join('')+'</tbody>';
+$('studyGate').textContent=`VM practical-benefit gate: ${N06.analysis.primary_gate_passed?'passed':'failed'}. It requires 5% improvement, a positive paired interval and every regime within its regression guard against reactive, seasonal and Fourier. Six rooms limit precision; no model acceptance is upgraded.`;
+render();
+</script>
+</body></html>

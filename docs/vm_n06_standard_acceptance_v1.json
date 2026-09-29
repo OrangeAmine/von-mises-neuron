@@ -1,0 +1,282 @@
+{
+  "results": {
+    "seasonal": {
+      "metrics": {
+        "rmse": 13.237819110841883,
+        "mae": 11.068141664385516,
+        "r2": 0.8715249298510571,
+        "mape": 1.8472800687373898
+      },
+      "absolute_passed": true,
+      "regression_passed": false,
+      "passed": false,
+      "failures": [
+        "  RMSE: 13.2378 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+        "  MAE: 11.0681 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+        "  MAPE: 1.84728 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+        "  R2: 0.8715 is 0.1074 below base 0.9790"
+      ],
+      "fit_and_predict_seconds": 0.022974299965426326,
+      "model": {
+        "mode": "seasonal",
+        "fitted_coefficients": 96,
+        "values": [
+          599.2395594996856,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          613.062761321046,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          624.5987547427978,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          635.8714352788785,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          643.0987574215125,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          648.1778583361797,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          649.6688283849081,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          647.9593823959564,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          643.6737659504682,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          634.7061599897265,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          624.9850103068663,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          613.4520395032722,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          600.7630461318303,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          586.3910565480105,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          575.0527252026013,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          565.5506993902768,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          556.6897856857925,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          552.0357952709976,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          549.8603457563868,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          552.2777908479712,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          557.537560504382,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          565.1844813117933,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          575.6690869758394,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497,
+          586.6369894328132,
+          600.0893198412497,
+          600.0893198412497,
+          600.0893198412497
+        ],
+        "fixed_geometry": {
+          "features": 16,
+          "kappa": 16.0,
+          "ridge": 0.001,
+          "horizon_steps": 8,
+          "eligibility": "new diagnostic calendar-source models; no inherited neural adapter; acceptance reported separately"
+        },
+        "device": "cuda",
+        "eligibility": "synthetic diagnostic; see separate standard acceptance"
+      }
+    },
+    "fourier": {
+      "metrics": {
+        "rmse": 13.233613221254043,
+        "mae": 11.079441722758622,
+        "r2": 0.8716065544926418,
+        "mape": 1.8491606400149403
+      },
+      "absolute_passed": true,
+      "regression_passed": false,
+      "passed": false,
+      "failures": [
+        "  RMSE: 13.2336 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+        "  MAE: 11.0794 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+        "  MAPE: 1.84916 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+        "  R2: 0.8716 is 0.1074 below base 0.9790"
+      ],
+      "fit_and_predict_seconds": 0.2075970999430865,
+      "model": {
+        "mode": "fourier",
+        "fitted_coefficients": 17,
+        "values": [
+          600.0893198412497,
+          -0.05340061700585198,
+          -0.054894250061395616,
+          -0.231889109964262,
+          -0.20266822728466932,
+          -0.1450198972493018,
+          0.09711608651623355,
+          -0.11884924946347547,
+          0.01621719230140411,
+          49.62427630903198,
+          -0.07471145972157754,
+          0.009816197998936696,
+          -0.01379456746718243,
+          0.18623466978402262,
+          -0.1821543638901366,
+          0.21767972563878624,
+          -0.07431925786520095
+        ],
+        "fixed_geometry": {
+          "features": 16,
+          "kappa": 16.0,
+          "ridge": 0.001,
+          "horizon_steps": 8,
+          "eligibility": "new diagnostic calendar-source models; no inherited neural adapter; acceptance reported separately"
+        },
+        "device": "cuda",
+        "eligibility": "synthetic diagnostic; see separate standard acceptance"
+      }
+    },
+    "vm": {
+      "metrics": {
+        "rmse": 13.221881904829408,
+        "mae": 11.058680174054272,
+        "r2": 0.8718340897081732,
+        "mape": 1.8453587741747843
+      },
+      "absolute_passed": true,
+      "regression_passed": false,
+      "passed": false,
+      "failures": [
+        "  RMSE: 13.2219 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+        "  MAE: 11.0587 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+        "  MAPE: 1.84536 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+        "  R2: 0.8718 is 0.1071 below base 0.9790"
+      ],
+      "fit_and_predict_seconds": 0.07389419991523027,
+      "model": {
+        "mode": "vm",
+        "fitted_coefficients": 17,
+        "values": [
+          600.089133718626,
+          -0.7806106716426707,
+          12.291222208473426,
+          22.55701464059339,
+          29.52771583004781,
+          31.196769811008053,
+          29.934720497428884,
+          21.818001467782583,
+          12.399082241471227,
+          0.7436873871725121,
+          -13.35431939777542,
+          -21.379723193930786,
+          -29.872517414234846,
+          -31.86196457982748,
+          -29.057196966495837,
+          -22.033116291440354,
+          -12.126914517109721
+        ],
+        "fixed_geometry": {
+          "features": 16,
+          "kappa": 16.0,
+          "ridge": 0.001,
+          "horizon_steps": 8,
+          "eligibility": "new diagnostic calendar-source models; no inherited neural adapter; acceptance reported separately"
+        },
+        "device": "cuda",
+        "eligibility": "synthetic diagnostic; see separate standard acceptance"
+      }
+    }
+  },
+  "all_passed": false,
+  "thresholds": {
+    "rmse": 35.0,
+    "mae": 25.0,
+    "r2": 0.2,
+    "mape": 5.0
+  },
+  "inherited_base_reference": {
+    "path": "results/vm_n04/standard_unchanged/benchmark_results.json",
+    "sha256": "8a2d227629732294c0b57402115d9f9e257313eb34166164a25606c79c16280e",
+    "config": {
+      "n_days": 90,
+      "lookback": 72,
+      "horizon": 12,
+      "seed": 42,
+      "epochs": 50,
+      "device": "cuda"
+    },
+    "base_vm_metrics": {
+      "rmse": 5.357273412657669,
+      "mae": 4.150812149047852,
+      "r2": 0.9789586471814591,
+      "mape": 0.6916255690157413,
+      "params": 43148,
+      "time_seconds": 13.29,
+      "passed": true
+    }
+  },
+  "data_contract": {
+    "days": 90,
+    "seed": 42,
+    "split": [
+      0.8,
+      0.1,
+      0.1
+    ],
+    "lookback": 72,
+    "horizon": 12,
+    "training_labels": 1728,
+    "test_windows": 133
+  },
+  "fit_budget": "One closed-form fit per calendar arm, no selection; 50 epochs not applicable to a closed-form estimator.",
+  "limitations": "Calendar-only concentration transfer diagnostic; no sensor branch, weekly term or online correction. Preserves standard local calendar/DST limitations. Passing would not establish closed-loop validity.",
+  "runtime_seconds": 2.4803664998617023,
+  "source_sha256": {
+    "scripts/validate_n06_calendar_v1.py": "6dd04ce8f21790d63ce8884e35f579214392f831c0fe73e49a4e33a150c33eda",
+    "src/decision_forecasts_v1.py": "add2e84c7f3fb0aaae9aa32d69119e8b3df985f8c3effa7d1a37965cf559c556",
+    "scripts/benchmark_standard_dataset.py": "5440e412300ad22c804eaeb0fcb2f77d51604c0ba19596122fb8f296d9547cbc"
+  }
+}

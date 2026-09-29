@@ -1,0 +1,8 @@
+{
+  "frozen_utc": "2026-09-22T11:26:07.366754+00:00",
+  "before_target_generation": true,
+  "files": {
+    "configs/vm_n01_v1.json": "bcb409875f27a1d5c96efe76b64e63c115c03837828dc35cc3be139a123ebbd5",
+    "docs/vm_n01_protocol.md": "eb8aa842bab3a9e57627b6cdb7ab87603ade6ef5fbd2b54883e93d2db9564368"
+  }
+}

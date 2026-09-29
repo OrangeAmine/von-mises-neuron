@@ -2,3 +2,7 @@
 # Preserve those bytes on commit and checkout, including mixed historical
 # line endings; normalization would invalidate the frozen provenance.
 * -text
+
+# CRLF is valid in Windows-generated N06 receipts, not trailing content.
+docs/vm_n06* whitespace=cr-at-eol
+docs/vm_n06_demo/** whitespace=cr-at-eol

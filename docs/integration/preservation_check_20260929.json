@@ -1,0 +1,27 @@
+{
+  "created_utc": "2026-09-29T16:02:25.926630+00:00",
+  "passed": true,
+  "counts": {
+    "original_source_files": 989,
+    "original_result_files": 8250,
+    "copied_result_files": 8250,
+    "imported_files_unchanged": 149,
+    "inherited_files_unchanged": 127,
+    "archive_hashes": 13,
+    "frozen_source_checks": 126
+  },
+  "authorized_teaching_edits": [
+    "docs/learning/vm_playground_guide.md",
+    "learning/vm_playground/README.md",
+    "learning/vm_playground/guide.html",
+    "learning/vm_playground/index.html"
+  ],
+  "authorized_main_edits": [
+    ".gitattributes",
+    "README.md",
+    "docs/project_state.md",
+    "docs/proposed_tasks_from_forecasting.md"
+  ],
+  "owner_notes_unchanged": true,
+  "scope": "Byte/hash preservation, not a repeat of prediction-array numerical replays or scientific campaigns."
+}

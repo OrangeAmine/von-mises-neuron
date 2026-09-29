@@ -1,0 +1,68 @@
+{
+  "schema": "vm_integration_validation_v1",
+  "date": "2026-09-29",
+  "scope": "Compatibility, preservation and teaching UI; no scientific campaign reruns.",
+  "python": {
+    "command": "py -3.11 -m pytest tests/ -q --junitxml=results/integration_20260929/full_suite.xml",
+    "passed": 1802,
+    "seconds": 135.8
+  },
+  "javascript": {
+    "core_checks_passed": 12,
+    "syntax_checks_passed": true
+  },
+  "evidence": {
+    "historical_source_hashes": 5,
+    "historical_cells": 720,
+    "research_source_hashes": 11,
+    "studies": 6,
+    "exports_current": true
+  },
+  "browser": {
+    "surface": "Codex in-app browser",
+    "route": "http://127.0.0.1:8765/learning/vm_playground/research.html",
+    "studies_checked": 6,
+    "comparison_views_checked": 13,
+    "reset_passed": true,
+    "worked_answer_and_provenance_checked": true,
+    "original_lesson_reveal_reset_checks": 3,
+    "companion_and_n06_demo_opened": true,
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 720,
+        "document_scroll_width": 1265
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "document_scroll_width": 375
+      }
+    ],
+    "console_warnings_or_errors": 0,
+    "direct_file_route_tested": false
+  },
+  "local_links_checked": 121,
+  "preservation_receipt": "docs/integration/preservation_check_20260929.json",
+  "deferred": [
+    "calendar-trust study",
+    "N05/N06 uncertainty and controlled-source contract"
+  ],
+  "artifacts": {
+    "results/integration_20260929/full_suite.log": {
+      "sha256": "a767aa07fb136cbbd17037ca09853aab42e7ec4ab4ca21047dc7ca180d0267ea",
+      "bytes": 2140
+    },
+    "results/integration_20260929/full_suite.xml": {
+      "sha256": "d7162e86fb542b69d98580164466f25b45237df8cca3aead61b8faf314488257",
+      "bytes": 248835
+    }
+  },
+  "staged_file_bytes_verified": 168,
+  "whitespace": {
+    "integration_files_checked": 19,
+    "passed": true,
+    "crlf_recognized": true,
+    "frozen_svg_warnings_preserved": 2656
+  }
+}

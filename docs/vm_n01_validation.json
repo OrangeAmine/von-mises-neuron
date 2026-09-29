@@ -1,0 +1,24 @@
+{
+  "benchmark_scope": "Unchanged standard data/trainer/metric/gates for fresh base VM and narrow adapter; not static superiority",
+  "created_utc": "2026-09-22T11:44:41.048021+00:00",
+  "evidence": {
+    "docs/vm_n01_implementation_review.json": "7907902f921de079a7eb88d1764f3e4a8945c3fa2c6c2bc445701c8b0c2082f7",
+    "docs/vm_n01_numerical_review.json": "5379ff5f4e296746a3cb68c8c33acc2d0cceb87f89a64c53ab90f472427727f6",
+    "results/vm_n01_v1/engineering_standard.log": "956eb1da8f8bdff9bce6ea00e69005e60ff6940fee6900433d59aef3b7d63441",
+    "results/vm_n01_v1/engineering_standard/manifest.json": "d9784876a9d21a3ed26caa260dccf9e6589ac583fde8a9d11130f44a9348b792",
+    "results/vm_n01_v1/engineering_standard/results.json": "a37c99af63056ca2c8d8458358948084c8cd2acea067b33b9cd2373ffdb43977",
+    "results/vm_n01_v1/engineering_standard/validation.json": "62ef4ea92eed46fad560725bc41d4a035bf56a9d7c02aaed5d4f5750c2902bc2",
+    "results/vm_n01_v1/full_suite.log": "dc1e91b6c898dbaabad30fa00093b656961ff3c484a714afe6d069f1e47ebabb",
+    "results/vm_n01_v1/full_suite_receipt.json": "e020c722b71a704d863eb649f2902630161fc45be41e606d5b9b25746c17f7d0"
+  },
+  "full_suite_summary": "1429 passed in 82.73s (0:01:22)",
+  "full_tests": true,
+  "independent_review": true,
+  "standard_adapter_gate": true,
+  "test_receipt": {
+    "command": "py -3.11 -m pytest tests/ -q",
+    "completed_utc": "2026-09-22T11:44:05.417743+00:00",
+    "exit_code": 0,
+    "seconds": 87.09802849998232
+  }
+}

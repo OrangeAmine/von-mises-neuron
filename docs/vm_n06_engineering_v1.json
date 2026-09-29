@@ -1,0 +1,19 @@
+{
+  "full_suite_passed": true,
+  "full_suite": {
+    "passed": 1494,
+    "seconds": 85.76
+  },
+  "supplement": {
+    "passed": 32,
+    "seconds": 1.49,
+    "overlaps_full_suite": true
+  },
+  "standard_adapter_completed": true,
+  "standard_adapters_passed": false,
+  "evidence": {
+    "results/vm_n06/engineering/full_suite.xml": "ac6f96b4e53cc62f5f7b2ef0ac85a8f82c4cc5f11963e85343c301a636e4cce3",
+    "results/vm_n06/engineering/n06_supplement.xml": "4b8e0fed6489177b346c6789a9d8090aedc115e5541548f5a8fef0dcc8a63951",
+    "results/vm_n06/engineering/calendar_standard_v1/acceptance.json": "d99695c1ce57cab2b3d53ad00a1255f8f679108166c923d96a7c9bc9d5016edf"
+  }
+}

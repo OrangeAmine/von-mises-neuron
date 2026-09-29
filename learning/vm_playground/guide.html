@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Offline companion to three lessons about circular coordinates, local kernels and honest evidence.">
+  <title>VM learning playground · Offline companion</title>
+  <style>
+    :root { color-scheme: light; --ink: #18322f; --muted: #526863; --accent: #146c5e; --paper: #fbfcf9; --line: #d4dfd9; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font: 17px/1.68 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { max-width: 880px; margin: 0 auto; padding: 42px 28px 72px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #ba7135; outline-offset: 4px; }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -.025em; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); margin: .3em 0; }
+    h2 { margin-top: 2.4em; font-size: 1.65rem; }
+    h3 { margin-top: 1.8em; font-size: 1.2rem; }
+    p { margin: .85em 0; }
+    .eyebrow, .sources { color: var(--muted); font-size: .9rem; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .08em; }
+    .intro { font-size: 1.12rem; }
+    nav { display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 16px 0; border-block: 1px solid var(--line); margin: 26px 0; }
+    .equation { padding: 16px 20px; margin: 20px 0; background: #edf4ee; border-left: 3px solid var(--accent); font-size: 1.13rem; overflow-wrap: anywhere; }
+    .equation div + div { margin-top: 8px; }
+    .callout { padding: 15px 20px; background: #f5eddc; border-left: 3px solid #9d642e; }
+    .label { display: inline-block; font-size: .76rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border: 1px solid var(--line); border-radius: 4px; }
+    details { margin: 24px 0; padding: 15px 18px; border: 1px solid var(--line); border-radius: 7px; background: #fff; }
+    summary { cursor: pointer; font-weight: 650; }
+    details p:last-child { margin-bottom: 0; }
+    pre { padding: 16px; background: #eaf0ed; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    code { font: .91em/1.6 ui-monospace, "Cascadia Code", Consolas, monospace; overflow-wrap: anywhere; }
+    table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); padding: 12px 10px; }
+    th { background: #eaf0ed; }
+    .table-scroll { overflow-x: auto; }
+    footer { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 20px; color: var(--muted); }
+    @media (max-width: 540px) { main { padding: 24px 18px 48px; } body { font-size: 16px; } th, td { padding: 9px 7px; } }
+    @media print {
+      body { color: #111; background: white; font-size: 10.5pt; line-height: 1.5; }
+      main { max-width: none; padding: 0; }
+      nav { display: none; }
+      h1 { font-size: 25pt; } h2 { font-size: 17pt; } h3 { font-size: 13pt; }
+      h1, h2, h3, summary { break-after: avoid; }
+      .equation, details, tr { break-inside: avoid; }
+      details > *:not(summary), details:not([open]) > *:not(summary) { display: block !important; }
+      .equation, .callout, th { background: white; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+  <p class="eyebrow">VM-N03 · Original lessons: 22 September · Findings edition: 29 September 2026</p>
+    <h1>VM learning playground</h1>
+    <p class="intro">An offline companion to coordinates, locality and the difference between a gain and a successful scientific claim.</p>
+    <p>The examples illustrate equations and selection effects. They do not train a research model or produce new scientific evidence. The saved v1 and locality-v2 findings remain unchanged. Angles are <strong>radians</strong>; illustrative responses have arbitrary units unless a metric is explicitly labeled dimensionless.</p>
+  </header>
+  <nav aria-label="Guide navigation">
+    <a href="#new-findings">Six completed studies</a>
+    <a href="index.html">Open playground</a>
+    <a href="#start">Launch</a>
+    <a href="#coordinates">1 · Coordinates</a>
+    <a href="#locality">2 · Locality</a>
+    <a href="#evidence">3 · Evidence</a>
+    <a href="#reading">Reading map</a>
+  </nav>
+
+  <section id="start" aria-labelledby="start-heading">
+    <h2 id="start-heading">Open, learn, reset</h2>
+    <p>Open <a href="index.html">index.html</a> directly in a current browser. This guide and the playground use local files, without external fonts, packages, accounts or model downloads. Keep the repository directory layout so that research-source links work. Alternatively, from the repository root:</p>
+    <pre><code>py -3.11 -m http.server 8765 --bind 127.0.0.1</code></pre>
+    <p>Then open <a href="http://127.0.0.1:8765/learning/vm_playground/index.html">the served playground</a> or <a href="http://127.0.0.1:8765/learning/vm_playground/guide.html">the served guide</a>. On another host, use its Python executable in place of <code>py -3.11</code>. Stop the server with Ctrl+C. The browser can print this guide; open answer panels first if you want them included.</p>
+    <p>For each lesson, <strong>predict</strong> before opening the explanation, <strong>manipulate</strong> one control at a time, <strong>observe</strong> the plot and values, then <strong>explain</strong> what changed in your own words. Use the lesson's reset button to return to its original settings. Identical controls give identical examples. Historical display filters never refit or edit the study.</p>
+  </section>
+
+  <section id="coordinates" aria-labelledby="coordinates-heading">
+    <h2 id="coordinates-heading">1. Same function, different coordinates</h2>
+    <span class="label">Exact identity</span>
+    <p><strong>Predict.</strong> With amplitude κ fixed, what happens to the preferred input angle when phase μ increases? Does doubling κ make a cosine peak narrower?</p>
+    <p><strong>Manipulate.</strong> Change amplitude and phase. Compare polar and Cartesian response curves, then compare θ with θ + 2π. Try a very small amplitude and zero.</p>
+    <div class="equation" aria-label="Polar and Cartesian identity">
+      <div>f(θ) = κ cos(θ + μ) = a cos θ + b sin θ</div>
+      <div>a = κ cos μ &nbsp; · &nbsp; b = −κ sin μ</div>
+      <div>κ = √(a² + b²) &nbsp; · &nbsp; μ = atan2(−b, a) when κ &gt; 0</div>
+    </div>
+    <p>This is the cosine addition formula, not a fit. For κ &gt; 0, the maximum occurs at <strong>θ = −μ modulo 2π</strong>. The two coordinate systems describe the same response, although their optimizer trajectories need not match. The polar phase derivative is −κ sin(θ + μ), so its magnitude shrinks with κ.</p>
+    <p><strong>Worked example.</strong> Let κ = 2 and μ = π/3. Then a = 1 and b = −√3. At θ = π/6, the polar form gives 2 cos(π/2) = 0, while the Cartesian form gives √3/2 − √3/2 = 0. The preferred input is −π/3, equivalently 5π/3. Adding 2π to either θ or μ leaves every response unchanged, up to floating-point rounding.</p>
+    <p><strong>Observe.</strong> Changing κ scales the sum response vertically: dividing a nonzero response by κ recovers the same cosine shape. Changing μ shifts it horizontally. At κ = 0, a = b = 0 and every phase gives the same flat response. <strong>No unique preferred angle exists.</strong> Near zero, tiny coefficient changes can move the inferred phase substantially while barely changing predictions.</p>
+    <p>Exact zero is a useful teaching boundary. The research layers use softplus of a finite unconstrained parameter to produce strictly positive κ in exact arithmetic; that raw parameter is not log(κ). A near-zero phase is not reliable evidence of stable structure.</p>
+    <p><strong>Explain the boundary of the claim.</strong> The multi-input core sum is Σ<sub>i</sub>[a<sub>i</sub> cos(x<sub>i</sub>) + b<sub>i</sub> sin(x<sub>i</sub>)] plus an optional bias. It is 2π-periodic in each input. An affine input projection or raw-input residual can break that guarantee for the complete model. A physical direction has a physical wrap; a standardized sensor value fed into cosine merely has a mathematical wrap in standardized units. Its preferred value is not automatically a clock time, compass direction or physical mechanism.</p>
+    <p>The historical <code>log_output</code> setting returns the sum response plus bias. It is not the logarithm of the final biased exponential output.</p>
+    <p class="sources">Sources: <a href="../../src/circular_layers_v2.py">versioned circular layers</a>, <a href="../../src/von_mises_neuron.py">legacy core implementation</a>, and <a href="../../AGENTS.md">repository mathematical guardrails</a>.</p>
+    <details>
+      <summary>Self-check: μ = π/2, κ = 3. What are a, b and the preferred angle?</summary>
+      <p>a = 0, b = −3, and the preferred input is −π/2 modulo 2π, or 3π/2. The response is −3 sin θ. A phase of +π/2 is not the preferred input under the cos(θ + μ) convention. At κ = 0, no unique preferred angle remains.</p>
+    </details>
+  </section>
+
+  <section id="locality" aria-labelledby="locality-heading">
+    <h2 id="locality-heading">2. Amplitude versus locality</h2>
+    <span class="label">Exact identity</span>
+    <p><strong>Predict.</strong> If the maximum of a kernel is fixed at one, what can increasing κ change? Does it change the period?</p>
+    <p><strong>Manipulate.</strong> Compare the sum response with the peak-normalized kernel while holding the center fixed. Increase κ, inspect the off-center values, and then change the integer harmonic separately.</p>
+    <div class="equation" aria-label="Sum response and peak-normalized kernel">
+      <div>c = −μ</div>
+      <div>s(θ) = κ cos(θ − c)</div>
+      <div>K(θ, c) = exp{κ[cos(θ − c) − 1]}</div>
+    </div>
+    <p>In s, κ changes amplitude, not the normalized cosine shape. In K, the peak stays at one while values away from the center decrease as κ grows: this is locality. At κ = 0, s is zero and K is constant one. For κ &gt; 0, the kernel's minimum at the antipode is exp(−2κ). The teaching kernel is peak-normalized; the legacy exp(s) output has peak exp(κ), and an added bias changes it again.</p>
+    <p><strong>Worked example.</strong> At κ = 2 and θ − c = π/2, s = 0 and K = exp(−2) ≈ 0.1353. At the center K = 1; at the opposite angle K = exp(−4) ≈ 0.0183. Raising κ lowers off-center values without moving the center or changing the period.</p>
+    <h3>A Gaussian on the unit circle</h3>
+    <p>Define the embedding u(θ) = (cos θ, sin θ). Expanding its squared distance gives an exact equality:</p>
+    <div class="equation" aria-label="Exact chordal Gaussian identity">
+      <div>‖u(θ) − u(c)‖² = 2 − 2 cos(θ − c)</div>
+      <div>K(θ, c) = exp{−(κ/2)‖u(θ) − u(c)‖²}</div>
+    </div>
+    <p>This is a Gaussian radial basis evaluated on the unit circle, with Euclidean embedding width σ = 1/√κ for κ &gt; 0. Chord distance is dimensionless on the unit circle; it differs from unwrapped angular distance. The local approximation K ≈ exp(−κ(θ − c)²/2) uses cos δ ≈ 1 − δ²/2 and is only an approximation near the center. σ is not an exact angular standard deviation.</p>
+    <p><strong>Observe the independent roles.</strong> Integer harmonic h in cos(hθ) changes the fundamental period to 2π/h while preserving 2π wrap consistency. The corresponding kernel exp{κ[cos(h(θ − c)) − 1]} has h equally high peaks around the original circle. For h &gt; 1, it is a Gaussian basis on the <em>h-fold embedding</em> u<sub>h</sub>(θ) = (cos(hθ), sin(hθ)): multiple original angles map to the same embedded point. It is not one isolated peak on the original circle.</p>
+    <p>Kappa alone never sets h. A clock feature θ(t) = 2πt/T supplies physical cycle T; harmonic h gives T/h. Frozen concentration bands do not create daily and weekly periods by themselves.</p>
+    <p><strong>Explain normalization.</strong> Peak one does not mean integral one. A circular probability density is exp(κ cos(θ − c)) / [2πI<sub>0</sub>(κ)], where I<sub>0</sub> is the modified Bessel function. This lesson's unnormalized basis is not a density, so its height is not a probability. A weighted sum of bases with a bias is a regression function and may be negative. A bounded basis also does not establish bounded gradients or safe exponentials for every other architecture and parameterization.</p>
+    <p class="sources">Source: <code>PeakCircularKernelBankV1.log_features</code> and <code>chordal_features</code> in <a href="../../src/circular_layers_v2.py">the versioned implementation</a>.</p>
+    <details>
+      <summary>Self-check: What changes when κ goes from 1 to 4? What changes when h goes from 1 to 2?</summary>
+      <p>The sum amplitude increases fourfold. The kernel remains at peak one, suppresses off-center responses more strongly, and has embedding width 1/2 instead of 1. Changing h to 2 creates two peaks over a full turn and halves the fundamental period. It preserves the original 2π wrap, unlike an arbitrary noninteger frequency.</p>
+    </details>
+  </section>
+
+  <section id="evidence" aria-labelledby="evidence-heading">
+    <h2 id="evidence-heading">3. A gain with a failed gate</h2>
+    <h3>Read the saved evidence first</h3>
+    <span class="label">Historical empirical finding</span>
+    <p><strong>Predict.</strong> Can an average error reduction coexist with a failed continuation rule? Which additional facts would you need before calling one method better?</p>
+    <p><strong>Manipulate.</strong> Inspect historical family, total-label, noise and compute views. These controls select saved summaries; they launch no new runs. <code>vp_both</code> adapts centers and widths while solving its ridge readout at each geometry state. <code>joint_both</code> updates geometry and readout together using Adam. <code>fixed16</code> has the same basis count as the adaptive models; <code>fixed48</code> has the same fitted scalar count as <code>vp_both</code> but more fixed basis functions.</p>
+    <p>The compact <a href="../../docs/vm_locality_v2_run_record.json">run record</a> and <a href="../../docs/vm_locality_v2_cells.csv">cell CSV</a> are historical sources, explained in the <a href="../../docs/vm_locality_v2_results.md">v2 report</a>. The CSV's 720 confirmation cells cover every model, family, noise level, label budget and time allowance. Its <code>normalized_clean_mse</code> is clean-grid MSE divided by clean target variance: <strong>dimensionless, lower is better</strong>. Noise SD is in standardized target units. The nonperiodic family is diagnostic and excluded from the balanced periodic primary score; all v2 model arms are periodic.</p>
+    <p>Total labels include training and validation: 64 = 48 + 16, 128 = 96 + 32, and 512 = 384 + 128. The primary allowance is two seconds per fit; the other saved allowances are 0.25 and 0.75 seconds. Fixed controls finish their ridge solve much earlier, so a common allowance is not equal actual runtime. Only checkpoints completed within an allowance are eligible. <a href="../../docs/vm_locality_v2_protocol.md">Source: prospective protocol</a>; <a href="../../docs/vm_locality_v2_results.md#runtime-and-numerical-diagnostics">runtime analysis</a>.</p>
+    <div class="callout">
+      <p><strong>Observe the locked decision.</strong> <code>vp_both</code> reduced balanced error by <strong>54.54% against fixed16</strong> and <strong>35.85% against fixed48</strong>. But smooth-family error was <strong>47.58% higher than fixed16</strong>, exceeding the unchanged <strong>10%</strong> family regression limit. Both co-primary contrasts had to pass: <strong>the overall gate failed</strong>. <a href="../../docs/vm_locality_v2_results.md#locked-confirmation-decisions">Source: locked confirmation decisions</a>.</p>
+    </div>
+    <p>The full rule also required sufficient aggregate improvement, a positive lower bootstrap improvement bound, and improvement in at least two periodic families. <a href="../../docs/vm_locality_v2_protocol.md#analysis-and-evidence">Source: frozen analysis rule</a>.</p>
+    <p><strong>Why can both be true?</strong> Each target first averages its paired budgets, noise and initializations. Targets are then averaged within family, and the three periodic families receive equal weight. Large absolute reductions in narrow or multimodal error can outweigh a small absolute increase in already-small smooth error. A family-relative guard asks a different question from the aggregate.</p>
+    <p>The saved smooth errors are about 0.003304 versus 0.002239: an absolute increase of about 0.001065 can still be a large percentage increase. The gate was not rewritten after the result. <a href="../../docs/vm_locality_v2_results.md#locked-confirmation-decisions">Source: decision table and explanation</a>.</p>
+    <p><strong>Compare the alternatives.</strong> Variable projection's balanced error was <strong>15.05% higher than joint Adam's</strong>, and all three periodic family means favored joint Adam. Solving one part exactly does not guarantee the best complete method under a fixed wall-clock allowance. Joint Adam completed more updates in this setup, but the comparison does not establish update count as the sole cause. <a href="../../docs/vm_locality_v2_results.md#locked-confirmation-decisions">Source: optimizer contrast</a>; <a href="../../docs/vm_locality_v2_results.md#runtime-and-numerical-diagnostics">runtime table</a>.</p>
+    <p>At <strong>512 total labels</strong>, larger Fourier controls won the narrow and multimodal comparisons described in the report. Their weaker small-sample cells explain why a local win need not produce the best overall mean. At <strong>0.25 seconds</strong>, <code>vp_both</code> was worse than fixed48; more computation changed that comparison. <a href="../../docs/vm_locality_v2_results.md#all-model-outcomes-and-conditional-answer">Source: all model outcomes and conditional answer</a>.</p>
+    <p><strong>Keep v1 visible.</strong> Both v1 primary confirmation gates failed too: polar optimization's curve error was <strong>62.94% higher than Cartesian</strong>, and learned locality error was <strong>65.09% higher than its locked fixed-VM comparator</strong>. V2 changed label accounting, regularization, initialization and compute budgeting; it does not reverse v1. These are bounded synthetic results, not real-world forecasting validation. <a href="../../docs/vm_methodology_results.md">Source: v1 report</a>; <a href="../../docs/vm_locality_v2_results.md#interpretation-limitations-and-preservation">v2 limitations</a>.</p>
+    <details>
+      <summary>Self-check: If the fixed48 contrast passes, may it replace the failed fixed16 contrast?</summary>
+      <p>No. Both were required by the locked co-primary rule. A favorable aggregate, subgroup, alternative optimizer or comparator cannot retrospectively replace the failed contrast. Report the conditional benefit and the failed overall gate together.</p>
+    </details>
+
+    <h3>Then run the separate selection-bias exercise</h3>
+    <span class="label">Synthetic teaching example</span>
+    <p><strong>Predict.</strong> If every candidate has the same true error, what happens to the best development score as you inspect more candidates?</p>
+    <p><strong>Manipulate.</strong> Increase the candidate count and compare the selected development MSE with its independent reserved MSE. Compare small and larger development samples. Reset returns the same exercise; it does not create a fresh reserved research sample.</p>
+    <p>Every candidate's residuals are standard normal, so every candidate has population MSE <strong>1 in dimensionless units</strong>. Candidate sets are nested at 1, 4, 16 and 64. Select the candidate with the lowest development mean squared residual, using 16 or 128 development samples. Its reserved score uses a separate sample of 256 residuals. The display averages 200 repetitions with fixed teaching seed <strong>20260922</strong>. These are simulation definitions, not estimates from locality v2 or the external model-selection lesson.</p>
+    <div class="equation" aria-label="Selection exercise definition">
+      <div>D<sub>j</sub> = mean(e²) on development samples</div>
+      <div>j* = argmin<sub>j</sub> D<sub>j</sub></div>
+      <div>R<sub>j*</sub> = mean(e²) on separate reserved samples</div>
+      <div>E[R<sub>j*</sub> | development results] = 1</div>
+    </div>
+    <p><strong>Observe.</strong> Adding a candidate to a nested set cannot increase the minimum development error in any repetition. Independence keeps the selected candidate's expected reserved error at one. More candidates can therefore improve the reported development winner without improving population quality. Finite reserved averages fluctuate around one. Larger development samples generally reduce this selection optimism without eliminating the need for independent evaluation.</p>
+    <p><strong>Explain the limit.</strong> Real candidate errors are often correlated, candidates can differ in true quality, and search can adapt to earlier results. This deliberately simple exercise isolates selection among equally good candidates. It does not diagnose the v2 gate failure, estimate bias in that study, or measure a generalization gap for VM models. Repeatedly tuning against reserved results would make them development data; resetting the controls cannot restore statistical independence.</p>
+    <details>
+      <summary>Self-check: Development MSE fell while reserved MSE stayed near one. Did the candidate improve?</summary>
+      <p>No population-quality improvement was built into this exercise. Selection found a favorable development fluctuation. The independent reserved score evaluates the selected candidate without reusing the fluctuation that selected it.</p>
+    </details>
+  </section>
+
+  <section id="reading" aria-labelledby="reading-heading">
+    <h2 id="reading-heading">Evidence guide and reading map</h2>
+    <div class="table-scroll">
+      <table>
+        <caption>Four labels to keep the strength of a claim visible</caption>
+        <thead><tr><th scope="col">Evidence label</th><th scope="col">What it establishes here</th><th scope="col">What it does not establish</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Exact identity</th><td>Polar/Cartesian expansion, core 2π wrap and the Gaussian-on-the-circle equality.</td><td>Faster training, identifiable learned phases or a superior model.</td></tr>
+          <tr><th scope="row">Engineering validation</th><td>Focused numerical, reset, source-integrity and browser checks of this teaching implementation.</td><td>New scientific confirmation or the validity of an unstated learning claim.</td></tr>
+          <tr><th scope="row">Empirical finding</th><td>Saved v1/v2 outcomes under their stated synthetic tasks, controls, budgets and rules.</td><td>Novelty, unseen-domain validation or general forecasting superiority.</td></tr>
+          <tr><th scope="row">Open hypothesis</th><td>Whether a conditional finding extends to a new regime or real deployment.</td><td>A demonstrated result in that new setting. N01 now provides bounded synthetic evidence for the smooth-plus-local question; its overall gate failed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Read the <a href="../../src/circular_layers_v2.py">core equations</a> for identities, the <a href="../../docs/vm_methodology_results.md">v1 report</a> for earlier negative findings, the <a href="../../docs/vm_locality_v2_protocol.md">v2 protocol</a> for the prospective contract, and the <a href="../../docs/vm_locality_v2_results.md">v2 report</a> for decisions and limitations. The <a href="../../docs/vm_locality_v2_run_record.json">run record</a> and <a href="../../docs/vm_locality_v2_cells.csv">cell CSV</a> support inspection without ignored training arrays. Full arrays and checkpoints are not shipped with this teaching resource.</p>
+    <p>The <a href="../../docs/proposed_tasks_from_forecasting.md#vm-n03--vm-learning-playground-and-reading-companion">VM-N03 proposal</a> records its origin; the original delivery implemented that task; the 29 September integration adds the separate findings edition below. The user's <a href="../../VM_exploration.md">exploratory notes</a> retain their historical status and do not replace audited conclusions. A <a href="../../docs/learning/vm_playground_guide.md">Markdown version of this guide</a> is available for repository reading.</p>
+  </section>
+  <section id="new-findings" aria-labelledby="new-findings-heading">
+    <h2 id="new-findings-heading">4. Six completed studies, distinct claims</h2>
+    <p>Added 29 September 2026. Use the <a href="research.html">findings explorer</a> to compare saved outcomes. It adds a separate evidence edition; all original locality-v2 cells and source pins remain unchanged.</p>
+    <p><strong>Completion is not a passing scientific gate.</strong> N01, N04, N05 and N06 completed but failed their overall gates. N02 reports individual claims without a combined gate. N03 is teaching implementation, not a learner-outcome experiment.</p>
+    <dl>
+      <dt><strong>N01 · Smooth and local structure</strong></dt><dd>The hybrid reduced balanced error by 19.21% against Fourier16, yet smooth error rose 11.97% against the fixed hybrid and failed the 10% guard. Read the absolute smooth errors too: 0.00204512 versus 0.00182657. A small absolute difference does not change a prespecified relative rule.</dd>
+      <dt><strong>N02 · Parameter meaning</strong></dt><dd>All 36 isolated-peak fits recovered parameters in the identifiable setup. Redundant components could predict accurately while their geometry varied; response stability also failed. Proxy-clock reliance did not establish causality. The isolated doubled-kappa effect and proxy accuracy criterion retained their failures.</dd>
+      <dt><strong>N03 · What the examples establish</strong></dt><dd>Exact identities, authored simulations and saved empirical results provide different kinds of support. Resetting the selection exercise repeats an authored pool; it does not create a new held-out evaluation.</dd>
+      <dt><strong>N04 · Routine reliability</strong></dt><dd>Learned geometry gained only 1.58% against Fourier, below the 5% practical threshold, and was worse than fixed geometry. A regime regressed 12.86%; a three-hour routine shift reversed calendar benefits. These are synthetic CO₂ forecasts, not recovered real occupancy.</dd>
+      <dt><strong>N05 · Which uncertainty?</strong></dt><dd>The primary score improvement was 7.50%, but its room-level 95% interval ran from −4.34% to +17.43%; noisy coverage also failed. A positive block interval conditioned on fixed fitted intervals omits refitting uncertainty and cannot replace the primary inference. All arms used the same persistence point forecast and fixed VM geometry.</dd>
+      <dt><strong>N06 · Prediction meets a decision</strong></dt><dd>VM improved the low-effort-penalty objective against reactive control, but only 2.73% against matched Fourier (95% interval −0.07% to +6.15%), failing the gate. It used more air than reactive control. A higher effort penalty changed the ranking; capacity limits and routine shifts constrained the benefit.</dd>
+    </dl>
+    <details><summary>Self-check: can N05 uncertainty be inserted directly into N06?</summary><p>No. N05 forms CO₂ intervals around persistence; N06 predicts exogenous source for an action-dependent mass-balance model. A shared target and information-timing contract are needed before coupling them. That follow-up has not been run.</p></details>
+    <details><summary>Self-check: does a passing software test validate an experimental claim?</summary><p>No. Tests establish engineering properties. N01's adapter passed standard absolute checks despite its separate scientific failure. N04's four neural adapters and N06's new neural calendar adapters failed base-VM regression checks and remain diagnostic or unvalidated under their full acceptance contracts. View controls never change those statuses.</p></details>
+    <p><a href="../../docs/research_account_n01_n06.md">Read the consolidated account and original report links</a> · <a href="../../docs/vm_n06_demo/index.html">Try the decision-timing demonstrator</a> · <a href="../../docs/integration_20260929.md">Integration and validation record</a>.</p>
+  </section>
+  <footer>
+    <p>The selection exercise is a teaching simulation. The research summaries are a fixed historical record. Neither is a new model benchmark. This resource can check its calculations and present evidence honestly; it cannot establish learning effectiveness without a separate evaluation.</p>
+    <p><a href="index.html">Return to the playground</a></p>
+  </footer>
+</main>
+</body>
+</html>

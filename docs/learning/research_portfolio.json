@@ -1,0 +1,582 @@
+{
+  "edition": "2026-09-29",
+  "scope": "Read-only synthesis of completed N01–N06 evidence; no new training or gate changes.",
+  "sources": {
+    "n01": {
+      "path": "docs/vm_n01_run_record.json",
+      "sha256": "54ec608e141974a4ddb23a0d326be506363e32d74b74b92b8bc23f06300f3f8c"
+    },
+    "n02": {
+      "path": "docs/vm_n02_scorecard.json",
+      "sha256": "ce85bf291f12e96f51cfe05a3fcc2fd31f4a7463f6ccd81ecfb1c1f500fbae68"
+    },
+    "n04": {
+      "path": "docs/vm_n04_results_v1.json",
+      "sha256": "3ffb3098d4e5e0851577a5d01f057f50196e39f604665e378dd35927dff0d557"
+    },
+    "n05": {
+      "path": "docs/vm_n05_results_v1.json",
+      "sha256": "66c96060caa1ef1983f495f5314516c6bd82fcd24660c1815f911ac825070a3c"
+    },
+    "n06": {
+      "path": "docs/vm_n06_results_v1.json",
+      "sha256": "bbe974cc64236024628562581cab8b8ae3a684cc19083b01f2f819b409b07468"
+    },
+    "n01_report": {
+      "path": "docs/vm_n01_results.md",
+      "sha256": "4f43b72c5322c0aa2a3e342851402ce4aeabfefc094a75b8ada3c0ee6a6d1ead"
+    },
+    "n02_report": {
+      "path": "docs/vm_n02_interpretation_results.md",
+      "sha256": "b07814c2064cd81a92c09402e027134ab924cbe347cb6de54a609529734490b6"
+    },
+    "n03_report": {
+      "path": "docs/learning/vm_n03_completion.md",
+      "sha256": "c4ff069d02416c1bae8f9433fd7d750019db7dc16ad464136158178c98680738"
+    },
+    "n04_report": {
+      "path": "docs/vm_n04_report_v1.md",
+      "sha256": "6cb3d699493804428812ab26e96d9482b3e7effc886ab6b83d5b5f29ce626f69"
+    },
+    "n05_report": {
+      "path": "docs/vm_n05_report_v1.md",
+      "sha256": "1190e4395693e31a35191e9b6d6e75d1c600b5bca95cd8c08e2254f83ceaa1ea"
+    },
+    "n06_report": {
+      "path": "docs/vm_n06_report_v1.md",
+      "sha256": "0f9680deb61f87482c656db2ad311ebcb90d2ddbcbac667d660d49dbf0d28a64"
+    }
+  },
+  "studies": [
+    {
+      "id": "N01",
+      "title": "Smooth + local",
+      "question": "Can local corrections help a smooth backbone?",
+      "status": "Overall scientific gate failed",
+      "scope": "Synthetic functions · six independent functions per family · one noise level · two label budgets",
+      "finding": "The selected joint-Adam hybrid improved balanced error against all three declared controls.",
+      "limit": "Smooth error increased 11.97% against the fixed hybrid, exceeding the unchanged 10% guard. Fourier36 was stronger at 256 labels. A passing individual contrast cannot override the failed overall gate.",
+      "engineering": "The separate forecasting adapter passed standard absolute checks. That does not change this scientific decision.",
+      "prompt": "Why can the Fourier16 comparison pass while the overall study fails?",
+      "answer": "All required comparisons and guards must pass. The smooth-family guard against the fixed hybrid failed. The absolute smooth errors are small, but the rule was relative and was fixed before confirmation.",
+      "views": [
+        {
+          "label": "Against Fourier16",
+          "description": "Balanced clean MSE divided by target variance; lower is better. Positive reduction favors the selected hybrid. Intervals resample whole functions within family.",
+          "metrics": [
+            {
+              "label": "Error reduction",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier16/relative_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/analyses/confirmation/contrasts/fourier16/interval"
+            },
+            {
+              "label": "Hybrid smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier16/families/smooth/candidate_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            },
+            {
+              "label": "Control smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier16/families/smooth/comparator_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            }
+          ]
+        },
+        {
+          "label": "Against the fixed hybrid",
+          "description": "Balanced clean MSE divided by target variance; lower is better. Positive reduction favors the selected hybrid. Intervals resample whole functions within family.",
+          "metrics": [
+            {
+              "label": "Error reduction",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/hybrid_fixed16/relative_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/analyses/confirmation/contrasts/hybrid_fixed16/interval"
+            },
+            {
+              "label": "Hybrid smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/hybrid_fixed16/families/smooth/candidate_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            },
+            {
+              "label": "Control smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/hybrid_fixed16/families/smooth/comparator_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            }
+          ]
+        },
+        {
+          "label": "Against Fourier36",
+          "description": "Balanced clean MSE divided by target variance; lower is better. Positive reduction favors the selected hybrid. Intervals resample whole functions within family.",
+          "metrics": [
+            {
+              "label": "Error reduction",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier36/relative_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/analyses/confirmation/contrasts/fourier36/interval"
+            },
+            {
+              "label": "Hybrid smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier36/families/smooth/candidate_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            },
+            {
+              "label": "Control smooth error",
+              "source": "n01",
+              "pointer": "/analyses/confirmation/contrasts/fourier36/families/smooth/comparator_error",
+              "scale": 1,
+              "decimals": 8,
+              "unit": "NMSE",
+              "interval_pointer": null
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Original protocol",
+          "path": "docs/vm_n01_protocol.md"
+        }
+      ],
+      "gate": {
+        "source": "n01",
+        "pointer": "/analyses/confirmation/gate/passed"
+      },
+      "report": "n01_report"
+    },
+    {
+      "id": "N02",
+      "title": "Interpreting parameters",
+      "question": "When do phase and width identify a component?",
+      "status": "Claim-specific outcomes · no overall gate",
+      "scope": "Synthetic identifiable, redundant and proxy cases · 12 independent units per case",
+      "finding": "All 36 isolated-peak fits recovered the declared parameters with full support, the correct family and training-derived local initialization.",
+      "limit": "Redundant models can fit accurately while their components vary. Even complete-response stability failed here. A model relying on a clock does not make the clock a physical cause.",
+      "engineering": "Numerical and intervention checks passed their engineering scope. Individual scientific failures remain visible, including the isolated doubled-kappa effect and the proxy accuracy criterion.",
+      "prompt": "Does a good complete response imply that each fitted kernel has a unique physical meaning?",
+      "answer": "No. Exact split and cancellation constructions can keep the response unchanged while changing components. Recovery needs identifiable assumptions; deletion measures model reliance, not causal identification.",
+      "views": [
+        {
+          "label": "Identifiable isolated peak",
+          "description": "Recovery was tested in a deliberately favorable, identifiable setup. The doubled-kappa effect narrowly missed its fixed 0.1 practical-effect criterion.",
+          "metrics": [
+            {
+              "label": "Recovered fits",
+              "source": "n02",
+              "pointer": "/16/mean",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": null
+            },
+            {
+              "label": "Clean error",
+              "source": "n02",
+              "pointer": "/0/mean",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "NRMSE",
+              "interval_pointer": "/0/ci95"
+            },
+            {
+              "label": "Doubled-kappa error increase",
+              "source": "n02",
+              "pointer": "/6/mean",
+              "scale": 1,
+              "decimals": 7,
+              "unit": "NMSE",
+              "interval_pointer": null
+            }
+          ]
+        },
+        {
+          "label": "Redundant components",
+          "description": "The mean accuracy criterion passed, but only 26 of 36 individual fits did. Across-initialization response NRMSE failed the 0.05 stability criterion.",
+          "metrics": [
+            {
+              "label": "Mean clean error",
+              "source": "n02",
+              "pointer": "/7/mean",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "NRMSE",
+              "interval_pointer": "/7/ci95"
+            },
+            {
+              "label": "Response instability",
+              "source": "n02",
+              "pointer": "/8/mean",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "NRMSE",
+              "interval_pointer": "/8/ci95"
+            },
+            {
+              "label": "Center dispersion",
+              "source": "n02",
+              "pointer": "/14/mean",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "radians",
+              "interval_pointer": null
+            }
+          ]
+        },
+        {
+          "label": "Proxy clock",
+          "description": "Aligned accuracy failed its 0.1 NRMSE criterion. Deleting the clock harms aligned predictions but helps after the proxy relationship changes. The known noise floor does not change the gate.",
+          "metrics": [
+            {
+              "label": "Aligned clean error",
+              "source": "n02",
+              "pointer": "/17/mean",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "NRMSE",
+              "interval_pointer": "/17/ci95"
+            },
+            {
+              "label": "Shifted full minus sensor-only error",
+              "source": "n02",
+              "pointer": "/19/mean",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "NMSE",
+              "interval_pointer": null
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Interpretation protocol",
+          "path": "docs/vm_n02_interpretation_protocol.md"
+        }
+      ],
+      "gate": null,
+      "report": "n02_report"
+    },
+    {
+      "id": "N03",
+      "title": "Learning the distinctions",
+      "question": "What can an interactive example establish?",
+      "status": "Teaching delivery · no scientific gate",
+      "scope": "Exact identities, authored examples and separately labeled historical evidence",
+      "finding": "Three resettable lessons connect coordinate equivalence, local kernel shape and the interpretation of a failed gate. All 720 historical locality-v2 cells remain available.",
+      "limit": "An interactive identity is not a new model comparison. The authored selection exercise is not a measured estimate of bias in the research studies. No learner-outcome study was run.",
+      "engineering": "Original numerical tests and pinned evidence checks are preserved. The integration adds this separate explorer and extends the reading companion.",
+      "prompt": "Does changing a view create a new held-out evaluation?",
+      "answer": "No. The views read frozen saved results. Reset repeats the same authored examples. Choosing a new method from these results would require a fresh evaluation for that new procedure.",
+      "views": [
+        {
+          "label": "Start with the original lessons",
+          "description": "The original v1/v2 export and all three interactive lessons remain intact. Follow the links below, then return to compare the later studies.",
+          "metrics": []
+        }
+      ],
+      "links": [
+        {
+          "label": "Open the three lessons",
+          "path": "learning/vm_playground/index.html"
+        },
+        {
+          "label": "Read the companion",
+          "path": "learning/vm_playground/guide.html"
+        }
+      ],
+      "gate": null,
+      "report": "n03_report"
+    },
+    {
+      "id": "N04",
+      "title": "Changing routines",
+      "question": "When does the calendar stop helping?",
+      "status": "Overall scientific gate failed",
+      "scope": "Synthetic CO2 rooms · six independent confirmation rooms · 24 regimes · primary one-hour horizon",
+      "finding": "Calendar information helped under stable routines. Learned geometry offered a small average gain against Fourier.",
+      "limit": "The 1.58% Fourier gain missed the 5% minimum, fixed geometry was better, and a fast stable/outage regime regressed 12.86%. The three-hour routine shift reversed calendar benefits.",
+      "engineering": "Four neural adapters passed absolute checks but failed base-VM regression checks: they remain unvalidated under the full contract. Residual ridge passed both.",
+      "prompt": "Why does a narrow positive interval not establish a useful calendar improvement?",
+      "answer": "Statistical direction is only one requirement. The useful-effect threshold and regime guard also had to pass. A reliable but small average gain can still fail that contract.",
+      "views": [
+        {
+          "label": "Against Fourier",
+          "description": "Positive improvement means lower normalized RMSE for learned geometry. The paired interval resamples rooms; repeated regimes are not new independent rooms.",
+          "metrics": [
+            {
+              "label": "Learned geometry improvement",
+              "source": "n04",
+              "pointer": "/primary/fourier/improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/primary/fourier/paired_95_interval"
+            },
+            {
+              "label": "Learned geometry error",
+              "source": "n04",
+              "pointer": "/primary/fourier/candidate_mean_normalized_rmse",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "normalized RMSE",
+              "interval_pointer": null
+            },
+            {
+              "label": "Control error",
+              "source": "n04",
+              "pointer": "/primary/fourier/control_mean_normalized_rmse",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "normalized RMSE",
+              "interval_pointer": null
+            }
+          ]
+        },
+        {
+          "label": "Against fixed geometry",
+          "description": "Positive improvement means lower normalized RMSE for learned geometry. The paired interval resamples rooms; repeated regimes are not new independent rooms.",
+          "metrics": [
+            {
+              "label": "Learned geometry improvement",
+              "source": "n04",
+              "pointer": "/primary/fixed/improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/primary/fixed/paired_95_interval"
+            },
+            {
+              "label": "Learned geometry error",
+              "source": "n04",
+              "pointer": "/primary/fixed/candidate_mean_normalized_rmse",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "normalized RMSE",
+              "interval_pointer": null
+            },
+            {
+              "label": "Control error",
+              "source": "n04",
+              "pointer": "/primary/fixed/control_mean_normalized_rmse",
+              "scale": 1,
+              "decimals": 5,
+              "unit": "normalized RMSE",
+              "interval_pointer": null
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Dynamics protocol",
+          "path": "docs/vm_n04_protocol_v1.md"
+        }
+      ],
+      "gate": {
+        "source": "n04",
+        "pointer": "/scientific_gate_passed"
+      },
+      "report": "n04_report"
+    },
+    {
+      "id": "N05",
+      "title": "Uncertainty",
+      "question": "Which uncertainty does an interval describe?",
+      "status": "Overall scientific gate failed",
+      "scope": "Synthetic CO2 · eight independently generated and fitted rooms · latest-arrived persistence point forecast for every arm",
+      "finding": "The fixed VM scale basis improved one-hour interval score against the Fourier scale basis on average. Only four of eight rooms favored VM.",
+      "limit": "The primary room-level interval crossed zero. Noisy-condition coverages of 83.70% and 83.32% failed the 85% guards. Ordinary rolling calibration had a better score and narrower intervals overall.",
+      "engineering": "No new point forecaster was trained. VM centers and concentration were fixed; only the scale readout was learned. Nominal 90% coverage is not guaranteed under dependence and changing conditions.",
+      "prompt": "Can the positive conditional block interval replace the room-level interval?",
+      "answer": "No. The conditional calculation keeps fitted factors and issued quantiles fixed and omits refitting uncertainty. It answers a narrower question. The preregistered room-level result remains the primary decision.",
+      "views": [
+        {
+          "label": "Primary: room and fitting variability",
+          "description": "Primary inference: independently generated and fitted room pipelines, with all scenarios paired. This interval includes variability omitted by the conditional view.",
+          "metrics": [
+            {
+              "label": "VM score improvement over Fourier",
+              "source": "n05",
+              "pointer": "/primary_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/paired_room_95_interval"
+            }
+          ]
+        },
+        {
+          "label": "Diagnostic: fixed fitted intervals",
+          "description": "Conditional only: evaluation blocks resampled with fitted factors and issued quantiles fixed. A positive interval here does not rescue the failed room-level gate.",
+          "metrics": [
+            {
+              "label": "Same score improvement; conditional interval",
+              "source": "n05",
+              "pointer": "/primary_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/conditional_fixed_interval_block_95_interval"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Interval contract sample",
+          "path": "docs/vm_n05_interval_contract_sample_v1.csv"
+        },
+        {
+          "label": "Full comparison table",
+          "path": "docs/vm_n05_comparison_v1.csv"
+        }
+      ],
+      "gate": {
+        "source": "n05",
+        "pointer": "/scientific_gate_passed"
+      },
+      "report": "n05_report"
+    },
+    {
+      "id": "N06",
+      "title": "Decisions",
+      "question": "When does forecast timing have value?",
+      "status": "Overall scientific gate failed",
+      "scope": "Synthetic controlled mass balance · six evaluation rooms · source forecasts · point forecasts only",
+      "finding": "Forecast-informed policies reduced exceedance under the low effort penalty. VM improved the objective against reactive and seasonal controls.",
+      "limit": "VM improved over matched Fourier by only 2.73%, with an interval crossing zero. It used more air than reactive control. Changing the effort penalty changes the ranking; routine shifts and capacity limits constrain the benefit.",
+      "engineering": "Source estimation uses fixed-kernel ridge and ideal synthetic source labels. New neural calendar adapters failed base regression checks. The perfect-source heuristic is a reference, not an optimal bound.",
+      "prompt": "Can better CO2 interval coverage from N05 be inserted directly into this controller?",
+      "answer": "No. N05 surrounds a persistence CO2 forecast; N06 predicts exogenous source for an action-dependent plant. Target, information timing and calibration must be reconciled before combining them. That work is deferred.",
+      "views": [
+        {
+          "label": "Low effort penalty (0.02)",
+          "description": "Saved development-selected policy margins, evaluated on held-out rooms. J = exceedance hours + weight × extra air / 1000 m³. Lower is better. These are different objectives, not equal-effort comparisons.",
+          "metrics": [
+            {
+              "label": "VM objective",
+              "source": "n06",
+              "pointer": "/objectives/exceedance_priority/arms/vm/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "Fourier objective",
+              "source": "n06",
+              "pointer": "/objectives/exceedance_priority/arms/fourier/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "Reactive objective",
+              "source": "n06",
+              "pointer": "/objectives/exceedance_priority/arms/reactive/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "VM improvement over Fourier",
+              "source": "n06",
+              "pointer": "/objectives/exceedance_priority/contrasts/fourier/relative_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/objectives/exceedance_priority/contrasts/fourier/paired_95_interval"
+            }
+          ]
+        },
+        {
+          "label": "High effort penalty (2.0)",
+          "description": "Saved development-selected policy margins, evaluated on held-out rooms. J = exceedance hours + weight × extra air / 1000 m³. Lower is better. These are different objectives, not equal-effort comparisons.",
+          "metrics": [
+            {
+              "label": "VM objective",
+              "source": "n06",
+              "pointer": "/objectives/effort_priority/arms/vm/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "Fourier objective",
+              "source": "n06",
+              "pointer": "/objectives/effort_priority/arms/fourier/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "Reactive objective",
+              "source": "n06",
+              "pointer": "/objectives/effort_priority/arms/reactive/mean_objective",
+              "scale": 1,
+              "decimals": 3,
+              "unit": "J",
+              "interval_pointer": null
+            },
+            {
+              "label": "VM improvement over Fourier",
+              "source": "n06",
+              "pointer": "/objectives/effort_priority/contrasts/fourier/relative_improvement",
+              "scale": 100,
+              "decimals": 2,
+              "unit": "%",
+              "interval_pointer": "/objectives/effort_priority/contrasts/fourier/paired_95_interval"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "Open the decision demonstrator",
+          "path": "docs/vm_n06_demo/index.html"
+        },
+        {
+          "label": "Decision guide",
+          "path": "docs/vm_n06_guide.md"
+        }
+      ],
+      "gate": {
+        "source": "n06",
+        "pointer": "/primary_gate_passed"
+      },
+      "report": "n06_report"
+    }
+  ]
+}

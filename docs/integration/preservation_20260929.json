@@ -1,0 +1,1644 @@
+{
+  "schema": "vm_completed_delivery_integration_v1",
+  "created_utc": "2026-09-29T15:46:20.758006+00:00",
+  "base_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "manifest": "results/integration_20260929/preservation_manifest.json",
+  "manifest_sha256": "17fb1dac853fc1da288d024b68a565ecdba3b660d43e8b3fbb12b80cb2ec4c4f",
+  "main_archive": {
+    "path": "results/integration_20260929/main_before_source.zip",
+    "sha256": "a325819ba5119a672400d533eba562f42357669f7be675a23235aedf677038ce",
+    "bytes": 1108140,
+    "files": 131
+  },
+  "owner_notes_sha256": "d76ae1df27b4ecbc48a33aadc81dcf08d199e69025a4a6419972c3a58f179fe0",
+  "tasks": [
+    {
+      "task": "N01",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron",
+      "head": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "source_archive": {
+        "path": "results/integration_20260929/N01_source.zip",
+        "sha256": "e10aee4514f31d0c95728a44a17871b11be677a1d39349db5b3bcf22f4a0f2d1",
+        "bytes": 1368108,
+        "files": 168
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N01_results.zip",
+        "sha256": "8b2f87f58ebae66245ba658fec79d6fbab4c26ecdd865126029ffbe836e88111",
+        "bytes": 14772718,
+        "files": 3355
+      },
+      "delivery_paths": [
+        "configs/vm_n01_v1.json",
+        "docs/figures/vm_n01_confirmation.png",
+        "docs/vm_n01_audit_summary.json",
+        "docs/vm_n01_cells.csv",
+        "docs/vm_n01_completion.json",
+        "docs/vm_n01_final_review.json",
+        "docs/vm_n01_function_results.csv",
+        "docs/vm_n01_implementation_review.json",
+        "docs/vm_n01_inherited_baseline.json",
+        "docs/vm_n01_interpretation_scope.md",
+        "docs/vm_n01_numerical_review.json",
+        "docs/vm_n01_pilot_results.csv",
+        "docs/vm_n01_preservation.json",
+        "docs/vm_n01_protocol.md",
+        "docs/vm_n01_protocol_freeze.json",
+        "docs/vm_n01_results.md",
+        "docs/vm_n01_run_record.json",
+        "docs/vm_n01_runtime.csv",
+        "docs/vm_n01_usage.md",
+        "docs/vm_n01_validation.json",
+        "scripts/audit_vm_n01.py",
+        "scripts/report_vm_n01.py",
+        "scripts/run_vm_n01.py",
+        "scripts/validate_smooth_local_forecaster_v1.py",
+        "src/smooth_local_analysis_v1.py",
+        "src/smooth_local_forecaster_v1.py",
+        "src/smooth_local_protocol_v1.py",
+        "src/smooth_local_tasks_v1.py",
+        "src/smooth_local_training_v1.py",
+        "src/smooth_local_v1.py",
+        "tests/test_smooth_local_analysis_v1.py",
+        "tests/test_smooth_local_forecaster_v1.py",
+        "tests/test_smooth_local_protocol_v1.py",
+        "tests/test_smooth_local_tasks_v1.py",
+        "tests/test_smooth_local_training_v1.py",
+        "tests/test_smooth_local_v1.py",
+        "tests/test_validate_smooth_local_forecaster_v1.py"
+      ],
+      "reconciled_separately": [
+        "VM_exploration.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    },
+    {
+      "task": "N02",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron",
+      "head": "368551799c27b9c4ad90d85d89c3b4ab3e817e10",
+      "source_archive": {
+        "path": "results/integration_20260929/N02_source.zip",
+        "sha256": "f5e03707f3cb98ff847398a3e81de4baa9cac3b53bca5d4525a44860109ecc3e",
+        "bytes": 1658020,
+        "files": 152
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N02_results.zip",
+        "sha256": "2e1294cb58c5ea1614eb3676f06bcbd0d67dcb0dac54810ee5bbc543c8744cff",
+        "bytes": 10496595,
+        "files": 289
+      },
+      "delivery_paths": [
+        "configs/vm_n02_interpretation_v1.json",
+        "docs/figures/vm_n02_interpretation.png",
+        "docs/figures/vm_n02_interpretation.svg",
+        "docs/vm_n02_baseline_receipt.json",
+        "docs/vm_n02_context_receipt.json",
+        "docs/vm_n02_execution_notes.md",
+        "docs/vm_n02_fits.csv",
+        "docs/vm_n02_interpretation_protocol.md",
+        "docs/vm_n02_interpretation_results.md",
+        "docs/vm_n02_run_record.json",
+        "docs/vm_n02_scorecard.csv",
+        "docs/vm_n02_scorecard.json",
+        "docs/vm_n02_units.csv",
+        "scripts/audit_vm_n02_interpretation.py",
+        "scripts/report_vm_n02_interpretation.py",
+        "scripts/run_vm_n02_interpretation.py",
+        "src/interpretation_n02_cases.py",
+        "src/interpretation_n02_diagnostics.py",
+        "tests/test_interpretation_n02_cases.py",
+        "tests/test_interpretation_n02_diagnostics.py",
+        "tests/test_run_vm_n02_interpretation.py"
+      ],
+      "reconciled_separately": [
+        "VM_exploration.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    },
+    {
+      "task": "N03",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron",
+      "head": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "source_archive": {
+        "path": "results/integration_20260929/N03_source.zip",
+        "sha256": "5145ae088350023d5c0a5c4770094a5518cd3ccb578c843e22fe9b28ecf88419",
+        "bytes": 1189354,
+        "files": 145
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N03_results.zip",
+        "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85",
+        "bytes": 22,
+        "files": 0
+      },
+      "delivery_paths": [
+        "docs/learning/vm_n03_completion.md",
+        "docs/learning/vm_n03_inherited_snapshot.json",
+        "docs/learning/vm_n03_validation.json",
+        "docs/learning/vm_playground_guide.md",
+        "learning/vm_playground/README.md",
+        "learning/vm_playground/app.js",
+        "learning/vm_playground/core.js",
+        "learning/vm_playground/core.test.cjs",
+        "learning/vm_playground/evidence.js",
+        "learning/vm_playground/guide.html",
+        "learning/vm_playground/index.html",
+        "learning/vm_playground/style.css",
+        "scripts/learning/build_vm_playground_evidence.py",
+        "tests/test_vm_playground_evidence.py"
+      ],
+      "reconciled_separately": [
+        "VM_exploration.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    },
+    {
+      "task": "N04",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron",
+      "head": "843bf96f289d6217b038ecbc2355eef4bf8b5e87",
+      "source_archive": {
+        "path": "results/integration_20260929/N04_source.zip",
+        "sha256": "7fedcf910afc555f943b1fc89342dbbf49ef814582fb6fc74c8fa42f5fc347f3",
+        "bytes": 1515893,
+        "files": 156
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N04_results.zip",
+        "sha256": "4af9251887462a9467e27c5eb2f9456983c61bf0272947cbe0062859141c15bf",
+        "bytes": 64975229,
+        "files": 3964
+      },
+      "delivery_paths": [
+        "configs/vm_n04_v1.json",
+        "docs/figures/vm_n04_v1.png",
+        "docs/vm_n04_cells_v1.csv",
+        "docs/vm_n04_context_receipt.json",
+        "docs/vm_n04_engineering_v1.json",
+        "docs/vm_n04_protocol_v1.md",
+        "docs/vm_n04_replay_v1.json",
+        "docs/vm_n04_report_v1.md",
+        "docs/vm_n04_results_v1.json",
+        "docs/vm_n04_review_v1.md",
+        "docs/vm_n04_run_record_v1.json",
+        "docs/vm_n04_storage_recovery_v1_1.md",
+        "docs/vm_n04_usage.md",
+        "scripts/analyze_vm_n04_v1.py",
+        "scripts/run_vm_n04_v1.py",
+        "scripts/run_vm_n04_v1_1.py",
+        "scripts/validate_dynamics_forecasters_v1.py",
+        "src/dynamics_data_v1.py",
+        "src/dynamics_models_v1.py",
+        "src/dynamics_training_v1.py",
+        "tests/test_analyze_vm_n04_v1.py",
+        "tests/test_dynamics_data_v1.py",
+        "tests/test_dynamics_models_v1.py",
+        "tests/test_dynamics_training_v1.py",
+        "tests/test_run_vm_n04_v1.py",
+        "tests/test_vm_n04_storage_recovery_v1_1.py"
+      ],
+      "reconciled_separately": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    },
+    {
+      "task": "N05",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron",
+      "head": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "source_archive": {
+        "path": "results/integration_20260929/N05_source.zip",
+        "sha256": "43b5f6a016bbd09d91254e8d3a41252c5dea43284ab15994253d3cb3cc0f1255",
+        "bytes": 1909336,
+        "files": 177
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N05_results.zip",
+        "sha256": "8d4482c5cc3b1eb9a3377eb80c4683b0c10b928c9cebd54add3c73a019bec54e",
+        "bytes": 14904214,
+        "files": 109
+      },
+      "delivery_paths": [
+        "configs/vm_n04_v1.json",
+        "configs/vm_n05_v1.json",
+        "docs/figures/vm_n04_v1.png",
+        "docs/figures/vm_n05_v1.png",
+        "docs/vm_n04_cells_v1.csv",
+        "docs/vm_n04_context_receipt.json",
+        "docs/vm_n04_engineering_v1.json",
+        "docs/vm_n04_protocol_v1.md",
+        "docs/vm_n04_replay_v1.json",
+        "docs/vm_n04_report_v1.md",
+        "docs/vm_n04_results_v1.json",
+        "docs/vm_n04_review_v1.md",
+        "docs/vm_n04_run_record_v1.json",
+        "docs/vm_n04_storage_recovery_v1_1.md",
+        "docs/vm_n04_usage.md",
+        "docs/vm_n05_cells_v1.csv",
+        "docs/vm_n05_clipping_v1.csv",
+        "docs/vm_n05_comparison_v1.csv",
+        "docs/vm_n05_completion_receipt.json",
+        "docs/vm_n05_context_receipt.json",
+        "docs/vm_n05_dependency_receipt.json",
+        "docs/vm_n05_interval_contract_sample_v1.csv",
+        "docs/vm_n05_protocol_v1.md",
+        "docs/vm_n05_report_v1.md",
+        "docs/vm_n05_results_v1.json",
+        "docs/vm_n05_run_record_v1.json",
+        "docs/vm_n05_source_lock_v1.json",
+        "docs/vm_n05_usage.md",
+        "scripts/analyze_vm_n04_v1.py",
+        "scripts/run_vm_n04_v1.py",
+        "scripts/run_vm_n04_v1_1.py",
+        "scripts/run_vm_n05_v1.py",
+        "scripts/validate_dynamics_forecasters_v1.py",
+        "src/dynamics_data_v1.py",
+        "src/dynamics_models_v1.py",
+        "src/dynamics_training_v1.py",
+        "src/uncertainty_analysis_v1.py",
+        "src/uncertainty_calibration_v1.py",
+        "src/uncertainty_data_v1.py",
+        "tests/test_analyze_vm_n04_v1.py",
+        "tests/test_dynamics_data_v1.py",
+        "tests/test_dynamics_models_v1.py",
+        "tests/test_dynamics_training_v1.py",
+        "tests/test_run_vm_n04_v1.py",
+        "tests/test_vm_n04_storage_recovery_v1_1.py",
+        "tests/test_vm_n05_v1.py"
+      ],
+      "reconciled_separately": [
+        "VM_exploration.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    },
+    {
+      "task": "N06",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron",
+      "head": "96c72d05414fa41380e0b6d08d89963bc9a30cc6",
+      "source_archive": {
+        "path": "results/integration_20260929/N06_source.zip",
+        "sha256": "f6eeef7165ff0d6565fb523580ac110cc7a18eb5fdc8458d28f51661388e66b5",
+        "bytes": 1838176,
+        "files": 191
+      },
+      "results_archive": {
+        "path": "results/integration_20260929/N06_results.zip",
+        "sha256": "d15d49daa13ab3a88ba624a6911e424e3ab8afcc42e6828542fae2b7763ecbd9",
+        "bytes": 4165529,
+        "files": 533
+      },
+      "delivery_paths": [
+        ".gitattributes",
+        "configs/vm_n04_v1.json",
+        "configs/vm_n06_v1.json",
+        "docs/figures/vm_n04_v1.png",
+        "docs/figures/vm_n06_timing_v1.png",
+        "docs/figures/vm_n06_tradeoffs_v1.png",
+        "docs/vm_n04_cells_v1.csv",
+        "docs/vm_n04_context_receipt.json",
+        "docs/vm_n04_engineering_v1.json",
+        "docs/vm_n04_protocol_v1.md",
+        "docs/vm_n04_replay_v1.json",
+        "docs/vm_n04_report_v1.md",
+        "docs/vm_n04_results_v1.json",
+        "docs/vm_n04_review_v1.md",
+        "docs/vm_n04_run_record_v1.json",
+        "docs/vm_n04_storage_recovery_v1_1.md",
+        "docs/vm_n04_usage.md",
+        "docs/vm_n06_achieved_points_v1.csv",
+        "docs/vm_n06_completion_v1.json",
+        "docs/vm_n06_context_receipt.json",
+        "docs/vm_n06_contract_lock.json",
+        "docs/vm_n06_demo/data.js",
+        "docs/vm_n06_demo/index.html",
+        "docs/vm_n06_dependency_receipt.json",
+        "docs/vm_n06_engineering_v1.json",
+        "docs/vm_n06_evaluation_lock_v1.json",
+        "docs/vm_n06_guide.md",
+        "docs/vm_n06_protocol_v1.md",
+        "docs/vm_n06_report_v1.md",
+        "docs/vm_n06_results_v1.json",
+        "docs/vm_n06_rollout_audit_v1.json",
+        "docs/vm_n06_selected_rooms_v1.csv",
+        "docs/vm_n06_source_lock_v1.json",
+        "docs/vm_n06_standard_acceptance_v1.json",
+        "docs/vm_n06_teaching_v1.json",
+        "scripts/analyze_vm_n04_v1.py",
+        "scripts/analyze_vm_n06_v1.py",
+        "scripts/audit_vm_n06_v1.py",
+        "scripts/bootstrap_n06_dependency.py",
+        "scripts/launch_vm_n06.py",
+        "scripts/prepare_n06_engineering.py",
+        "scripts/record_n06_context.py",
+        "scripts/render_vm_n06_timing.py",
+        "scripts/run_vm_n04_v1.py",
+        "scripts/run_vm_n04_v1_1.py",
+        "scripts/run_vm_n06_v1.py",
+        "scripts/validate_dynamics_forecasters_v1.py",
+        "scripts/validate_n06_calendar_v1.py",
+        "src/decision_forecasts_v1.py",
+        "src/decision_plant_v1.py",
+        "src/decision_policies_v1.py",
+        "src/dynamics_data_v1.py",
+        "src/dynamics_models_v1.py",
+        "src/dynamics_training_v1.py",
+        "tests/test_analyze_vm_n04_v1.py",
+        "tests/test_decision_n06_v1.py",
+        "tests/test_dynamics_data_v1.py",
+        "tests/test_dynamics_models_v1.py",
+        "tests/test_dynamics_training_v1.py",
+        "tests/test_run_vm_n04_v1.py",
+        "tests/test_vm_n04_storage_recovery_v1_1.py"
+      ],
+      "reconciled_separately": [
+        "VM_exploration.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ]
+    }
+  ],
+  "imports": [
+    {
+      "path": "configs/vm_n01_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\configs\\vm_n01_v1.json",
+      "sha256": "bcb409875f27a1d5c96efe76b64e63c115c03837828dc35cc3be139a123ebbd5",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n01_confirmation.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\figures\\vm_n01_confirmation.png",
+      "sha256": "097f0ca41d9294814d1bcf79a456c95804ca6b1785b975eb8929a51a8a2f1f7d",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_audit_summary.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_audit_summary.json",
+      "sha256": "c90b83f4f19c28dc96a3c252b5dc816988e62012a992eb4b853467f176080e6f",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_cells.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_cells.csv",
+      "sha256": "d88b0c07dc7bc2d5f962ede7c05edaf2f98f89b3df6bf615e07bbe5cc8b15247",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_completion.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_completion.json",
+      "sha256": "89e7870f0e7237f2d824cf96b66e2fa16db20a650199acc41bb5f9fd091db790",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_final_review.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_final_review.json",
+      "sha256": "1d4e2fbc6ec3f2ba522917f5f916fe5a7a7aa9cff2b59553a9e6e511c6f84233",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_function_results.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_function_results.csv",
+      "sha256": "0bd0c8e6a13c51847b8670f7b80b35ace2ca25221a136b87f3e4f4818f3701e1",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_implementation_review.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_implementation_review.json",
+      "sha256": "7907902f921de079a7eb88d1764f3e4a8945c3fa2c6c2bc445701c8b0c2082f7",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_inherited_baseline.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_inherited_baseline.json",
+      "sha256": "e01ea7f86ca2b7a755bc3e38a526a380b1806cfd6aabf877a423ef6500fefcfd",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_interpretation_scope.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_interpretation_scope.md",
+      "sha256": "5bf76767698dfd115fbde584f8ea2da401507834bb55a0f5919dd53a0d991840",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_numerical_review.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_numerical_review.json",
+      "sha256": "5379ff5f4e296746a3cb68c8c33acc2d0cceb87f89a64c53ab90f472427727f6",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_pilot_results.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_pilot_results.csv",
+      "sha256": "5f6aa1014a272f0343626f3aebc2ca5ca77c057d9b91195b96535cd00e108779",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_preservation.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_preservation.json",
+      "sha256": "424ef4c5d19004e2ade15cbd3d7140d878986cb3c4e12cd02f387a5f8a170fe0",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_protocol.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_protocol.md",
+      "sha256": "eb8aa842bab3a9e57627b6cdb7ab87603ade6ef5fbd2b54883e93d2db9564368",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_protocol_freeze.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_protocol_freeze.json",
+      "sha256": "d0c1e569a5b07ffc530bf81b428e5dbcd09a93fe17b88339d52a85abf83e5b33",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_results.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_results.md",
+      "sha256": "4f43b72c5322c0aa2a3e342851402ce4aeabfefc094a75b8ada3c0ee6a6d1ead",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_run_record.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_run_record.json",
+      "sha256": "54ec608e141974a4ddb23a0d326be506363e32d74b74b92b8bc23f06300f3f8c",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_runtime.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_runtime.csv",
+      "sha256": "9fd83d2caf807194db292a4073158b3796abe2c898c08f1a92c79a881621068a",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_usage.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_usage.md",
+      "sha256": "a16df089e1a32ed6b01ce84fa8d747ffe07cc2bc5bc7ffca13d27fb337bfedab",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "docs/vm_n01_validation.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\docs\\vm_n01_validation.json",
+      "sha256": "855ca4887a0aac6ee320d6e70987a012dca8b1b4df01cb7ec4903a5bbc1f7caf",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "scripts/audit_vm_n01.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\scripts\\audit_vm_n01.py",
+      "sha256": "361b42cbd7fb2d298f8b7969e15c703f15eb014e95e953682369e4ec0e55ff65",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "scripts/report_vm_n01.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\scripts\\report_vm_n01.py",
+      "sha256": "d75277d2c4d0368e7aa5e5d762bfe98671739ced9d05c636c570f44b9d16e05a",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n01.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\scripts\\run_vm_n01.py",
+      "sha256": "0c88b1d6cf241f5379165a447c5cbd79e514fe071533c3a1662ea1a07104c1b7",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "scripts/validate_smooth_local_forecaster_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\scripts\\validate_smooth_local_forecaster_v1.py",
+      "sha256": "84cbaad5a531fbeb60053e833485b34bde78c5d6cf45e0a3463052b1f76f49f8",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_analysis_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_analysis_v1.py",
+      "sha256": "0bf9ef925d1d1b5934a5e079dd5355b7cc6dd9239dbfdaf65a37c75943ae85b0",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_forecaster_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_forecaster_v1.py",
+      "sha256": "92724470a4f02376992263c746024a4d264602590dd1bfe501cc053237a1570b",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_protocol_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_protocol_v1.py",
+      "sha256": "c64f423e261e7eee66c93b2bc44ba7e602e4573f6b4b928a8d8d755df5702ea2",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_tasks_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_tasks_v1.py",
+      "sha256": "431f293898a14c9a8ce2947c89f0962d8447c90b2ed7afc300b2e3587f5201d7",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_training_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_training_v1.py",
+      "sha256": "41bda426bc3665ecbb45d26bad0a5b9f7a0a7dc0af203b80d6bdc33c49ae2b82",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "src/smooth_local_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\src\\smooth_local_v1.py",
+      "sha256": "a7b1ddc57b91c40485908b16140544951118dabad5a5e2bc0de19cfc807e69a5",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_analysis_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_analysis_v1.py",
+      "sha256": "b9f7faccfe40a0db87bb9e17e1571d23d474336958eedcfe557d944b4aa9792e",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_forecaster_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_forecaster_v1.py",
+      "sha256": "30bd6e4a2d74f1875ff30969686e953cb4e112be656eac131bb1bb659e06468c",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_protocol_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_protocol_v1.py",
+      "sha256": "4dbeecb5ff804f7b5208d59b59962cf1fa0372c313c296ca2cb558864e28bcd8",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_tasks_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_tasks_v1.py",
+      "sha256": "1163548a95e5c5e31d93e552425bb2915d5e3b156886bb89633e5ef4c606478e",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_training_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_training_v1.py",
+      "sha256": "fd6e5be89f3c2f8192e35c799008f467bf04963c155b3fcb70261e1b134a00f9",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_smooth_local_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_smooth_local_v1.py",
+      "sha256": "687119b7ecd4c2e95015b9ed2983e1a21a8f97c5d76efa083e075a3d9aad9475",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "tests/test_validate_smooth_local_forecaster_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\de12\\von-mises-neuron\\tests\\test_validate_smooth_local_forecaster_v1.py",
+      "sha256": "b45587fcc32675ddab73dadc44f36a451c41882b25b1f8f1ba117b7d91fb65eb",
+      "tasks": [
+        "N01"
+      ]
+    },
+    {
+      "path": "configs/vm_n02_interpretation_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\configs\\vm_n02_interpretation_v1.json",
+      "sha256": "8d985e719dd54180b892e38437100dcf82a30a935802a4d2c30a4f76f0938496",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n02_interpretation.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\figures\\vm_n02_interpretation.png",
+      "sha256": "4996b5e2f898c5ca374e0c600381f281769019bb486640ad053b7b0b0142e993",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n02_interpretation.svg",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\figures\\vm_n02_interpretation.svg",
+      "sha256": "96d0ad8705d66d82ef4e1e776e1fb1f86fae631ae435e5988f8d6953ac03f747",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_baseline_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_baseline_receipt.json",
+      "sha256": "17e61a9e2a33cfb553e489ba8af93aebdd470d7200acb5368d1f319d60498487",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_context_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_context_receipt.json",
+      "sha256": "7ac5036dffd4c15ad40aae4adfd17b530d35d18748c1c23fd9c2108ce4275045",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_execution_notes.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_execution_notes.md",
+      "sha256": "2139eb6a318171b3d6d8b0276161a3047813ff22962e236757ec4457ba3be328",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_fits.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_fits.csv",
+      "sha256": "c8ec36b53d9779fd945d383a5d1029664e40c71a3a5d3ac1d1b4ab6d477238e8",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_interpretation_protocol.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_interpretation_protocol.md",
+      "sha256": "d84bf4c395c7a14c0a414e6d47b37b2ecf17af861f3d6265e44d3c8a69975a38",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_interpretation_results.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_interpretation_results.md",
+      "sha256": "b07814c2064cd81a92c09402e027134ab924cbe347cb6de54a609529734490b6",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_run_record.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_run_record.json",
+      "sha256": "835e250f7e3fa92bb4bfccfb5e3f3a418d5dbd55d54238a47f901bf9476a5ce1",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_scorecard.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_scorecard.csv",
+      "sha256": "59f818887e37782a6bb25acfcee03fe86de3f34bbb62c35460cb8a046ea8e8e4",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_scorecard.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_scorecard.json",
+      "sha256": "ce85bf291f12e96f51cfe05a3fcc2fd31f4a7463f6ccd81ecfb1c1f500fbae68",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/vm_n02_units.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\docs\\vm_n02_units.csv",
+      "sha256": "8f0c90fd508a3e6e95070b0f559c6b601964e34a6a6765c3994797cdf0132aa5",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "scripts/audit_vm_n02_interpretation.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\scripts\\audit_vm_n02_interpretation.py",
+      "sha256": "fd9e1db986c8604f61bbea88acdf9228d04368bd0312a8f393a3fc692a7e25dd",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "scripts/report_vm_n02_interpretation.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\scripts\\report_vm_n02_interpretation.py",
+      "sha256": "7ed3b5222795b884f5b0a8c669db2fdb8e40b32e1f0ce21377029696517905d9",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n02_interpretation.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\scripts\\run_vm_n02_interpretation.py",
+      "sha256": "f47c4681e74fb4acabb8f3e23604fefa37d671a0b5cbeca2dd6bb68200440d1f",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "src/interpretation_n02_cases.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\src\\interpretation_n02_cases.py",
+      "sha256": "831939b4d894ae7a2bec191370acb4b69fcf5b13658f1641a1a0be9a494b911f",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "src/interpretation_n02_diagnostics.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\src\\interpretation_n02_diagnostics.py",
+      "sha256": "be3e2c11bbbc5f1efbc70d03b267f537379ac7cb7d8d830d0a70836141e4de32",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "tests/test_interpretation_n02_cases.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\tests\\test_interpretation_n02_cases.py",
+      "sha256": "f8d9476287b70d1061794f035147bdb0694760903a7bd53f796fa97750fd062f",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "tests/test_interpretation_n02_diagnostics.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\tests\\test_interpretation_n02_diagnostics.py",
+      "sha256": "12823308fb5ba707565d07362d172ac1dd7f8d180dc40c91f81c50ef334bb750",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "tests/test_run_vm_n02_interpretation.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\c416\\von-mises-neuron\\tests\\test_run_vm_n02_interpretation.py",
+      "sha256": "69161f32535e1c8c9541356500ffd75ad2b1f7a1e2a5dd63941c2d981f33bfc6",
+      "tasks": [
+        "N02"
+      ]
+    },
+    {
+      "path": "docs/learning/vm_n03_completion.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\docs\\learning\\vm_n03_completion.md",
+      "sha256": "c4ff069d02416c1bae8f9433fd7d750019db7dc16ad464136158178c98680738",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "docs/learning/vm_n03_inherited_snapshot.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\docs\\learning\\vm_n03_inherited_snapshot.json",
+      "sha256": "78792e667441610a534651b4dc1ad6dcebb612961b4bfc31e25af6a2ba03a1c2",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "docs/learning/vm_n03_validation.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\docs\\learning\\vm_n03_validation.json",
+      "sha256": "0bd5c936951ec21766ae47e68d5ac4fa5d6fe5ec4e3422f7eef441c35e315a7c",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "docs/learning/vm_playground_guide.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\docs\\learning\\vm_playground_guide.md",
+      "sha256": "8d7c01291d0adc7962151312d9d02771b6a7d0251125ebe6317733cf3c0520f2",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/README.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\README.md",
+      "sha256": "aed1c92c1517dbf7a21f1f49f3f850f6f900f0a820f1aaf5cadf0b175eba3710",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/app.js",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\app.js",
+      "sha256": "50bf8b76de6353246d688701d02ea8e628b1980551b058668eb4df1c1d2ceb32",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/core.js",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\core.js",
+      "sha256": "cbc6bb495225a627a503eb26344b5682cd7995787e6900f38bc6bf7c4405ae18",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/core.test.cjs",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\core.test.cjs",
+      "sha256": "8cff08ca95a777aa13ee109a39d6988666e997f730aed7080e6b15987ade6eb6",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/evidence.js",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\evidence.js",
+      "sha256": "d2187f00bef188b7123f74ed2d8d198a8beb97885df96794f32f4737d6154494",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/guide.html",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\guide.html",
+      "sha256": "7910a5c6cf5445b737c8d76a26c6212bcfa9244e54a90e5a6e17f95b15b52152",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/index.html",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\index.html",
+      "sha256": "6709a21e4b4ac21725bceffdb476e3d0647a708502e3bd1d23c281d1ece5e676",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "learning/vm_playground/style.css",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\learning\\vm_playground\\style.css",
+      "sha256": "e387180cf863b8c0162a348a03b49f33e06183a097414a87ff37c0a862ddcea5",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "scripts/learning/build_vm_playground_evidence.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\scripts\\learning\\build_vm_playground_evidence.py",
+      "sha256": "d35f7266cfc66964f6315430d54e52554fe6a4c5fccdaaf49bd37c764447a736",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "tests/test_vm_playground_evidence.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\63ae\\von-mises-neuron\\tests\\test_vm_playground_evidence.py",
+      "sha256": "2a91399ec9d7c3e93194ec5ef6bb16cb3236053ddd8a446c379b243788f59522",
+      "tasks": [
+        "N03"
+      ]
+    },
+    {
+      "path": "configs/vm_n04_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\configs\\vm_n04_v1.json",
+      "sha256": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n04_v1.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\figures\\vm_n04_v1.png",
+      "sha256": "991dc770acea54b9b6d11d90ff398a3582332b1fd2f290f2087521ad82184edf",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_cells_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_cells_v1.csv",
+      "sha256": "958bb8cb37b7ac44af94e1465bc53366aa24b4ae30f6c54366ea7710e7e350f0",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_context_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_context_receipt.json",
+      "sha256": "3ff1537c0821b05dbf5ee9686758619ace0c340190a15fa6777e4b03537b525b",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_engineering_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_engineering_v1.json",
+      "sha256": "0e0cad26ff3f22b7c6f34aabbecabf850343faa3733c256870141be1b6fe91ed",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_protocol_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_protocol_v1.md",
+      "sha256": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_replay_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_replay_v1.json",
+      "sha256": "161385f13e3a501637903b64627b3b918035202a3d3bf9eb6832f65f8d7632f0",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_report_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_report_v1.md",
+      "sha256": "6cb3d699493804428812ab26e96d9482b3e7effc886ab6b83d5b5f29ce626f69",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_results_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_results_v1.json",
+      "sha256": "3ffb3098d4e5e0851577a5d01f057f50196e39f604665e378dd35927dff0d557",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_review_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_review_v1.md",
+      "sha256": "774f259ce4b6598b3b89deeafc6c849bac118370560016d2fd015c629ae9ed7e",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_run_record_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_run_record_v1.json",
+      "sha256": "8416e1439c6a2e5ed495a922949292f6a96282e78b1a8ccd7a3bb724fe41a85f",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_storage_recovery_v1_1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_storage_recovery_v1_1.md",
+      "sha256": "a1a08dd6e9abf195b9a05652a1dab528b16171444d793062497f9e2e1fdb8316",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n04_usage.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\docs\\vm_n04_usage.md",
+      "sha256": "8eb6f880fab4a23e8d883f7ce805fd7f76a6eeaae0a478f8f1edb9643f3292d7",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/analyze_vm_n04_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\scripts\\analyze_vm_n04_v1.py",
+      "sha256": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n04_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\scripts\\run_vm_n04_v1.py",
+      "sha256": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n04_v1_1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\scripts\\run_vm_n04_v1_1.py",
+      "sha256": "4c6820122df21934fa0e65a3aca88c2a899262a5782854bfada6586832fba3af",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/validate_dynamics_forecasters_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\scripts\\validate_dynamics_forecasters_v1.py",
+      "sha256": "a8ad8f001f04f744cc461166af58948cad391220ee4c37788a809eaf6a0af53a",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "src/dynamics_data_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\src\\dynamics_data_v1.py",
+      "sha256": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "src/dynamics_models_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\src\\dynamics_models_v1.py",
+      "sha256": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "src/dynamics_training_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\src\\dynamics_training_v1.py",
+      "sha256": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_analyze_vm_n04_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_analyze_vm_n04_v1.py",
+      "sha256": "592d916844722940be3d0d42c37af0c5a3f73b3fbf875f642cde7c5b91197749",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_dynamics_data_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_dynamics_data_v1.py",
+      "sha256": "39e34474dfb41a45fd6bc67afacd49c2290c748e0707937b81056ed82d2ad5a7",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_dynamics_models_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_dynamics_models_v1.py",
+      "sha256": "c2208ec352d22d1b239f8c1b85c49a1cc636bbca8e64605bae45f3c914a544e9",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_dynamics_training_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_dynamics_training_v1.py",
+      "sha256": "3e95712ae0d5f00528ca02fc2ffd9d09eb2d40414a9f7e0156ef1e7716a76870",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_run_vm_n04_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_run_vm_n04_v1.py",
+      "sha256": "48e9c12a6e9c640c92b9fb72714e2e6739364652cca21f6eeb1cbd438f7f97f2",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_vm_n04_storage_recovery_v1_1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\tests\\test_vm_n04_storage_recovery_v1_1.py",
+      "sha256": "56e1dbfdf017f707ea7ddcf572a58b500af8d6d55ac4e828e0c14139bb377b94",
+      "tasks": [
+        "N04",
+        "N05",
+        "N06"
+      ]
+    },
+    {
+      "path": "configs/vm_n05_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\configs\\vm_n05_v1.json",
+      "sha256": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n05_v1.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\figures\\vm_n05_v1.png",
+      "sha256": "d067bf60ed52c3f9231de088c29804e79fa3bf9dc9f692903ee14c1011dacd84",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_cells_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_cells_v1.csv",
+      "sha256": "6bb3282fbf2493a9035dae75077a616c3fb649a57de60f3e7af2764ba1bc35ee",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_clipping_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_clipping_v1.csv",
+      "sha256": "784b3d69f83ff5162ccf78a19e363d5c6be7e7c1b9f7299924538915013039b0",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_comparison_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_comparison_v1.csv",
+      "sha256": "c544276c08b35cd0d1e0d1e44f0c7caae9980d433a68bfb28b08f5b089f36601",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_completion_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_completion_receipt.json",
+      "sha256": "b3f690bb4317828e884f99bc391858e52902a35f2f0ff71ada2c3341f6084ebd",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_context_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_context_receipt.json",
+      "sha256": "9e0a64cc1ae23a90626e5ad2ed2b02e57f1290b82e191b926fdb6ec0221908a8",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_dependency_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_dependency_receipt.json",
+      "sha256": "008f3192fbf797646b1551cd7b183c6be2561870eef2ff3523475172bd2445ed",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_interval_contract_sample_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_interval_contract_sample_v1.csv",
+      "sha256": "65b378d507cdbebc3291103503a2da28f025a526fad4f2c5c993f64a3de478f6",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_protocol_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_protocol_v1.md",
+      "sha256": "9c2bab76436e0557e1d0518d79d973f591516c454e97bcb8269545efa9722609",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_report_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_report_v1.md",
+      "sha256": "1190e4395693e31a35191e9b6d6e75d1c600b5bca95cd8c08e2254f83ceaa1ea",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_results_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_results_v1.json",
+      "sha256": "66c96060caa1ef1983f495f5314516c6bd82fcd24660c1815f911ac825070a3c",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_run_record_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_run_record_v1.json",
+      "sha256": "e6e626a608b8f1d7ee674847d39e78d33a9f6e147184f72d1ca41d10d52c1c31",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_source_lock_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_source_lock_v1.json",
+      "sha256": "468673446a1438bb0459c67bd0cd6f962568e7a69b76b1c141c140f0691311d6",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "docs/vm_n05_usage.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\docs\\vm_n05_usage.md",
+      "sha256": "2635c79faa9aa83b8160cc2bb4a9fd94f7fc55ad5f48616eca0ab307053c58d8",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n05_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\scripts\\run_vm_n05_v1.py",
+      "sha256": "9a5332566ee569cceaf36bf9d5a67b1dd5f7ca7555dcc90faeb7042004c93cbe",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "src/uncertainty_analysis_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\src\\uncertainty_analysis_v1.py",
+      "sha256": "4c7d097f03a063823a766e7710065563b6dcbfbd3fc691f4db17a8775f5f6930",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "src/uncertainty_calibration_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\src\\uncertainty_calibration_v1.py",
+      "sha256": "ac91d035fa40ebe557491f3c00fb7ce332c3a1bc314cbf1faa941085b50da9d9",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "src/uncertainty_data_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\src\\uncertainty_data_v1.py",
+      "sha256": "8e822efc6e39c599782066374c49c46cef0f72d94ee9d5bd881d13090a5e96eb",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": "tests/test_vm_n05_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron\\tests\\test_vm_n05_v1.py",
+      "sha256": "17036983627054311edd2a34dd46748365a0d3ddb561a6bc207a444112be32cc",
+      "tasks": [
+        "N05"
+      ]
+    },
+    {
+      "path": ".gitattributes",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\.gitattributes",
+      "sha256": "335af3187440f21915d56155fc3fb20f53d13b4a7eeb1fa718eb4a8f146224e7",
+      "tasks": [
+        "N06"
+      ],
+      "previous_sha256": "ee8690bec7be75eed438751a2046789cfc13902f46dcbffaaf83f7f54fd446e4"
+    },
+    {
+      "path": "configs/vm_n06_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\configs\\vm_n06_v1.json",
+      "sha256": "f40a06e328c3ba5aab7fb54883be69c731e79ea9e2fe82ca8cf6a2239d551d10",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n06_timing_v1.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\figures\\vm_n06_timing_v1.png",
+      "sha256": "e6c40196442cf051779ea1852f62093d8d4bdcf7b3874334a2bcab43a0e6b2c0",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/figures/vm_n06_tradeoffs_v1.png",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\figures\\vm_n06_tradeoffs_v1.png",
+      "sha256": "90cd241292da8189245d5bef3fdea9c8571ba8ddfad2fc30720346c74548551c",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_achieved_points_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_achieved_points_v1.csv",
+      "sha256": "52ba1ecd444bde82fdfe1176ce90d575ef0e8c3b13de1cf4e68ebca9179084ac",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_completion_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_completion_v1.json",
+      "sha256": "d7db9be00fbffbde35297df8aa47b75cb88c430b0c6955337186384e370353bd",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_context_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_context_receipt.json",
+      "sha256": "1cf7c18fccb68a82369fcd6dcd5482da2453c2084859785ee6f1f6e180820688",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_contract_lock.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_contract_lock.json",
+      "sha256": "afee661e8a7b75d2482c2453adaa280dd4ad337bafa41dc526fc91cb25d3409d",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_demo/data.js",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_demo\\data.js",
+      "sha256": "34be8eaba6dff6bb3287164e2e47734ba143f7939f65a34d0025c669217c5426",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_demo/index.html",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_demo\\index.html",
+      "sha256": "2889649c1ac902343272c03ce54b6b8ef683741ddcab9460a852bf0c6bdfb003",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_dependency_receipt.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_dependency_receipt.json",
+      "sha256": "8c4f595ecc2ac6b389a92257215e41cc05905e06f92ce42f215520e44125b6a5",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_engineering_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_engineering_v1.json",
+      "sha256": "d74bc96e4afac24182852b2afdce40f53dedbcea02c47e5ec29916e54e2065a0",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_evaluation_lock_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_evaluation_lock_v1.json",
+      "sha256": "4eb7a62d987ed05a09d33e519aef1f9a74bea743eef93fdd065f3aae77b9755b",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_guide.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_guide.md",
+      "sha256": "74e67fa96728ed30f45b7fca4e02638e0262f3c65b45a12ddd0a14a88f0d1744",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_protocol_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_protocol_v1.md",
+      "sha256": "7f38cc3022f53e88301b0710c0306d12ca0c88f8a5d288ce9a70c91ed2d7885f",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_report_v1.md",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_report_v1.md",
+      "sha256": "0f9680deb61f87482c656db2ad311ebcb90d2ddbcbac667d660d49dbf0d28a64",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_results_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_results_v1.json",
+      "sha256": "bbe974cc64236024628562581cab8b8ae3a684cc19083b01f2f819b409b07468",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_rollout_audit_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_rollout_audit_v1.json",
+      "sha256": "428562f130548283cf6b68582ef908a4d85075a7b4e2e74a0702e91c91f172e5",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_selected_rooms_v1.csv",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_selected_rooms_v1.csv",
+      "sha256": "37b53681fb26cf098d3130c3457a8ea431cd3e34ecf1d58ea5a6aff7c798f1cd",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_source_lock_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_source_lock_v1.json",
+      "sha256": "c8c6e49ab7513cee2412d5fb6e467f65eb7d67c22043a6605dfa212e4a2dfd90",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_standard_acceptance_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_standard_acceptance_v1.json",
+      "sha256": "d99695c1ce57cab2b3d53ad00a1255f8f679108166c923d96a7c9bc9d5016edf",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "docs/vm_n06_teaching_v1.json",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\docs\\vm_n06_teaching_v1.json",
+      "sha256": "56cfd91960d5772699515356a292d1c33aaa4c3dce3c56b9446d67165102be1b",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/analyze_vm_n06_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\analyze_vm_n06_v1.py",
+      "sha256": "d4ea419afaf10f83577a4d9bf085b905b35124f74bb3e5e637e21bbc500f757f",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/audit_vm_n06_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\audit_vm_n06_v1.py",
+      "sha256": "aad41f37a354299c510d5c4b17147a1b3cc27545c8d94d42e69ca20164a442f4",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/bootstrap_n06_dependency.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\bootstrap_n06_dependency.py",
+      "sha256": "513f266ae7ebca52de69dc24f056fcbf19f0975e570bb44722943abe541da168",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/launch_vm_n06.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\launch_vm_n06.py",
+      "sha256": "7592244f3372fab4c4176b70519927027753e51767bacff8efc8f734e2909975",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/prepare_n06_engineering.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\prepare_n06_engineering.py",
+      "sha256": "7b08e81a9b16c6540e4b2ab807eda05790d2fc00aeca2e062fe7175ecc03c7a1",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/record_n06_context.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\record_n06_context.py",
+      "sha256": "08ed0e9e4e3c06ab592e62960eb9b1c22c0856eac7c40880dc2a043c9dc0a4fc",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/render_vm_n06_timing.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\render_vm_n06_timing.py",
+      "sha256": "a6017f73747ebc87ccb1b779361821d294082c0076560a04e76bc1483efdc97c",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/run_vm_n06_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\run_vm_n06_v1.py",
+      "sha256": "dcc0edb44663cc37218d1e235dd52f9a0959d99b68d9922065c24faa7d0f2a6d",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "scripts/validate_n06_calendar_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\scripts\\validate_n06_calendar_v1.py",
+      "sha256": "6dd04ce8f21790d63ce8884e35f579214392f831c0fe73e49a4e33a150c33eda",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "src/decision_forecasts_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\src\\decision_forecasts_v1.py",
+      "sha256": "add2e84c7f3fb0aaae9aa32d69119e8b3df985f8c3effa7d1a37965cf559c556",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "src/decision_plant_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\src\\decision_plant_v1.py",
+      "sha256": "6025d74cfd6b1ac752b36520198e4af84d833ad132af6dc61613f290b7f0d37e",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "src/decision_policies_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\src\\decision_policies_v1.py",
+      "sha256": "14e98b2b508ba6ffbf83ade0609cb9c2117ebcd6694fb5576919e0259d19a4f1",
+      "tasks": [
+        "N06"
+      ]
+    },
+    {
+      "path": "tests/test_decision_n06_v1.py",
+      "source": "C:\\Users\\Amine\\.codex\\worktrees\\a3a8\\von-mises-neuron\\tests\\test_decision_n06_v1.py",
+      "sha256": "2e68c4b62adc90cdfc5bb97912b24e67ce132c4df006974515bf78778f996df6",
+      "tasks": [
+        "N06"
+      ]
+    }
+  ],
+  "method": "Exact-byte file import; existing task branches retained. N04 duplicate files verified equal and imported once. Task handoffs reconciled separately."
+}

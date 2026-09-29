@@ -1,0 +1,63 @@
+{
+  "schema": "vm_n05_context_v1",
+  "created_utc": "2026-09-26T18:29:33.057964+00:00",
+  "receiving_project": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron",
+  "context_root": "D:\\Desktop\\Claude\\Hybrid_models_forecasting",
+  "validator": {
+    "checkout_state": "dirty",
+    "context_root": "D:\\Desktop\\Claude\\Hybrid_models_forecasting",
+    "logical_context_id": "research-workspace",
+    "manifest_sha256": "49aed2956b668ffdbf00c531a4f4967515724ebd9747132b1618eb934f0af337",
+    "required_file_sha256": {
+      "AGENTS.md": "5064a953f084a932f99eca94ee89d54e1afc03a3e44ed91294d1d13255a3c7ef",
+      "START_HERE.md": "e4830ac2df8f3f9f279752db93756633d4ef880fc21d739449b5787d54897365",
+      "docs/research/authority.md": "82a029fade81f67240d8e35c6093afd266032ff0ad9803ebd205e434c2f7317d",
+      "docs/research/datasets.md": "206cfad9d6035bff0333ae94e35d7896366c1e9891907e1f08a1712b883d9c10",
+      "docs/research/evidence.md": "3ea6f582a8132a41a7e74f6c534db7eb4db7e8ef77899b7e31e0cc89245b78f3"
+    },
+    "required_paths": {
+      "authority": "docs/research/authority.md",
+      "datasets": "docs/research/datasets.md",
+      "entry_point": "START_HERE.md",
+      "evidence": "docs/research/evidence.md",
+      "repository_rules": "AGENTS.md"
+    },
+    "revision": "beb32d5c1a205a155242e7bc52de6d552caaa349",
+    "schema_version": "research_context_manifest_v1"
+  },
+  "route": "forecast-lab; explicitly named teaching resources only",
+  "catalog_ids": [],
+  "owners": [
+    "docs/learning/chapter5_reading_companion.md",
+    "docs/learning/labs/sensor_timing.md"
+  ],
+  "unavailable_resources": [],
+  "source_hashes": {
+    ".agents/skills/research-workspace-context/SKILL.md": "961927f5e59817bf5320e2d6b5b7e80c8aab5a6eb8db225a766b914cd5f9d524",
+    ".agents/skills/research-workspace-context/references/authority-routing.md": "a6ca490c3047a70afe5d038b236af78f998b3e2c91bf9964e9e608246b63b650",
+    "AGENTS.md": "5064a953f084a932f99eca94ee89d54e1afc03a3e44ed91294d1d13255a3c7ef",
+    "START_HERE.md": "e4830ac2df8f3f9f279752db93756633d4ef880fc21d739449b5787d54897365",
+    "docs/research/active_work.md": "99603628c9f496f75b11d42c846116a87053fb50cbc76786dbe3306b4b030328",
+    "docs/learning/chapter5_reading_companion.md": "abdbde21427778154391c843e0ac9c8984c46b9545be297dc126b441e4f02a90",
+    "docs/learning/labs/sensor_timing.md": "64117eb0d8d8a0a31e9dd0545784aede016c95eeb2d46496e5b257f06e70c8ff"
+  },
+  "n04_lock_sha256": "069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74",
+  "n04_verified_source_files": {
+    "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+    "docs/vm_n04_protocol_v1.md": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+    "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+    "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+    "src/dynamics_training_v1.py": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+    "scripts/run_vm_n04_v1.py": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+    "scripts/analyze_vm_n04_v1.py": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+    "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0",
+    "scripts/run_vm_n04_v1_1.py": "4c6820122df21934fa0e65a3aca88c2a899262a5782854bfada6586832fba3af",
+    "docs/vm_n04_storage_recovery_v1_1.md": "a1a08dd6e9abf195b9a05652a1dab528b16171444d793062497f9e2e1fdb8316"
+  },
+  "selected_historical_artifacts": {
+    "results/vm_n04/standard_unchanged/benchmark_results.json": "8a2d227629732294c0b57402115d9f9e257313eb34166164a25606c79c16280e",
+    "results/vm_n04/standard_adapters_v1/validation.json": "5bfd510f1c25d464b39e6819ff6b5e67993d00f01a1a45c482eae7b582a4f321"
+  },
+  "historical_predictions_used": false,
+  "scope": "Read-only teaching context and N04 engineering identity checks; no reanalysis or replay of old predictions."
+}
