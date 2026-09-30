@@ -1,5 +1,58 @@
 # Project state: ownership handoff
 
+## Completed VM-N01 — smooth backbone with circular corrections (2026-09-22)
+
+The owner explicitly authorized VM-N01 from the proposal. Its implementation,
+frozen protocol, bounded experiment and required checks are complete in this
+isolated worktree. **The confirmation benefit gate failed.** The selected
+joint-Adam hybrid reduced balanced normalized clean error 19.21% versus
+Fourier16, 56.34% versus the fixed hybrid, and 40.40% versus Fourier36, with
+positive paired 95% intervals. However, smooth-family error rose **11.97% versus
+the fixed hybrid**, exceeding the unchanged 10% guard. The other passing
+comparisons cannot override this failure. At 256 total labels, Fourier36 was
+substantially better (0.015723 versus hybrid 0.061858), and kernel-only joint
+Adam had lower aggregate error with more fitted parameters. No broad/local
+component-identification or general-superiority claim follows.
+
+New `smooth_local_*_v1` modules implement the exact integer-Fourier plus
+peak-normalized circular-kernel equation, positive concentrations, ridge/joint
+Adam/variable projection, fresh paired task pools, timed checkpoint selection,
+function-level bootstrap analysis and guarded reserved access. New entry points
+are `scripts/run_vm_n01.py`, `scripts/report_vm_n01.py` and the independent
+`scripts/audit_vm_n01.py`. Locked v1/v2 sources, configurations and evidence
+identities were not changed. The supplied immutable source snapshot was checked
+against its archive SHA256 and all 130 per-file hashes; it is recorded as
+inherited baseline, separate from this task's implementation. No writes were
+made to the original checkout or supplied forecasting research context.
+
+All **1,615 fits** completed: 75 pilot, 220 development, 1,320 confirmation,
+using **11,520 unique total observational labels including tuning/validation**.
+Actual phase times were 44.52 / 88.71 / 568.22 seconds under fixed 240 / 600 /
+1,800-second ceilings. Rates, comparator, code and gate stayed frozen after the
+appropriate selection stages. All **13,341 saved checkpoints** passed
+independent equation/selection replay; the observer performed **491,581 checks**
+and independently reproduced the reported gate. No fit was retried or dropped.
+
+The full suite passed **1,429 tests in 82.73 seconds**. The narrowly scoped
+SmoothLocalForecasterV1 adapter also passed unchanged standard synthetic APIs,
+training budget and absolute gates: RMSE 5.15322 ppm, MAE 4.08604 ppm,
+R2 0.98053 and MAPE 0.67904%, 28,032 parameters. Fresh base VM RMSE was 5.35727.
+Saved CUDA predictions replayed exactly. This is adapter integration evidence,
+not static-basis superiority or a new forecasting application study.
+
+Start with [the result report](vm_n01_results.md), then [usage and reproduction](vm_n01_usage.md),
+[the protocol](vm_n01_protocol.md), [compact run record](vm_n01_run_record.json),
+[all cells](vm_n01_cells.csv), [paired function results](vm_n01_function_results.csv),
+and [completion record](vm_n01_completion.json). Exact arrays/checkpoints/locks
+remain local and ignored under `results/vm_n01_v1/`; a fresh clone lacks them.
+Confirmation functions are consumed. Another run is reproduction, not fresh
+confirmation. Six functions per family, one noise level, two label budgets,
+raw-feature regularization and hardware-dependent computation limit inference.
+
+VM-N02 and forecasting/uncertainty/control follow-ups were not launched. The
+proposal's earlier proposal-only status is superseded for VM-N01 alone; no
+further experiment or search is authorized by this completion.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed

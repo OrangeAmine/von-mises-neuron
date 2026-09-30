@@ -1,0 +1,142 @@
+{
+  "created_utc": "2026-09-22T11:43:24.734579+00:00",
+  "engineering_artifact_replay": {
+    "artifact_sha256": {
+      "results/vm_n01_v1/engineering_standard/SmoothLocalForecasterV1_42_predictions.npz": "b0fded09c3970e654f3330237fdb0115570b8b58fc8fa12167682125b5beb877",
+      "results/vm_n01_v1/engineering_standard/SmoothLocalForecasterV1_42_state.pt": "6e71a73d7ecf6f85522c500c3707d412d8ebbb64c61f2fd219be9d30f1d3051d",
+      "results/vm_n01_v1/engineering_standard/VonMises_42_predictions.npz": "db99585988a2eb28b8b69b075cf0b07cbdb2181c247ee8b8dbf8c3a6cf47b7fa",
+      "results/vm_n01_v1/engineering_standard/VonMises_42_state.pt": "2f5b1bfcbd03bd4f4858f8a5a8c2eb782cc0c9b8d97c11a7aa99803cccfcc3ab",
+      "results/vm_n01_v1/engineering_standard/benchmark_data.npz": "4907aaa726fc907f0dfb71c69b05c70465fd5c53896c14a13b86521ddda09e74",
+      "results/vm_n01_v1/engineering_standard/manifest.json": "d9784876a9d21a3ed26caa260dccf9e6589ac583fde8a9d11130f44a9348b792",
+      "results/vm_n01_v1/engineering_standard/results.json": "a37c99af63056ca2c8d8458358948084c8cd2acea067b33b9cd2373ffdb43977",
+      "results/vm_n01_v1/engineering_standard/validation.json": "62ef4ea92eed46fad560725bc41d4a035bf56a9d7c02aaed5d4f5750c2902bc2"
+    },
+    "cuda_predictions_bitwise_exact": true,
+    "directory": "results/vm_n01_v1/engineering_standard",
+    "initial_cpu_assertion": "Initial CPU replay assertion at atol=1e-5/rtol=1e-4 failed for the inherited base VM. Reported backend difference above; native CUDA replay was exact for both models. New adapter CPU difference was 7.15e-7.",
+    "method": "Load saved final state and benchmark_data.npz, reconstruct each model, seed42, replay eval on CUDA; recompute standard metrics from saved predictions and targets.",
+    "model_source_matches_benchmark_snapshot": {
+      "scripts/validate_smooth_local_forecaster_v1.py": true,
+      "src/smooth_local_forecaster_v1.py": true,
+      "src/smooth_local_v1.py": true
+    },
+    "runs": [
+      {
+        "cpu_vs_saved_cuda_max_normalized_output_difference": 0.00019848346710205078,
+        "execution_status": "completed",
+        "metrics": {
+          "mae": 4.150812149047852,
+          "mape": 0.6916255690157413,
+          "r2": 0.9789586513922223,
+          "rmse": 5.357273234642799
+        },
+        "model": "VonMises",
+        "parameters": 43148
+      },
+      {
+        "cpu_vs_saved_cuda_max_normalized_output_difference": 7.152557373046875e-07,
+        "execution_status": "completed",
+        "metrics": {
+          "mae": 4.086041450500488,
+          "mape": 0.6790413986891508,
+          "r2": 0.9805310439591358,
+          "rmse": 5.153216030040902
+        },
+        "model": "SmoothLocalForecasterV1",
+        "parameters": 28032
+      }
+    ],
+    "saved_metric_recomputation_exact": true,
+    "training_performed": false
+  },
+  "findings": [
+    {
+      "finding": "Interrupted trainer bundles previously allowed remaining planned fits to continue.",
+      "id": "F01",
+      "resolution": "Runner archives interrupted bundle then stops and emits an incomplete terminal receipt.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "Outer loop failures previously escaped without a terminal summary.",
+      "id": "F02",
+      "resolution": "Phase failure capture now finalizes retained attempts; final source verification failure marks incomplete rather than suppressing the receipt.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "Prior phase completeness and configuration/source identities were not fully replayed before confirmation lock.",
+      "id": "F03",
+      "resolution": "Exact plan matrix, stage/config/source identities, counts, compact row identities, .pt hashes, summary equality and prescribed selections are checked; confirmation guard independently repeats these proofs.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "Successful status alone could certify missing scientific metrics.",
+      "id": "F04",
+      "resolution": "Completion now requires finite nonnegative clean and validation errors; hardened guard also checks selected timestamp eligibility.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "Feasibility used realized cap overshoot and omitted compact record write/progress costs.",
+      "id": "F05",
+      "resolution": "Adaptive bound now uses maximum complete block duration; nonfit timing includes compact write and progress output; actual realized overshoot is also retained.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "New guard required interruption=false while actual successful phase writes null.",
+      "id": "F06",
+      "resolution": "Guard accepts canonical interruption=null; focused tests cover real receipt shape.",
+      "status": "resolved_before_source_freeze"
+    },
+    {
+      "finding": "Full hardened verification work was not included in confirmation feasibility.",
+      "id": "F07",
+      "resolution": "Runner creates a timing-only proof, measures actual full verify_lock execution, charges all 31 entry/target invocations, and creates a final lock only if the unchanged ceiling passes. Timing-only proofs are rejected by default and by reserved generation.",
+      "status": "resolved_before_source_freeze"
+    }
+  ],
+  "limits": [
+    "This review is not a formal proof or an adversarial sandbox boundary; Python source and direct generator internals remain accessible to the authorized research process.",
+    "Full repository suite and final source lock are root-owned prerequisites and were not certified by this review record.",
+    "No pilot/development/confirmation scientific artifacts existed during this implementation review; no claim about their future completeness or scientific benefit is made.",
+    "Engineering benchmark acceptance certifies the fixed adapter integration only, not scalar-arm superiority or forecasting usefulness.",
+    "A filesystem write failure can prevent an attempted artifact from being written; retained plan/terminal failure identifies incomplete work and never permits confirmation.",
+    "Phase wall timing includes final summary serialization and hashing; terminal receipt serialization occurs immediately after its elapsed-time timestamp."
+  ],
+  "open_actionable_findings": [],
+  "positive_checks": [
+    "Exact prospective matrices enumerate 75 pilot, 220 development and 1320 confirmation fits.",
+    "Reserved generation calls default verify_lock before RNG or target construction; preflight timing proofs cannot authorize it.",
+    "Model selection occurs only in development and learning-rate selection only in pilot; confirmation carries locked choices.",
+    "Every declared model and allowance is retained, including failed and late-checkpoint outcomes.",
+    "Adapter source manifest and source snapshot include src/smooth_local_v1.py via src/*.py."
+  ],
+  "review_id": "vm_n01_implementation_review_v1_20260922",
+  "reviewed_path_sha256": {
+    "configs/vm_n01_v1.json": "bcb409875f27a1d5c96efe76b64e63c115c03837828dc35cc3be139a123ebbd5",
+    "docs/vm_n01_protocol.md": "eb8aa842bab3a9e57627b6cdb7ab87603ade6ef5fbd2b54883e93d2db9564368",
+    "scripts/run_vm_n01.py": "0c88b1d6cf241f5379165a447c5cbd79e514fe071533c3a1662ea1a07104c1b7",
+    "scripts/validate_smooth_local_forecaster_v1.py": "84cbaad5a531fbeb60053e833485b34bde78c5d6cf45e0a3463052b1f76f49f8",
+    "src/smooth_local_analysis_v1.py": "0bf9ef925d1d1b5934a5e079dd5355b7cc6dd9239dbfdaf65a37c75943ae85b0",
+    "src/smooth_local_forecaster_v1.py": "92724470a4f02376992263c746024a4d264602590dd1bfe501cc053237a1570b",
+    "src/smooth_local_protocol_v1.py": "c64f423e261e7eee66c93b2bc44ba7e602e4573f6b4b928a8d8d755df5702ea2",
+    "src/smooth_local_tasks_v1.py": "431f293898a14c9a8ce2947c89f0962d8447c90b2ed7afc300b2e3587f5201d7",
+    "src/smooth_local_training_v1.py": "41bda426bc3665ecbb45d26bad0a5b9f7a0a7dc0af203b80d6bdc33c49ae2b82",
+    "tests/test_smooth_local_protocol_v1.py": "4dbeecb5ff804f7b5208d59b59962cf1fa0372c313c296ca2cb558864e28bcd8"
+  },
+  "reviewer_role": "Forecaster subagent; independent of root protocol/runner authorship. Authored the adapter, so its implementation is not represented as independently reviewed here.",
+  "scope": "Read-only protocol/runner review against frozen VM-N01 contract, final defect recheck, guard tests and saved engineering artifact replay. No study target generation or scientific fitting.",
+  "status": "passed_with_recorded_scope_limits",
+  "validation": [
+    {
+      "command": "py -3.11 -m pytest tests/test_smooth_local_protocol_v1.py -q",
+      "passed": 31,
+      "scope": "Independent rerun after final guard and preflight changes",
+      "seconds": 4.79
+    },
+    {
+      "command": "py -3.11 -m pytest tests/test_smooth_local_forecaster_v1.py tests/test_validate_smooth_local_forecaster_v1.py -q",
+      "passed": 36,
+      "scope": "Adapter-author focused tests before actual benchmark; includes CUDA output and gradient parity",
+      "seconds": 2.25
+    }
+  ]
+}
