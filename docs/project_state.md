@@ -1,5 +1,28 @@
 # Project state: ownership handoff
 
+## VM-N03 teaching delivery — isolated worktree (2026-09-22)
+
+The authorized VM-N03 first delivery is complete in its assigned managed
+worktree. The [local browser playground](../learning/vm_playground/index.html)
+contains three deterministic, resettable lessons on polar/Cartesian identity,
+amplitude versus locality, and the saved locality-v2 failed gate with a separate
+selection-bias exercise. The [offline companion](../learning/vm_playground/guide.html)
+provides worked equations, self-checks and an evidence guide.
+
+Focused validation passed 12 JavaScript numerical/selection/immutability tests,
+10 evidence-export tests, five pinned source hashes and all 720 historical cells.
+Actual browser inspection covered all lessons, control changes, resets, the guide
+and a narrow layout. No research model/pipeline was changed or trained. Direct
+file opening was not browser-tool testable; loopback HTTP is the verified route.
+See the [completion record](learning/vm_n03_completion.md) for commands, exact
+scope, browser limitations and the read-only external-context receipt.
+
+The worktree was bootstrapped from the verified 130-file launch snapshot;
+[its baseline manifest](learning/vm_n03_inherited_snapshot.json) separates inherited
+research from new teaching work. All inherited files except this
+handoff entry retain their hashes. VM-N01 remains independent. This entry records
+an uncommitted worktree delivery, not integration into the original checkout.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed
