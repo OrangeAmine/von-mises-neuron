@@ -1,0 +1,224 @@
+{
+  "schema": "vm_worktree_consolidation_v1",
+  "created_utc": "2026-09-30T22:22:48.280128+00:00",
+  "local_date": "2026-10-01",
+  "purpose": "Commit the six completed worktree deliveries and merge their histories into the existing master branch before a separately planned repository relocation.",
+  "primary_branch": "master",
+  "baseline_revision": "cef3491dac15450c78a5f65ff776484f36a6d0ae",
+  "merged_revision": "b8f6ead4aa31e05e86966423fc4b03e91770309a",
+  "owner_notes_commit": "a48cf85d6b324482b77b1d4774c3301cbdbc1f04",
+  "owner_notes_sha256": "d76ae1df27b4ecbc48a33aadc81dcf08d199e69025a4a6419972c3a58f179fe0",
+  "merges": [
+    {
+      "id": "de12",
+      "branch": "codex/vm-n01-smooth-local",
+      "commit": "95829bbd3f68146f50a3eee1bf3820b1f5db0bd6",
+      "files_committed": 40,
+      "first_parent": "a48cf85d6b324482b77b1d4774c3301cbdbc1f04",
+      "merge_commit": "2324ce8b0fb8376842b15c607a1ebf8d8c66f969",
+      "retained_master_paths": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ],
+      "tree_unchanged": true
+    },
+    {
+      "id": "c416",
+      "branch": "codex/vm-n02-interpretation",
+      "commit": "a156468ab1e00ff30802d5fccf25d27f343f765b",
+      "files_committed": 2,
+      "first_parent": "2324ce8b0fb8376842b15c607a1ebf8d8c66f969",
+      "merge_commit": "763c7b317185b67e0cc887ea6c75ca0e90835634",
+      "retained_master_paths": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ],
+      "tree_unchanged": true
+    },
+    {
+      "id": "63ae",
+      "branch": "codex/vm-n03-learning",
+      "commit": "3c751cbefa1227cff3024e49aae8376fc19ad88d",
+      "files_committed": 17,
+      "first_parent": "763c7b317185b67e0cc887ea6c75ca0e90835634",
+      "merge_commit": "b4ed88586cc80705d0c9ba10ddeaabc5bbe29b8e",
+      "retained_master_paths": [
+        "docs/learning/vm_playground_guide.md",
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md",
+        "learning/vm_playground/README.md",
+        "learning/vm_playground/guide.html",
+        "learning/vm_playground/index.html"
+      ],
+      "tree_unchanged": true
+    },
+    {
+      "id": "9c11",
+      "branch": "codex/vm-n04-dynamics",
+      "commit": "4f11e7b22cf57011c28303465cb9fdec3aed7d98",
+      "files_committed": 1,
+      "first_parent": "b4ed88586cc80705d0c9ba10ddeaabc5bbe29b8e",
+      "merge_commit": "7943cd8df20f471561fbb2e48e4503671e0db32a",
+      "retained_master_paths": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ],
+      "tree_unchanged": true
+    },
+    {
+      "id": "7457",
+      "branch": "codex/vm-n05-uncertainty",
+      "commit": "2d6f8a737b50e8d58ae523d4808e06203b8a9a2e",
+      "files_committed": 49,
+      "first_parent": "7943cd8df20f471561fbb2e48e4503671e0db32a",
+      "merge_commit": "bc7f35643918d01e6d1c97111711b9416c4cc307",
+      "retained_master_paths": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ],
+      "tree_unchanged": true
+    },
+    {
+      "id": "a3a8",
+      "branch": "codex/vm-n06-decision-v1",
+      "commit": "c235ba689c1e7f1c3c83acc5532c3b9fbcdc6b76",
+      "files_committed": 1,
+      "first_parent": "bc7f35643918d01e6d1c97111711b9416c4cc307",
+      "merge_commit": "b8f6ead4aa31e05e86966423fc4b03e91770309a",
+      "retained_master_paths": [
+        "docs/project_state.md",
+        "docs/proposed_tasks_from_forecasting.md"
+      ],
+      "tree_unchanged": true
+    }
+  ],
+  "integration_policy": "All delivery files were already present in the September 29 integration. Normal merges retained the current consolidated handoff, dispatch record and newer teaching pages at the reviewed documentation conflicts. Each merge tree exactly matches its first parent; original worktree documents remain available in the merged parent commits.",
+  "file_changes": [
+    "Track the existing VM_exploration.md without changing its bytes.",
+    "Add this consolidation receipt."
+  ],
+  "preservation": {
+    "source_file_checks": 1300,
+    "clean_checkouts": 7,
+    "merged_worktree_heads": 6,
+    "preexisting_main_bytes_unchanged": true,
+    "newly_tracked_existing_file": "VM_exploration.md"
+  },
+  "historical_preservation_audit": {
+    "created_utc": "2026-09-30T22:21:45.622376+00:00",
+    "passed": true,
+    "counts": {
+      "original_source_files": 989,
+      "original_result_files": 8250,
+      "copied_result_files": 8250,
+      "imported_files_unchanged": 149,
+      "inherited_files_unchanged": 127,
+      "archive_hashes": 13,
+      "frozen_source_checks": 126
+    },
+    "authorized_teaching_edits": [
+      "docs/learning/vm_playground_guide.md",
+      "learning/vm_playground/README.md",
+      "learning/vm_playground/guide.html",
+      "learning/vm_playground/index.html"
+    ],
+    "authorized_main_edits": [
+      ".gitattributes",
+      "README.md",
+      "docs/project_state.md",
+      "docs/proposed_tasks_from_forecasting.md"
+    ],
+    "owner_notes_unchanged": true,
+    "scope": "Byte/hash preservation, not a repeat of prediction-array numerical replays or scientific campaigns."
+  },
+  "validation": {
+    "python": "3.11.4",
+    "pytest": {
+      "tests": 1848,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds_reported": 128.2,
+      "command": "py -3.11 -m pytest tests/ -q --junitxml=results/worktree_consolidation_20261001/full_suite.xml"
+    },
+    "javascript": {
+      "command": "node learning/vm_playground/core.test.cjs",
+      "passed": 12
+    },
+    "exporters": [
+      {
+        "command": "py -3.11 scripts/learning/build_vm_playground_evidence.py --check",
+        "passed": true,
+        "pinned_sources": 5,
+        "historical_cells": 720
+      },
+      {
+        "command": "py -3.11 scripts/learning/build_vm_research_portfolio.py --check",
+        "passed": true,
+        "pinned_sources": 11,
+        "studies": 6
+      }
+    ],
+    "git_fsck_no_dangling_passed": true,
+    "scope": "Repository compatibility and byte preservation; no new model changes, standard training benchmark, scientific campaign or independent numerical replication."
+  },
+  "local_backup": {
+    "directory": "results/worktree_consolidation_20261001",
+    "inventory": "before.json",
+    "inventory_sha256": "fec1bf094374f1259b3212a744a081ead51f946093902ef5b1b7cb47ceea7fff",
+    "git_archive": "git_before.zip",
+    "git_archive_sha256": "d40ae2b3dd02b0ec51b44f4576000bd8f13783cecf8ebe150dfcf984aeb6170a",
+    "source_archives": [
+      {
+        "id": "master",
+        "archive": "results\\worktree_consolidation_20261001\\master_source.zip",
+        "archive_sha256": "9963be68abecb7cdfe3c0c40c0c086e306dcca5abb41d0ddfc452c5b68143baf"
+      },
+      {
+        "id": "de12",
+        "archive": "results\\worktree_consolidation_20261001\\de12_source.zip",
+        "archive_sha256": "3e4a7d91941296f2089ec1948c9a9489bcbc39c69a8c1fbe44232bae7b58f12a"
+      },
+      {
+        "id": "c416",
+        "archive": "results\\worktree_consolidation_20261001\\c416_source.zip",
+        "archive_sha256": "a15b21838afc2bf20bc7487ef15846060bcc3fd00b9323feeb37c12342e7b3f4"
+      },
+      {
+        "id": "63ae",
+        "archive": "results\\worktree_consolidation_20261001\\63ae_source.zip",
+        "archive_sha256": "07f259d4d57ec888988e7e8f1d0c1d9cbc7febf8ee070443331af0be4e6bb11b"
+      },
+      {
+        "id": "9c11",
+        "archive": "results\\worktree_consolidation_20261001\\9c11_source.zip",
+        "archive_sha256": "4dd123b94ecea850e49d8d904caf42ad100ce1c7e6744bbd586716d31c29ab04"
+      },
+      {
+        "id": "7457",
+        "archive": "results\\worktree_consolidation_20261001\\7457_source.zip",
+        "archive_sha256": "d3581bca859e7f8be772917adce7272bb0f7cef22e325c46c0ef4281ca2b4099"
+      },
+      {
+        "id": "a3a8",
+        "archive": "results\\worktree_consolidation_20261001\\a3a8_source.zip",
+        "archive_sha256": "dedd6237ed7169bcf23e182bc994589a0fd435cc2c1d42750c06219d8ba8c408"
+      }
+    ]
+  },
+  "worktrees_retained": true,
+  "ignored_data_and_results_retained": true,
+  "pushed": false,
+  "relocation": {
+    "status": "planned_only",
+    "source": "D:\\Desktop\\Claude\\von-mises-neuron",
+    "destination": "D:/Documents/Projects/von-mises-neuron",
+    "remaining_requirements": [
+      "Copy the complete directory including .git, ignored data and results, and local settings; verify an external file inventory before retiring the original.",
+      "Quiesce writers and use only one active primary checkout after cutover.",
+      "Run git worktree repair from the new primary location and verify all six linked worktrees.",
+      "Check Codex project/chat paths, local settings and historical absolute-path consumers; preserve frozen provenance bytes.",
+      "Validate imports, full tests and teaching/evidence checks from the new location, keeping a verified rollback copy."
+    ]
+  }
+}
