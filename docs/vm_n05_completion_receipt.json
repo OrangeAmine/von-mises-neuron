@@ -1,0 +1,41 @@
+{
+  "version": "vm_n05_completion_v1",
+  "completed_utc": "2026-09-26T18:53:55.121265+00:00",
+  "worktree": "C:\\Users\\Amine\\.codex\\worktrees\\7457\\von-mises-neuron",
+  "inherited_unchanged_files": 155,
+  "authorized_inherited_change": "docs/project_state.md: prepended N05 handoff; N04 and older handoffs preserved",
+  "owner_notes_preserved": true,
+  "all_frozen_sources_match": true,
+  "compact_export_hashes_match": true,
+  "full_suite": {
+    "passed": 1514,
+    "seconds": 83.9
+  },
+  "formal_retries": 0,
+  "scientific_gate_passed": false,
+  "tracked_path_additions": {
+    "configs/vm_n05_v1.json": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+    "docs/figures/vm_n05_v1.png": "d067bf60ed52c3f9231de088c29804e79fa3bf9dc9f692903ee14c1011dacd84",
+    "docs/vm_n05_cells_v1.csv": "6bb3282fbf2493a9035dae75077a616c3fb649a57de60f3e7af2764ba1bc35ee",
+    "docs/vm_n05_clipping_v1.csv": "784b3d69f83ff5162ccf78a19e363d5c6be7e7c1b9f7299924538915013039b0",
+    "docs/vm_n05_comparison_v1.csv": "c544276c08b35cd0d1e0d1e44f0c7caae9980d433a68bfb28b08f5b089f36601",
+    "docs/vm_n05_context_receipt.json": "9e0a64cc1ae23a90626e5ad2ed2b02e57f1290b82e191b926fdb6ec0221908a8",
+    "docs/vm_n05_dependency_receipt.json": "008f3192fbf797646b1551cd7b183c6be2561870eef2ff3523475172bd2445ed",
+    "docs/vm_n05_interval_contract_sample_v1.csv": "65b378d507cdbebc3291103503a2da28f025a526fad4f2c5c993f64a3de478f6",
+    "docs/vm_n05_protocol_v1.md": "9c2bab76436e0557e1d0518d79d973f591516c454e97bcb8269545efa9722609",
+    "docs/vm_n05_report_v1.md": "1190e4395693e31a35191e9b6d6e75d1c600b5bca95cd8c08e2254f83ceaa1ea",
+    "docs/vm_n05_results_v1.json": "66c96060caa1ef1983f495f5314516c6bd82fcd24660c1815f911ac825070a3c",
+    "docs/vm_n05_run_record_v1.json": "e6e626a608b8f1d7ee674847d39e78d33a9f6e147184f72d1ca41d10d52c1c31",
+    "docs/vm_n05_source_lock_v1.json": "468673446a1438bb0459c67bd0cd6f962568e7a69b76b1c141c140f0691311d6",
+    "docs/vm_n05_usage.md": "2635c79faa9aa83b8160cc2bb4a9fd94f7fc55ad5f48616eca0ab307053c58d8",
+    "scripts/run_vm_n05_v1.py": "9a5332566ee569cceaf36bf9d5a67b1dd5f7ca7555dcc90faeb7042004c93cbe",
+    "src/uncertainty_analysis_v1.py": "4c7d097f03a063823a766e7710065563b6dcbfbd3fc691f4db17a8775f5f6930",
+    "src/uncertainty_calibration_v1.py": "ac91d035fa40ebe557491f3c00fb7ce332c3a1bc314cbf1faa941085b50da9d9",
+    "src/uncertainty_data_v1.py": "8e822efc6e39c599782066374c49c46cef0f72d94ee9d5bd881d13090a5e96eb",
+    "tests/test_vm_n05_v1.py": "17036983627054311edd2a34dd46748365a0d3ddb561a6bc207a444112be32cc"
+  },
+  "handoff_sha256": "dff825ffb936016c0559a329ed735810cb28281b875803a78184942b5e292d70",
+  "external_worktrees_written": false,
+  "large_outputs": "results/vm_n05/ (ignored)",
+  "git_state": "Delivery retained as worktree changes; no commit, merge or push performed."
+}

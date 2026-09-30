@@ -1,0 +1,26 @@
+{
+  "version": "vm_n05_v1",
+  "point_predictor": "latest_arrived_persistence",
+  "room_seeds": [530101, 530103, 530107, 530109, 530111, 530113, 530117, 530119],
+  "fixture_seed": 15005,
+  "data": {
+    "dt_minutes": 15, "split_days": [28, 14, 14], "lookback": 24,
+    "horizon": 16, "stride": 4, "max_fill_age_steps": 12,
+    "delay_steps": 1, "noise_ppm": 10.0, "tau_ratio": 1.0,
+    "irregular": false, "start_utc": "2026-01-05T00:00:00Z"
+  },
+  "timeline_days": {"scale_start": 14, "scale_end": 28, "calibration_start": 28, "evaluation_start": 42, "end": 56},
+  "horizon_steps": [1, 4, 16],
+  "scenarios": [
+    {"name": "stable", "shifted": false, "outage": false, "evaluation_noise_multiplier": 1.0},
+    {"name": "shifted", "shifted": true, "outage": false, "evaluation_noise_multiplier": 1.0},
+    {"name": "noisy", "shifted": false, "outage": false, "evaluation_noise_multiplier": 3.0},
+    {"name": "shifted_noisy_outage", "shifted": true, "outage": true, "evaluation_noise_multiplier": 3.0}
+  ],
+  "arms": ["static", "static_matched", "rolling", "fourier", "hour_bin", "vm"],
+  "calibration": {"alpha": 0.1, "rolling_count": 168, "minimum_pool": 20},
+  "scale": {"basis_count": 24, "kappa": 8.0, "ridge_penalty": 0.01, "minimum_fit": 60, "minimum_phase": 8, "floor_ppm": 1.0, "ceiling_ppm": 1000.0, "change_divisor_ppm": 50.0},
+  "regimes": {"recent_rise_ppm": 25.0, "recent_fall_ppm": -25.0, "change_steps": 4, "phase_bins": 6},
+  "analysis": {"primary_horizon": 4, "primary_comparator": "fourier", "minimum_improvement": 0.05, "maximum_scenario_regression": 0.1, "minimum_overall_coverage": 0.85, "bootstrap_draws": 5000, "bootstrap_seed": 95005, "conditional_block_days": 2},
+  "compute": {"threads": 1, "fixture_cap_seconds": 120, "study_cap_seconds": 600, "analysis_cap_seconds": 120, "search_trials_per_conditional_arm": 1}
+}

@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "stage": "confirmation",
+  "created_utc": "2026-09-22T15:18:36.490915+00:00",
+  "audit_source_sha256": "18a7f27a5ab6fe34852b9a13d44863c7a515081571ca694b24e300fb91137d36",
+  "scope": "saved evidence only; no trajectory generation, target reselection or refitting",
+  "metric_scope": "observed and latent-clean RMSE/MAE/n at every declared endpoint and whole horizon; observed endpoint normalized RMSE",
+  "environment": {
+    "device": "cpu",
+    "threads": 1,
+    "torch": "2.5.1+cu121",
+    "numpy": "1.26.4",
+    "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]"
+  },
+  "tolerances": {
+    "neural_max_abs_normalized": 0.0001,
+    "reference_max_abs_normalized": 1e-06,
+    "metric_atol": 1e-10,
+    "metric_rtol": 1e-12
+  },
+  "counts": {
+    "checks": 52663,
+    "source_files": 10,
+    "access_dependencies": 3,
+    "stage_artifacts": 2342,
+    "neural_checkpoints": 288,
+    "case_bundles": 144,
+    "metric_comparisons": 42768,
+    "neural_prediction_arrays": 1152,
+    "reference_state_bundles": 36,
+    "reference_prediction_arrays": 432
+  },
+  "anomalies": [],
+  "maximum_errors": {
+    "neural_abs_normalized": 2.2962974384199697e-06,
+    "neural_abs_ppm": 0.00016941344862477482,
+    "reference_abs_normalized": 2.67003887177667e-15,
+    "reference_abs_ppm": 1.1368683772161603e-13,
+    "metric_abs": 0.0
+  },
+  "source_hashes": {
+    "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+    "docs/vm_n04_protocol_v1.md": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+    "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+    "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+    "src/dynamics_training_v1.py": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+    "scripts/run_vm_n04_v1.py": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+    "scripts/analyze_vm_n04_v1.py": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+    "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0",
+    "scripts/run_vm_n04_v1_1.py": "4c6820122df21934fa0e65a3aca88c2a899262a5782854bfada6586832fba3af",
+    "docs/vm_n04_storage_recovery_v1_1.md": "a1a08dd6e9abf195b9a05652a1dab528b16171444d793062497f9e2e1fdb8316"
+  },
+  "receipt_hashes": {
+    "source_lock": "069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74",
+    "summary": "927aef9db268f3bf6dc10ef2294704a255c23b9f1f43725f4e1b25e8ce3517f4",
+    "terminal": "182337bd03d1be34fb05cfe1df8d8b06e5df1c6a81b8078ef9a668ffbb71dee4",
+    "artifacts": "563f6b1783a72dbc4047f84f71eb1ff403b99e0d8e0854c973ac6aa7c18656bd"
+  },
+  "elapsed_seconds": 6.122037600027397,
+  "full_audit": {
+    "local_ignored_path": "results/vm_n04/audit/confirmation_replay.json",
+    "sha256": "8e5050ff06c24468b01539c39f765b3ca09d57b3577775af279a9ce99e4937b9",
+    "replay_script": "results/vm_n04/audit/replay.py"
+  }
+}

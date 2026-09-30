@@ -1,0 +1,12 @@
+arm,horizon_steps,scenario,n,floor,ceiling,mean_interval_score_ppm,mean_width_ppm,max_width_ppm
+fourier,1,shifted_noisy_outage,3,0,3,16514.17695,16514.17695,20266.56802
+fourier,4,shifted_noisy_outage,5,0,5,16633.38305,16633.38305,21736.65257
+fourier,16,shifted,10,0,10,9231.985829,9231.985829,12657.94905
+fourier,16,shifted_noisy_outage,14,0,14,14302.86347,14302.86347,20379.26514
+hour_bin,1,shifted_noisy_outage,4,0,4,13411.25,13411.25,15690.02832
+hour_bin,4,noisy,1,0,1,6579.017986,6579.017986,6579.017986
+hour_bin,4,shifted_noisy_outage,8,0,8,12092.24631,12092.24631,14976.87919
+hour_bin,16,noisy,1,0,1,6323.237432,6323.237432,6323.237432
+hour_bin,16,shifted_noisy_outage,8,0,8,10462.55425,10462.55425,13985.73089
+vm,4,noisy,3,3,0,1464.491309,22.28103303,27.47310514
+vm,4,shifted_noisy_outage,8,8,0,1170.838427,26.06073343,33.98939605

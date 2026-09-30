@@ -1,0 +1,1466 @@
+{
+  "version": "vm_n04_run_record_v1",
+  "status": "complete",
+  "scientific_gate_passed": false,
+  "inherited_baseline": "a7431a926c751868b11a3918c6cdd29be6540a32",
+  "archive_sha256": "18191869b3383ee437e33de713b4aaed6a7f103e9ae88c5581ce8ea8a44f31b5",
+  "bootstrap_summary": {
+    "verified_entries": 130,
+    "matching_left_in_place": 128,
+    "proposal_imported": 1,
+    "owner_note_intentionally_not_imported": 1
+  },
+  "scientific_source_lock": {
+    "created_utc": "2026-09-22T15:06:06.649061+00:00",
+    "baseline_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+    "sources": {
+      "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "docs/vm_n04_protocol_v1.md": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+      "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+      "src/dynamics_training_v1.py": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+      "scripts/run_vm_n04_v1.py": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+      "scripts/analyze_vm_n04_v1.py": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+      "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0"
+    },
+    "config": {
+      "version": "vm_n04_v1",
+      "baseline_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "data": {
+        "dt_minutes": 15,
+        "split_days": [
+          28,
+          14,
+          14
+        ],
+        "event_duration_hours": 2.0,
+        "lookback": 24,
+        "horizon": 16,
+        "stride": 4,
+        "max_fill_age_steps": 12,
+        "delay_steps": 1,
+        "noise_ppm": 10.0,
+        "baseline_ppm": 420.0,
+        "shift_hours": 3.0,
+        "start_utc": "2026-01-05T00:00:00Z",
+        "outage_test_days": [
+          2,
+          6,
+          10
+        ]
+      },
+      "tau_ratios": [
+        0.25,
+        1.0,
+        4.0
+      ],
+      "attendance": [
+        false,
+        true
+      ],
+      "test_shift": [
+        false,
+        true
+      ],
+      "test_outage": [
+        false,
+        true
+      ],
+      "arms": [
+        "none",
+        "fourier",
+        "fixed",
+        "learned"
+      ],
+      "references": [
+        "ridge",
+        "persistence",
+        "seasonal"
+      ],
+      "model": {
+        "hidden_size": 32,
+        "calendar_features": 32,
+        "fourier_harmonics": 16,
+        "initial_kappa": 32.0
+      },
+      "training": {
+        "epochs": 80,
+        "batch_size": 256,
+        "validation_every": 5,
+        "learning_rates": [
+          0.003,
+          0.01
+        ],
+        "weight_decay": 0.0001,
+        "gradient_clip": 1.0,
+        "ridge_penalties": [
+          0.0001,
+          0.01,
+          1.0
+        ]
+      },
+      "stages": {
+        "pilot": {
+          "room_seeds": [
+            410101
+          ],
+          "initialization_seeds": [
+            701
+          ],
+          "cap_seconds": 600
+        },
+        "development": {
+          "room_seeds": [
+            420101,
+            420103
+          ],
+          "initialization_seeds": [
+            701,
+            709
+          ],
+          "cap_seconds": 900
+        },
+        "confirmation": {
+          "room_seeds": [
+            430101,
+            430103,
+            430107,
+            430109,
+            430111,
+            430113
+          ],
+          "initialization_seeds": [
+            701,
+            709
+          ],
+          "cap_seconds": 1800
+        }
+      },
+      "analysis": {
+        "endpoint_steps": [
+          1,
+          4,
+          16
+        ],
+        "primary_step": 4,
+        "primary_comparators": [
+          "fourier",
+          "fixed"
+        ],
+        "minimum_improvement": 0.05,
+        "maximum_regime_regression": 0.1,
+        "bootstrap_seed": 94004,
+        "bootstrap_draws": 10000,
+        "normalization": "per-training-trajectory observed sensor standard deviation",
+        "clock_defect_minutes": 60
+      }
+    }
+  },
+  "successor_source_lock": {
+    "created_utc": "2026-09-22T15:11:49.067627+00:00",
+    "baseline_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+    "sources": {
+      "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "docs/vm_n04_protocol_v1.md": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+      "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+      "src/dynamics_training_v1.py": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+      "scripts/run_vm_n04_v1.py": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+      "scripts/analyze_vm_n04_v1.py": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+      "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0",
+      "scripts/run_vm_n04_v1_1.py": "4c6820122df21934fa0e65a3aca88c2a899262a5782854bfada6586832fba3af",
+      "docs/vm_n04_storage_recovery_v1_1.md": "a1a08dd6e9abf195b9a05652a1dab528b16171444d793062497f9e2e1fdb8316"
+    },
+    "config": {
+      "version": "vm_n04_v1",
+      "baseline_revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "data": {
+        "dt_minutes": 15,
+        "split_days": [
+          28,
+          14,
+          14
+        ],
+        "event_duration_hours": 2.0,
+        "lookback": 24,
+        "horizon": 16,
+        "stride": 4,
+        "max_fill_age_steps": 12,
+        "delay_steps": 1,
+        "noise_ppm": 10.0,
+        "baseline_ppm": 420.0,
+        "shift_hours": 3.0,
+        "start_utc": "2026-01-05T00:00:00Z",
+        "outage_test_days": [
+          2,
+          6,
+          10
+        ]
+      },
+      "tau_ratios": [
+        0.25,
+        1.0,
+        4.0
+      ],
+      "attendance": [
+        false,
+        true
+      ],
+      "test_shift": [
+        false,
+        true
+      ],
+      "test_outage": [
+        false,
+        true
+      ],
+      "arms": [
+        "none",
+        "fourier",
+        "fixed",
+        "learned"
+      ],
+      "references": [
+        "ridge",
+        "persistence",
+        "seasonal"
+      ],
+      "model": {
+        "hidden_size": 32,
+        "calendar_features": 32,
+        "fourier_harmonics": 16,
+        "initial_kappa": 32.0
+      },
+      "training": {
+        "epochs": 80,
+        "batch_size": 256,
+        "validation_every": 5,
+        "learning_rates": [
+          0.003,
+          0.01
+        ],
+        "weight_decay": 0.0001,
+        "gradient_clip": 1.0,
+        "ridge_penalties": [
+          0.0001,
+          0.01,
+          1.0
+        ]
+      },
+      "stages": {
+        "pilot": {
+          "room_seeds": [
+            410101
+          ],
+          "initialization_seeds": [
+            701
+          ],
+          "cap_seconds": 600
+        },
+        "development": {
+          "room_seeds": [
+            420101,
+            420103
+          ],
+          "initialization_seeds": [
+            701,
+            709
+          ],
+          "cap_seconds": 900
+        },
+        "confirmation": {
+          "room_seeds": [
+            430101,
+            430103,
+            430107,
+            430109,
+            430111,
+            430113
+          ],
+          "initialization_seeds": [
+            701,
+            709
+          ],
+          "cap_seconds": 1800
+        }
+      },
+      "analysis": {
+        "endpoint_steps": [
+          1,
+          4,
+          16
+        ],
+        "primary_step": 4,
+        "primary_comparators": [
+          "fourier",
+          "fixed"
+        ],
+        "minimum_improvement": 0.05,
+        "maximum_regime_regression": 0.1,
+        "bootstrap_seed": 94004,
+        "bootstrap_draws": 10000,
+        "normalization": "per-training-trajectory observed sensor standard deviation",
+        "clock_defect_minutes": 60
+      }
+    }
+  },
+  "original_lock_sha256": "35144cbadfced8c4f10ce6dc11d8a96195b8abdf10a99c9505959c65f140e7e9",
+  "successor_lock_sha256": "069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74",
+  "stages": {
+    "pilot": {
+      "status": "complete",
+      "planned_fits": 48,
+      "completed_fits": 48,
+      "elapsed_seconds": 107.5303671018919,
+      "elapsed_seconds_basis": "conservative_reconstructed_upper_estimate_not_original_monotonic",
+      "selected_rate": 0.01,
+      "pilot_rate_scores": {
+        "0.003": 0.3564046788024313,
+        "0.01": 0.3349544534056437
+      },
+      "projected_stage_seconds": {
+        "development": 322.5911013056757,
+        "confirmation": 967.7733039170271
+      },
+      "cuda_peak_allocated_bytes": null,
+      "process_rss_bytes_at_end": null,
+      "summary_sha256": "3ea505e4506303871e6fb07d1188edb44ef5eee5cd231d6b29fae9df92d6099b",
+      "terminal": {
+        "status": "complete",
+        "summary_sha256": "3ea505e4506303871e6fb07d1188edb44ef5eee5cd231d6b29fae9df92d6099b",
+        "artifacts_sha256": "f83645d1d81250c54f0f1e5aea5cfc414e7fae541d5b3a2d924fec6a769bf2d0",
+        "elapsed_seconds_including_summary_write": 109.91425440181047
+      }
+    },
+    "development": {
+      "status": "complete",
+      "planned_fits": 96,
+      "completed_fits": 96,
+      "elapsed_seconds": 85.52055150002707,
+      "elapsed_seconds_basis": null,
+      "selected_rate": null,
+      "pilot_rate_scores": null,
+      "projected_stage_seconds": null,
+      "cuda_peak_allocated_bytes": 20985344,
+      "process_rss_bytes_at_end": null,
+      "summary_sha256": "d9b4b7b28efb379b24dea97e694b46f2a6e9c638cd29dde1005e3173219eceaf",
+      "terminal": {
+        "status": "complete",
+        "elapsed_seconds_including_summary_write": 85.66762249998283,
+        "summary_sha256": "d9b4b7b28efb379b24dea97e694b46f2a6e9c638cd29dde1005e3173219eceaf",
+        "artifacts_sha256": "455d805751d6d6269d85aa0a2c69f9964d9bec887872fc54a1838f2b632a0f62"
+      }
+    },
+    "confirmation": {
+      "status": "complete",
+      "planned_fits": 288,
+      "completed_fits": 288,
+      "elapsed_seconds": 248.62523670005612,
+      "elapsed_seconds_basis": null,
+      "selected_rate": null,
+      "pilot_rate_scores": null,
+      "projected_stage_seconds": null,
+      "cuda_peak_allocated_bytes": 20985344,
+      "process_rss_bytes_at_end": null,
+      "summary_sha256": "927aef9db268f3bf6dc10ef2294704a255c23b9f1f43725f4e1b25e8ce3517f4",
+      "terminal": {
+        "status": "complete",
+        "elapsed_seconds_including_summary_write": 249.0466947000241,
+        "summary_sha256": "927aef9db268f3bf6dc10ef2294704a255c23b9f1f43725f4e1b25e8ce3517f4",
+        "artifacts_sha256": "563f6b1783a72dbc4047f84f71eb1ff403b99e0d8e0854c973ac6aa7c18656bd"
+      }
+    }
+  },
+  "pilot_recovery": {
+    "original_status": "all_48_fits_complete_but_summary_finalization_failed",
+    "error": "TypeError: Object of type int32 is not JSON serializable",
+    "original_root": "C:\\Users\\Amine\\.codex\\worktrees\\9c11\\von-mises-neuron\\results\\vm_n04\\study_v1",
+    "original_source_lock_sha256": "35144cbadfced8c4f10ce6dc11d8a96195b8abdf10a99c9505959c65f140e7e9",
+    "original_artifacts_sha256": "ada3e43c2b73c8d5c4f4411ec63f5c1b17313cfaebe3e7a2fddb3fad411e37fd",
+    "original_initial_summary_sha256": "1db4867a487ceb21b3ff6238b8992153350af0b29b1c0596e350cddec3b85e51",
+    "all_original_fits_reused": true,
+    "fits_retrained": 0,
+    "validation_selection_changed": false,
+    "original_access_to_last_artifact_wall_seconds": 43.54695010185242,
+    "conservative_margin_seconds": 60.0,
+    "recovery_seconds_to_selection": 3.9834170000394806,
+    "timing_caveat": "Original monotonic stage elapsed was not flushed; feasibility uses wall-clock artifact span plus60s margin and measured recovery work. Original reference fit/inference timings are unavailable.",
+    "selected_rate": 0.01,
+    "pilot_rate_scores": {
+      "0.003": 0.3564046788024313,
+      "0.01": 0.3349544534056437
+    }
+  },
+  "engineering": {
+    "full_suite_completed": true,
+    "standard_benchmarks_completed": true,
+    "full_suite": {
+      "passed": 1433,
+      "seconds": 82.83
+    },
+    "supplemental": {
+      "passed": 134,
+      "seconds": 4.16,
+      "scope": "All model tests incl CUDA plus new analyzer tests; overlaps full suite"
+    },
+    "standard_unchanged_passed": true,
+    "new_model_acceptance": {
+      "all_runs_attempted": true,
+      "all_passed": false,
+      "acceptance": {
+        "VonMises": {
+          "passed": true,
+          "absolute_passed": true,
+          "failures": [],
+          "gate_policy": "absolute"
+        },
+        "DynamicsNone": {
+          "passed": false,
+          "absolute_passed": true,
+          "failures": [
+            "  RMSE: 6.54378 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 5.12477 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 0.858146 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+          ],
+          "gate_policy": "absolute plus base regression",
+          "regression_vs_base": false
+        },
+        "DynamicsFourier": {
+          "passed": false,
+          "absolute_passed": true,
+          "failures": [
+            "  RMSE: 6.49082 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 5.0786 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 0.850063 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+          ],
+          "gate_policy": "absolute plus base regression",
+          "regression_vs_base": false
+        },
+        "DynamicsFixed": {
+          "passed": false,
+          "absolute_passed": true,
+          "failures": [
+            "  RMSE: 6.46692 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 5.06276 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 0.847506 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+          ],
+          "gate_policy": "absolute plus base regression",
+          "regression_vs_base": false
+        },
+        "DynamicsLearned": {
+          "passed": false,
+          "absolute_passed": true,
+          "failures": [
+            "  RMSE: 6.48245 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 5.07751 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 0.849813 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+          ],
+          "gate_policy": "absolute plus base regression",
+          "regression_vs_base": false
+        },
+        "ResidualRidge": {
+          "passed": true,
+          "absolute_passed": true,
+          "failures": [],
+          "gate_policy": "absolute plus base regression",
+          "regression_vs_base": true
+        },
+        "Persistence": {
+          "passed": true,
+          "absolute_passed": false,
+          "failures": [],
+          "gate_policy": "finite-only reference",
+          "diagnostic_regression_vs_base": false,
+          "diagnostic_regression_failures": [
+            "  RMSE: 52.1991 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 43.2424 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 7.24343 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+            "  R2: -0.9976 is 1.9766 below base 0.9790"
+          ]
+        },
+        "Seasonal": {
+          "passed": true,
+          "absolute_passed": true,
+          "failures": [],
+          "gate_policy": "finite-only reference",
+          "diagnostic_regression_vs_base": false,
+          "diagnostic_regression_failures": [
+            "  RMSE: 13.233 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+            "  MAE: 11.0735 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+            "  MAPE: 1.84759 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+            "  R2: 0.8716 is 0.1073 below base 0.9790"
+          ]
+        }
+      },
+      "candidates": {
+        "DynamicsNone": false,
+        "DynamicsFourier": false,
+        "DynamicsFixed": false,
+        "DynamicsLearned": false,
+        "ResidualRidge": true
+      }
+    },
+    "evidence_sha256": {
+      "results/vm_n04/engineering/full_suite.xml": "bf6a7692c286dbaaa753373b5758787ce4a9eefcfc1207f421d159663f62cc17",
+      "results/vm_n04/engineering/supplemental.xml": "89e909d69b9e0be36bdd166f6da1f28b13901370e28a346024379a198e19a268",
+      "results/vm_n04/standard_unchanged/benchmark_results.json": "8a2d227629732294c0b57402115d9f9e257313eb34166164a25606c79c16280e",
+      "results/vm_n04/standard_adapters_v1/results.json": "e849f3140fd59bb89b04e815e86196a35c2dc08fd0eff7f4a0f056257d4086ba",
+      "results/vm_n04/standard_adapters_v1/validation.json": "5bfd510f1c25d464b39e6819ff6b5e67993d00f01a1a45c482eae7b582a4f321",
+      "results/vm_n04/standard_adapters_v1/manifest.json": "56e947fabc73ab7bd4e197a120052e8df3da71b6cc48004cc7905f8549adb21b",
+      "results/vm_n04/engineering/supplemental_final.xml": "572c7080d20d3554f21be450b68744ebf51af881859b5e2f8a02516d6fd6f48e",
+      "results/vm_n04/engineering/storage_repair.xml": "0e1759e6856473a2395671aa637a5775d0287ae521534d98549842a8337bbb57"
+    },
+    "scope": "Four new neural arms pass absolute gates but fail base-VM RMSE/MAE/MAPE regression; unvalidated. Ridge passes both. No gates or models retuned.",
+    "gpu_resident_context": "Read-only process identity check found an existing marimo forecast_lab.py app, not another launched GPU study; local study fits serialized.",
+    "storage_repair_tests": {
+      "passed": 19,
+      "seconds": 5.65
+    },
+    "storage_recovery": "No fit rerun; original pilot failed finalization retained separately; v1.1 changes JSON scalar serialization only.",
+    "post_confirmation_final_full_suite": {
+      "passed": 1465,
+      "seconds": 81.49,
+      "junit_sha256": "03ed4a651860f0e3a903e89b48c5de0489dcaf32307ff55a096b79ae4011abf0",
+      "timing": "After confirmation and all storage/analysis additions; original pre-confirmation engineering receipt unchanged."
+    }
+  },
+  "unchanged_standard": {
+    "config": {
+      "n_days": 90,
+      "lookback": 72,
+      "horizon": 12,
+      "seed": 42,
+      "epochs": 50,
+      "device": "cuda"
+    },
+    "thresholds": {
+      "rmse": 35.0,
+      "mae": 25.0,
+      "r2": 0.2,
+      "mape": 5.0
+    },
+    "regression_limits": {
+      "error_metrics_relative_percent": 10.0,
+      "r2_absolute_decrease": 0.1
+    },
+    "acceptance": {
+      "VonMises": {
+        "checks": {
+          "finite_metrics": true,
+          "absolute_thresholds": true
+        },
+        "passed": true,
+        "failures": []
+      },
+      "TemporalVM": {
+        "checks": {
+          "finite_metrics": true,
+          "absolute_thresholds": true,
+          "regression_vs_base": true
+        },
+        "passed": true,
+        "failures": []
+      },
+      "SinCos": {
+        "checks": {
+          "finite_metrics": true,
+          "absolute_thresholds": true
+        },
+        "passed": true,
+        "failures": []
+      },
+      "LSTM": {
+        "checks": {
+          "finite_metrics": true
+        },
+        "passed": true,
+        "failures": []
+      },
+      "Transformer": {
+        "checks": {
+          "finite_metrics": true
+        },
+        "passed": true,
+        "failures": []
+      },
+      "HandCrafted": {
+        "checks": {
+          "finite_metrics": true
+        },
+        "passed": true,
+        "failures": []
+      }
+    },
+    "results": {
+      "VonMises": {
+        "rmse": 5.357273412657669,
+        "mae": 4.150812149047852,
+        "r2": 0.9789586471814591,
+        "mape": 0.6916255690157413,
+        "params": 43148,
+        "time_seconds": 13.29,
+        "passed": true
+      },
+      "TemporalVM": {
+        "rmse": 5.335004286473849,
+        "mae": 4.189743518829346,
+        "r2": 0.9791332129398717,
+        "mape": 0.697762006893754,
+        "params": 52492,
+        "time_seconds": 13.01,
+        "passed": true
+      },
+      "SinCos": {
+        "rmse": 5.455644173214247,
+        "mae": 4.272523880004883,
+        "r2": 0.9781788262215989,
+        "mape": 0.7109659723937511,
+        "params": 43148,
+        "time_seconds": 4.91,
+        "passed": true
+      },
+      "LSTM": {
+        "rmse": 6.178627820312805,
+        "mae": 4.8660054206848145,
+        "r2": 0.9720121142840508,
+        "mape": 0.8118909783661366,
+        "params": 43668,
+        "time_seconds": 4.38,
+        "passed": true
+      },
+      "Transformer": {
+        "rmse": 6.479320790051271,
+        "mae": 5.1535162925720215,
+        "r2": 0.9692216729648746,
+        "mape": 0.8604545146226883,
+        "params": 44956,
+        "time_seconds": 9.75,
+        "passed": true
+      },
+      "HandCrafted": {
+        "rmse": 5.083631704777054,
+        "mae": 3.9104480743408203,
+        "r2": 0.9810532729942966,
+        "mape": 0.6505236960947514,
+        "params": 6924,
+        "time_seconds": 1.94,
+        "passed": true
+      }
+    },
+    "all_passed": true
+  },
+  "adapter_standard": {
+    "runs": [
+      {
+        "model": "VonMises",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 5.357273234642799,
+          "mae": 4.150812149047852,
+          "r2": 0.9789586513922223,
+          "mape": 0.6916255690157413
+        },
+        "failures": [],
+        "config": {
+          "class": "VonMisesForecaster",
+          "kwargs": {
+            "input_size": 4,
+            "hidden_size": 64,
+            "num_vm_layers": 2,
+            "dropout": 0.1,
+            "output_size": 12,
+            "init_kappa": 1.0
+          }
+        },
+        "params": 43148,
+        "training_seconds": 13.337007399997674,
+        "inference_seconds": 0.004548999946564436,
+        "time_seconds": 13.460708800004795,
+        "peak_cuda_allocated_bytes": 408554496,
+        "training": {
+          "epochs_completed": 50,
+          "best_epoch": 35,
+          "best_val_loss": 0.02454409934580326,
+          "validation_loss": [
+            0.16066807508468628,
+            0.07875876873731613,
+            0.06783916056156158,
+            0.049591515213251114,
+            0.045482032001018524,
+            0.04347698390483856,
+            0.04782328009605408,
+            0.039419498294591904,
+            0.043410029262304306,
+            0.044723544269800186,
+            0.04309876635670662,
+            0.0485321506857872,
+            0.04759247973561287,
+            0.04775112122297287,
+            0.040944263339042664,
+            0.03812176734209061,
+            0.03729410469532013,
+            0.03296026960015297,
+            0.03207927942276001,
+            0.028271272778511047,
+            0.035525426268577576,
+            0.032635726034641266,
+            0.02664627693593502,
+            0.028217175975441933,
+            0.0304598119109869,
+            0.026735303923487663,
+            0.025508416816592216,
+            0.026731016114354134,
+            0.027323679998517036,
+            0.02576480060815811,
+            0.026302281767129898,
+            0.02831895463168621,
+            0.025962693616747856,
+            0.025731490924954414,
+            0.02454409934580326,
+            0.02552821859717369,
+            0.025155533105134964,
+            0.0260508693754673,
+            0.025508267804980278,
+            0.026690170168876648,
+            0.026642967015504837,
+            0.024845337495207787,
+            0.025355150923132896,
+            0.024595778435468674,
+            0.02577856183052063,
+            0.026428790763020515,
+            0.025180811062455177,
+            0.025549447163939476,
+            0.025743283331394196,
+            0.025761663913726807
+          ],
+          "max_epochs": 50,
+          "lr": 0.001,
+          "weight_decay": 0.0001,
+          "batch_size": 64,
+          "patience": 15,
+          "gradient_clip": 1.0
+        }
+      },
+      {
+        "model": "DynamicsNone",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 6.543778517987942,
+          "mae": 5.124765872955322,
+          "r2": 0.9686062526463437,
+          "mape": 0.8581463247537613
+        },
+        "failures": [],
+        "config": {
+          "class": "StandardDynamicsAdapterV1",
+          "kwargs": {
+            "calendar": "none",
+            "lookback": 72,
+            "horizon": 12,
+            "sensor_size": 4,
+            "target_index": 2,
+            "cadence_hours": 1.0,
+            "hidden_size": 32
+          },
+          "basis_features": 0,
+          "harmonics": 0,
+          "kernel_initial_kappa": null
+        },
+        "params": 15308,
+        "capacity": {
+          "class": "DynamicsForecasterV1",
+          "calendar": "none",
+          "lookback": 72,
+          "input_size": 6,
+          "horizon": 12,
+          "hidden_size": 32,
+          "target_index": 2,
+          "num_features": 32,
+          "init_kappa": 32.0,
+          "calendar_feature_count": 0,
+          "fourier_harmonics": 0,
+          "sensor_parameters": 15308,
+          "basis_parameters": 0,
+          "calendar_readout_parameters": 0,
+          "trainable_parameters": 15308
+        },
+        "training_seconds": 2.668320099939592,
+        "inference_seconds": 0.0007227999158203602,
+        "time_seconds": 2.680657699937001,
+        "peak_cuda_allocated_bytes": 22000128,
+        "training": {
+          "epochs_completed": 50,
+          "best_epoch": 42,
+          "best_val_loss": 0.03502092510461807,
+          "validation_loss": [
+            0.35356879234313965,
+            0.05277246981859207,
+            0.041896916925907135,
+            0.03915795683860779,
+            0.03876940906047821,
+            0.037605609744787216,
+            0.03696116432547569,
+            0.037885453552007675,
+            0.04009140655398369,
+            0.03923533856868744,
+            0.037969280034303665,
+            0.03775981441140175,
+            0.037071797996759415,
+            0.03685709461569786,
+            0.03652104735374451,
+            0.03681453317403793,
+            0.03619302064180374,
+            0.03645907714962959,
+            0.037022024393081665,
+            0.037088606506586075,
+            0.03617497533559799,
+            0.035950668156147,
+            0.03627908602356911,
+            0.036029230803251266,
+            0.036074329167604446,
+            0.03663608804345131,
+            0.03578979894518852,
+            0.035919852554798126,
+            0.03611500561237335,
+            0.036652859300374985,
+            0.03587896004319191,
+            0.036684196442365646,
+            0.03592728450894356,
+            0.036031655967235565,
+            0.03563457727432251,
+            0.03595351055264473,
+            0.035791512578725815,
+            0.03560810908675194,
+            0.03564608097076416,
+            0.03621413931250572,
+            0.0360088013112545,
+            0.03502092510461807,
+            0.035906028002500534,
+            0.03549117222428322,
+            0.035972703248262405,
+            0.035598572343587875,
+            0.036405742168426514,
+            0.03533248230814934,
+            0.03552018478512764,
+            0.035734158009290695
+          ],
+          "max_epochs": 50,
+          "lr": 0.001,
+          "weight_decay": 0.0001,
+          "batch_size": 64,
+          "patience": 15,
+          "gradient_clip": 1.0
+        }
+      },
+      {
+        "model": "DynamicsFourier",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 6.490817993997457,
+          "mae": 5.0785956382751465,
+          "r2": 0.9691123524291928,
+          "mape": 0.8500628173351288
+        },
+        "failures": [],
+        "config": {
+          "class": "StandardDynamicsAdapterV1",
+          "kwargs": {
+            "calendar": "fourier",
+            "lookback": 72,
+            "horizon": 12,
+            "sensor_size": 4,
+            "target_index": 2,
+            "cadence_hours": 1.0,
+            "hidden_size": 32
+          },
+          "basis_features": 32,
+          "harmonics": 16,
+          "kernel_initial_kappa": null
+        },
+        "params": 15341,
+        "capacity": {
+          "class": "DynamicsForecasterV1",
+          "calendar": "fourier",
+          "lookback": 72,
+          "input_size": 6,
+          "horizon": 12,
+          "hidden_size": 32,
+          "target_index": 2,
+          "num_features": 32,
+          "init_kappa": 32.0,
+          "calendar_feature_count": 32,
+          "fourier_harmonics": 16,
+          "sensor_parameters": 15308,
+          "basis_parameters": 0,
+          "calendar_readout_parameters": 33,
+          "trainable_parameters": 15341
+        },
+        "training_seconds": 3.174966200022027,
+        "inference_seconds": 0.0008808999555185437,
+        "time_seconds": 3.1859582000179216,
+        "peak_cuda_allocated_bytes": 22006272,
+        "training": {
+          "epochs_completed": 50,
+          "best_epoch": 44,
+          "best_val_loss": 0.03506172075867653,
+          "validation_loss": [
+            0.3317785859107971,
+            0.056377433240413666,
+            0.04178391769528389,
+            0.03987884148955345,
+            0.039277952164411545,
+            0.03777802735567093,
+            0.03718063235282898,
+            0.03801155462861061,
+            0.04062560945749283,
+            0.03930695727467537,
+            0.038344066590070724,
+            0.03794499859213829,
+            0.037295978516340256,
+            0.03694445267319679,
+            0.03648686036467552,
+            0.036938250064849854,
+            0.03626058250665665,
+            0.03654811531305313,
+            0.03701982647180557,
+            0.03720630705356598,
+            0.03626956045627594,
+            0.03600877895951271,
+            0.03629840910434723,
+            0.03598608076572418,
+            0.03618562966585159,
+            0.03662628307938576,
+            0.035858672112226486,
+            0.03581618890166283,
+            0.03614303097128868,
+            0.036757826805114746,
+            0.03599730134010315,
+            0.03658485785126686,
+            0.03592629358172417,
+            0.036251842975616455,
+            0.03540513664484024,
+            0.03607373312115669,
+            0.03583761304616928,
+            0.035554733127355576,
+            0.035577695816755295,
+            0.03628215938806534,
+            0.03597041592001915,
+            0.0351281575858593,
+            0.03528965264558792,
+            0.03506172075867653,
+            0.03548905998468399,
+            0.035516295582056046,
+            0.03587717190384865,
+            0.0358283594250679,
+            0.03546538203954697,
+            0.03585878014564514
+          ],
+          "max_epochs": 50,
+          "lr": 0.001,
+          "weight_decay": 0.0001,
+          "batch_size": 64,
+          "patience": 15,
+          "gradient_clip": 1.0
+        }
+      },
+      {
+        "model": "DynamicsFixed",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 6.46692104560266,
+          "mae": 5.062761306762695,
+          "r2": 0.9693393695331146,
+          "mape": 0.8475061506032944
+        },
+        "failures": [],
+        "config": {
+          "class": "StandardDynamicsAdapterV1",
+          "kwargs": {
+            "calendar": "fixed",
+            "lookback": 72,
+            "horizon": 12,
+            "sensor_size": 4,
+            "target_index": 2,
+            "cadence_hours": 1.0,
+            "hidden_size": 32
+          },
+          "basis_features": 32,
+          "harmonics": 0,
+          "kernel_initial_kappa": 32.0
+        },
+        "params": 15341,
+        "capacity": {
+          "class": "DynamicsForecasterV1",
+          "calendar": "fixed",
+          "lookback": 72,
+          "input_size": 6,
+          "horizon": 12,
+          "hidden_size": 32,
+          "target_index": 2,
+          "num_features": 32,
+          "init_kappa": 32.0,
+          "calendar_feature_count": 32,
+          "fourier_harmonics": 0,
+          "sensor_parameters": 15308,
+          "basis_parameters": 0,
+          "calendar_readout_parameters": 33,
+          "trainable_parameters": 15341
+        },
+        "training_seconds": 3.302786600077525,
+        "inference_seconds": 0.001995700062252581,
+        "time_seconds": 3.320912499912083,
+        "peak_cuda_allocated_bytes": 22007296,
+        "training": {
+          "epochs_completed": 50,
+          "best_epoch": 44,
+          "best_val_loss": 0.03508874028921127,
+          "validation_loss": [
+            0.3204454779624939,
+            0.054139893501996994,
+            0.041487786918878555,
+            0.03920239210128784,
+            0.03869311138987541,
+            0.03755103424191475,
+            0.03688505291938782,
+            0.03778491169214249,
+            0.04009181633591652,
+            0.03931474685668945,
+            0.037941619753837585,
+            0.03784671053290367,
+            0.03710077702999115,
+            0.03691732510924339,
+            0.03654535487294197,
+            0.03684546798467636,
+            0.036246538162231445,
+            0.036489687860012054,
+            0.03714458644390106,
+            0.037112172693014145,
+            0.03622552007436752,
+            0.0360039621591568,
+            0.03632679209113121,
+            0.03606615960597992,
+            0.03610619902610779,
+            0.03667927905917168,
+            0.03581070899963379,
+            0.03589566797018051,
+            0.03614377975463867,
+            0.03670097514986992,
+            0.03591305390000343,
+            0.03674396127462387,
+            0.03590796887874603,
+            0.0360235758125782,
+            0.03560703247785568,
+            0.03599349409341812,
+            0.03579360619187355,
+            0.03563499450683594,
+            0.035658806562423706,
+            0.036209337413311005,
+            0.036026716232299805,
+            0.03516869619488716,
+            0.03532779961824417,
+            0.03508874028921127,
+            0.035498496145009995,
+            0.035533420741558075,
+            0.03589911013841629,
+            0.03585191071033478,
+            0.0354933999478817,
+            0.03583400696516037
+          ],
+          "max_epochs": 50,
+          "lr": 0.001,
+          "weight_decay": 0.0001,
+          "batch_size": 64,
+          "patience": 15,
+          "gradient_clip": 1.0
+        }
+      },
+      {
+        "model": "DynamicsLearned",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 6.48245188679404,
+          "mae": 5.077510356903076,
+          "r2": 0.9691919221789186,
+          "mape": 0.8498127572238445
+        },
+        "failures": [],
+        "config": {
+          "class": "StandardDynamicsAdapterV1",
+          "kwargs": {
+            "calendar": "learned",
+            "lookback": 72,
+            "horizon": 12,
+            "sensor_size": 4,
+            "target_index": 2,
+            "cadence_hours": 1.0,
+            "hidden_size": 32
+          },
+          "basis_features": 32,
+          "harmonics": 0,
+          "kernel_initial_kappa": 32.0
+        },
+        "params": 15405,
+        "capacity": {
+          "class": "DynamicsForecasterV1",
+          "calendar": "learned",
+          "lookback": 72,
+          "input_size": 6,
+          "horizon": 12,
+          "hidden_size": 32,
+          "target_index": 2,
+          "num_features": 32,
+          "init_kappa": 32.0,
+          "calendar_feature_count": 32,
+          "fourier_harmonics": 0,
+          "sensor_parameters": 15308,
+          "basis_parameters": 64,
+          "calendar_readout_parameters": 33,
+          "trainable_parameters": 15405
+        },
+        "training_seconds": 3.9822777999797836,
+        "inference_seconds": 0.000925400061532855,
+        "time_seconds": 3.994586699991487,
+        "peak_cuda_allocated_bytes": 22010368,
+        "training": {
+          "epochs_completed": 50,
+          "best_epoch": 44,
+          "best_val_loss": 0.035194095224142075,
+          "validation_loss": [
+            0.3199095129966736,
+            0.05401886627078056,
+            0.041388239711523056,
+            0.039112020283937454,
+            0.03861178085207939,
+            0.037493787705898285,
+            0.03682684898376465,
+            0.037742018699645996,
+            0.040006693452596664,
+            0.03928811103105545,
+            0.037925343960523605,
+            0.037871524691581726,
+            0.0371236577630043,
+            0.036950625479221344,
+            0.03657146915793419,
+            0.03688030317425728,
+            0.036289941519498825,
+            0.03651689365506172,
+            0.03720250353217125,
+            0.037177182734012604,
+            0.03627389296889305,
+            0.036069970577955246,
+            0.03638061136007309,
+            0.036131326109170914,
+            0.0361727699637413,
+            0.03675823286175728,
+            0.03589862585067749,
+            0.03596411645412445,
+            0.03623700514435768,
+            0.03679211065173149,
+            0.03601241484284401,
+            0.036837536841630936,
+            0.03600633889436722,
+            0.03611486032605171,
+            0.03570305183529854,
+            0.03608926758170128,
+            0.03589782118797302,
+            0.03573734313249588,
+            0.035746414214372635,
+            0.036317966878414154,
+            0.03614379093050957,
+            0.03527819737792015,
+            0.0354335680603981,
+            0.035194095224142075,
+            0.03561053425073624,
+            0.035645365715026855,
+            0.036017026752233505,
+            0.03596710413694382,
+            0.035599686205387115,
+            0.0359380841255188
+          ],
+          "max_epochs": 50,
+          "lr": 0.001,
+          "weight_decay": 0.0001,
+          "batch_size": 64,
+          "patience": 15,
+          "gradient_clip": 1.0
+        }
+      },
+      {
+        "model": "ResidualRidge",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 5.122241447878777,
+          "mae": 3.978691099977054,
+          "r2": 0.980764385233101,
+          "mape": 0.660759996127287
+        },
+        "failures": [],
+        "config": {
+          "class": "sensor-only residual ridge",
+          "sensor_column_order": [
+            2,
+            0,
+            1,
+            3
+          ],
+          "input_size": 6,
+          "lookback": 72,
+          "horizon": 12,
+          "penalties": [
+            0.0001,
+            0.01,
+            1.0
+          ],
+          "penalty_objective": "mean squared residual loss",
+          "selection": "validation mean squared error; first on ties"
+        },
+        "params": 5196,
+        "training_seconds": 0.025643200031481683,
+        "training": {
+          "selected_penalty": 0.0001,
+          "candidates": [
+            {
+              "penalty": 0.0001,
+              "validation_mse": 0.023193330104497298
+            },
+            {
+              "penalty": 0.01,
+              "validation_mse": 0.024464588616757175
+            },
+            {
+              "penalty": 1.0,
+              "validation_mse": 0.036439415899406115
+            }
+          ],
+          "parameters": 5196,
+          "training_seconds": 0.025643200031481683
+        },
+        "inference_seconds": 0.00019569997675716877,
+        "time_seconds": 0.036393199930898845
+      },
+      {
+        "model": "Persistence",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 52.19911921550976,
+          "mae": 43.24239730834961,
+          "r2": -0.9976175298173389,
+          "mape": 7.243432849645615
+        },
+        "failures": [],
+        "config": {
+          "class": "Persistence",
+          "definition": "last measured target"
+        },
+        "params": 0,
+        "training_seconds": 0.0,
+        "training": null,
+        "inference_seconds": 9.190000128000975e-05,
+        "time_seconds": 0.004815499996766448
+      },
+      {
+        "model": "Seasonal",
+        "seed": 42,
+        "execution_status": "completed",
+        "metrics": {
+          "rmse": 13.23301453283097,
+          "mae": 11.073539539408486,
+          "r2": 0.8716181712641755,
+          "mape": 1.8475921287922379
+        },
+        "failures": [],
+        "config": {
+          "class": "Seasonal",
+          "definition": "training-only local hour-of-day target mean"
+        },
+        "params": 24,
+        "training_seconds": 0.00426399998832494,
+        "training": {
+          "source": "training rows only",
+          "hours": 24
+        },
+        "inference_seconds": 0.00011080002877861261,
+        "time_seconds": 0.00977709994185716
+      }
+    ],
+    "all_runs_attempted": true,
+    "all_passed": false,
+    "acceptance": {
+      "VonMises": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "absolute"
+      },
+      "DynamicsNone": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.54378 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.12477 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.858146 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsFourier": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.49082 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.0786 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.850063 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsFixed": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.46692 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.06276 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.847506 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "DynamicsLearned": {
+        "passed": false,
+        "absolute_passed": true,
+        "failures": [
+          "  RMSE: 6.48245 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 5.07751 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 0.849813 exceeds 0.760788 (base 0.691626, max regression 10.0%)"
+        ],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": false
+      },
+      "ResidualRidge": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "absolute plus base regression",
+        "regression_vs_base": true
+      },
+      "Persistence": {
+        "passed": true,
+        "absolute_passed": false,
+        "failures": [],
+        "gate_policy": "finite-only reference",
+        "diagnostic_regression_vs_base": false,
+        "diagnostic_regression_failures": [
+          "  RMSE: 52.1991 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 43.2424 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 7.24343 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+          "  R2: -0.9976 is 1.9766 below base 0.9790"
+        ]
+      },
+      "Seasonal": {
+        "passed": true,
+        "absolute_passed": true,
+        "failures": [],
+        "gate_policy": "finite-only reference",
+        "diagnostic_regression_vs_base": false,
+        "diagnostic_regression_failures": [
+          "  RMSE: 13.233 exceeds 5.893 (base 5.35727, max regression 10.0%)",
+          "  MAE: 11.0735 exceeds 4.56589 (base 4.15081, max regression 10.0%)",
+          "  MAPE: 1.84759 exceeds 0.760788 (base 0.691626, max regression 10.0%)",
+          "  R2: 0.8716 is 0.1073 below base 0.9790"
+        ]
+      }
+    },
+    "candidates": {
+      "DynamicsNone": false,
+      "DynamicsFourier": false,
+      "DynamicsFixed": false,
+      "DynamicsLearned": false,
+      "ResidualRidge": true
+    }
+  },
+  "independent_replay": {
+    "status": "passed",
+    "stage": "confirmation",
+    "created_utc": "2026-09-22T15:18:36.490915+00:00",
+    "audit_source_sha256": "18a7f27a5ab6fe34852b9a13d44863c7a515081571ca694b24e300fb91137d36",
+    "scope": "saved evidence only; no trajectory generation, target reselection or refitting",
+    "metric_scope": "observed and latent-clean RMSE/MAE/n at every declared endpoint and whole horizon; observed endpoint normalized RMSE",
+    "environment": {
+      "device": "cpu",
+      "threads": 1,
+      "torch": "2.5.1+cu121",
+      "numpy": "1.26.4",
+      "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]"
+    },
+    "tolerances": {
+      "neural_max_abs_normalized": 0.0001,
+      "reference_max_abs_normalized": 1e-06,
+      "metric_atol": 1e-10,
+      "metric_rtol": 1e-12
+    },
+    "counts": {
+      "checks": 52663,
+      "source_files": 10,
+      "access_dependencies": 3,
+      "stage_artifacts": 2342,
+      "neural_checkpoints": 288,
+      "case_bundles": 144,
+      "metric_comparisons": 42768,
+      "neural_prediction_arrays": 1152,
+      "reference_state_bundles": 36,
+      "reference_prediction_arrays": 432
+    },
+    "anomalies": [],
+    "maximum_errors": {
+      "neural_abs_normalized": 2.2962974384199697e-06,
+      "neural_abs_ppm": 0.00016941344862477482,
+      "reference_abs_normalized": 2.67003887177667e-15,
+      "reference_abs_ppm": 1.1368683772161603e-13,
+      "metric_abs": 0.0
+    },
+    "source_hashes": {
+      "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "docs/vm_n04_protocol_v1.md": "3373bbc77ea593276cf96f4c0fe0fcf4298af5b0429c58dc933fd2b73c44bc60",
+      "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "src/dynamics_models_v1.py": "e5e2c797abad476eea1d49b930b400df574d4cfea5ea441028b5649962d88ef7",
+      "src/dynamics_training_v1.py": "163e60f8ec5c24e682bfc67115caf06d967f0e3878a9aeb883708968f2111147",
+      "scripts/run_vm_n04_v1.py": "09a897f7f68503f30f1b0a21cde8e0333c66159bca093e6db27c84eb9c9bf1d9",
+      "scripts/analyze_vm_n04_v1.py": "9f19a7bb440fa316860d006c6aecded080c416c64b9e3ba3550448f0e41041f8",
+      "src/circular_layers_v2.py": "889002ad143f1f9af0a45cbc19ffe836eab97ee025bca3542d20aa5d9b2895b0",
+      "scripts/run_vm_n04_v1_1.py": "4c6820122df21934fa0e65a3aca88c2a899262a5782854bfada6586832fba3af",
+      "docs/vm_n04_storage_recovery_v1_1.md": "a1a08dd6e9abf195b9a05652a1dab528b16171444d793062497f9e2e1fdb8316"
+    },
+    "receipt_hashes": {
+      "source_lock": "069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74",
+      "summary": "927aef9db268f3bf6dc10ef2294704a255c23b9f1f43725f4e1b25e8ce3517f4",
+      "terminal": "182337bd03d1be34fb05cfe1df8d8b06e5df1c6a81b8078ef9a668ffbb71dee4",
+      "artifacts": "563f6b1783a72dbc4047f84f71eb1ff403b99e0d8e0854c973ac6aa7c18656bd"
+    },
+    "elapsed_seconds": 6.122037600027397,
+    "full_audit": {
+      "local_ignored_path": "results/vm_n04/audit/confirmation_replay.json",
+      "sha256": "8e5050ff06c24468b01539c39f765b3ca09d57b3577775af279a9ce99e4937b9",
+      "replay_script": "results/vm_n04/audit/replay.py"
+    }
+  },
+  "preservation": {
+    "unchanged_inherited_files": 128,
+    "authorized_state_update": 1,
+    "owner_notes_not_imported": 1,
+    "inventory_sha256": "f94420cf7b6d7a1f6adfb17b4e3b3f93d40cab62e59db50748d76a718fc3345c"
+  },
+  "artifact_sha256": {
+    "docs/vm_n04_results_v1.json": "3ffb3098d4e5e0851577a5d01f057f50196e39f604665e378dd35927dff0d557",
+    "docs/vm_n04_cells_v1.csv": "958bb8cb37b7ac44af94e1465bc53366aa24b4ae30f6c54366ea7710e7e350f0",
+    "docs/figures/vm_n04_v1.png": "991dc770acea54b9b6d11d90ff398a3582332b1fd2f290f2087521ad82184edf",
+    "docs/vm_n04_review_v1.md": "774f259ce4b6598b3b89deeafc6c849bac118370560016d2fd015c629ae9ed7e",
+    "docs/vm_n04_context_receipt.json": "3ff1537c0821b05dbf5ee9686758619ace0c340190a15fa6777e4b03537b525b"
+  }
+}

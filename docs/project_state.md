@@ -1,5 +1,114 @@
 # Project state: ownership handoff
 
+## Completed VM-N05 — phase-conditioned delayed uncertainty (2026-09-26)
+
+The authorized delivery is complete in isolated worktree `7457`. See
+[report](vm_n05_report_v1.md), [frozen protocol](vm_n05_protocol_v1.md),
+[config](../configs/vm_n05_v1.json), [usage and interval contract](vm_n05_usage.md),
+[comparison table](vm_n05_comparison_v1.csv), [results](vm_n05_results_v1.json)
+and [run record](vm_n05_run_record_v1.json).
+
+**The scientific gate failed.** With identical persistence point forecasts,
+VM-conditioned scales improved mean one-hour interval score 7.50% over Fourier,
+but the paired eight-room 95% interval was -4.34% to +17.43%; only four rooms
+favored VM. Noisy-condition coverages 83.70% and 83.32% failed the 85% guards.
+VM scored 10.06% worse than hour bins (348.22 vs 316.39 ppm);
+ordinary rolling scored 295.92 ppm. The
+fixed-interval evaluation-block bootstrap's narrower +4.65% to +10.25% interval
+omits refitting uncertainty and does not override the room result.
+
+New `uncertainty_*_v1.py` modules provide causal persistence rows, an explicit
+two-clock delayed-error ledger, positive frozen scalar scale regressions,
+six matched calibration arms, strict interval metrics and paired room/block
+analysis. `scripts/run_vm_n05_v1.py` supplies engineering, nonreserved fixture,
+freeze, run and analyze stages. The fixed VM bank learns readout weights only;
+there is no learned-locality or new point-forecast acceptance claim.
+
+All 72 fits and 32 paired room/scenario runs completed once in 21.95 seconds.
+The full suite passed **1,514 tests in 83.90 seconds**, including 49 new checks.
+No unchanged forecast model was retrained or benchmarked. The scalar interval
+fits do not upgrade N04's failed scientific gate or four unvalidated neural
+adapters; ridge's prior passing checks are preserved.
+
+The [156-file import receipt](vm_n05_dependency_receipt.json) distinguishes
+verified N04 dependency files from N05 changes. No frozen inherited source,
+config, original result or owner note was modified. The reference workspace
+was read-only after its context validator passed. There is no sibling runtime
+dependency. Raw new artifacts are ignored under `results/vm_n05/`; compact
+evidence and the exact [source lock](vm_n05_source_lock_v1.json) are in `docs/`.
+N05 reserved seeds are now consumed. New scientific selection needs a fresh
+version and unused seeds. N06 was not edited or blocked; it may consume the
+portable sample's point forecasts without using intervals. No real-data,
+controller or deployment claim is made.
+
+## Completed VM-N04 — dynamics and changing routines (2026-09-22)
+
+The authorized synthetic forecasting delivery is complete in this isolated
+worktree. See [the report](vm_n04_report_v1.md),
+[prospective protocol](vm_n04_protocol_v1.md),
+[configuration](../configs/vm_n04_v1.json),
+[672 result cells](vm_n04_cells_v1.csv),
+[machine-readable results](vm_n04_results_v1.json) and
+[reproduction guide](vm_n04_usage.md).
+
+**The locked scientific gate failed.** Across six independent confirmation
+room draws and 24 paired regimes, learned kernels improved one-hour balanced
+normalized RMSE only **1.58% over Fourier** (paired room bootstrap 95% interval
+1.24–1.91%), below the 5% minimum, and were **2.10% worse than fixed kernels**
+(improvement interval -2.92% to -1.30%). The fastest regular stable/outage cell
+also regressed 12.86% against Fourier, failing the unchanged 10% regime guard.
+No arm replaced the prespecified candidate or comparator after seeing results.
+
+Calendar information helped under stable routines: learned reduced one-hour
+normalized error 42.23% against the matched sensor-only model. A three-hour
+test-only routine shift reversed that benefit, increasing error 68.42%.
+Fourier/fixed controls show the same conditional calendar-value pattern. This
+does not establish adaptive-locality superiority, building-population validity
+or deployment readiness. All three calendar arms helped versus sensor-only in
+every stable one-hour regime and harmed it in every shifted regime.
+
+New versioned data, models, training, runner and analysis files leave inherited
+scientific sources/configs intact. The regular UTC 15-minute grid separates
+forcing, exact first-order response, noise and delayed availability. All models
+share causal history and eligible origins; no outage origins were dropped.
+Each split keeps its own normalization/window boundaries, with raw future clock
+angles. Known future sensors and realized attendance never enter predictors.
+
+All **432 neural fits completed without refits or dropped arms**. Original
+pilot final-summary serialization failed after all 48 fits; its bytes remain
+preserved. A separately locked storage-only v1.1 controller recovered those
+completed records, retaining missing original reference timers and explicitly
+estimated pilot duration. Rate 0.01 was selected solely from the original
+validation histories. Development's 96 fits took 85.52 seconds; confirmation's
+288 fits took 248.63 seconds, below unchanged 900/1800-second caps. Use
+`scripts/run_vm_n04_v1_1.py` for reproduction; v1 remains the exact original
+pilot source. The [recovery contract](vm_n04_storage_recovery_v1_1.md) explains
+the exception and timing limits.
+
+The unchanged standard benchmark passed. The four new neural adapters passed
+absolute thresholds but **failed base-VM RMSE/MAE/MAPE regression gates**, so
+they remain **unvalidated** under repository policy. Residual ridge passed both
+checks. Numerical tests or the completed study do not override failed model
+acceptance. See [engineering evidence](vm_n04_engineering_v1.json).
+
+Independent replay passed 52,663 checks, covering all 288 confirmation
+checkpoints, 1,584 prediction arrays and 2,342 artifact hashes. All 42,768
+metric comparisons matched exactly; maximum CPU/GPU discrepancy was
+2.30e-6 normalized units. [Replay receipt](vm_n04_replay_v1.json).
+The final full suite passed **1,465 tests in 81.49 seconds**, and the separate
+[statistical review](vm_n04_review_v1.md) confirmed the paired analysis and
+covered all eleven declared statistical/interpretation checks.
+The original/successor source locks are
+`35144cbadfced8c4f10ce6dc11d8a96195b8abdf10a99c9505959c65f140e7e9` and
+`069abf9d9635ef9c6b3345404e300f421ec81147997bca735cdeb5c029bd2d74`.
+
+Full arrays/checkpoints are ignored local artifacts under
+`results/vm_n04/study_v1_1/`; the failed original pilot is under `study_v1/`.
+Inherited baseline is `a7431a926c751868b11a3918c6cdd29be6540a32`; all 130 supplied
+snapshot entries were verified before use. No original/sibling checkout,
+historical results, source/config locks or owner notes were modified. Real-data
+replication, VM-N05/N06, and sibling-task results were not used or launched.
+
 ## Completed follow-up — circular locality v2 (2026-09-21)
 
 The owner requested saving the literature review and starting the proposed

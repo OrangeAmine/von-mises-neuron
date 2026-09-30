@@ -1,0 +1,214 @@
+{
+  "version": "vm_n05_v1",
+  "created_utc": "2026-09-26T18:45:45.791960+00:00",
+  "sources": {
+    "configs/vm_n05_v1.json": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+    "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+    "docs/vm_n05_protocol_v1.md": "9c2bab76436e0557e1d0518d79d973f591516c454e97bcb8269545efa9722609",
+    "requirements.txt": "bb8d4d1f5a84de4322d2e3efd19503431b1e207a4d7168186c8e05d112ad3b99",
+    "src/__init__.py": "414e18c167e3e5de0ca9bab053436ed87a66f9c83bf05cca941c304f157ae3dc",
+    "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+    "src/uncertainty_data_v1.py": "8e822efc6e39c599782066374c49c46cef0f72d94ee9d5bd881d13090a5e96eb",
+    "src/uncertainty_calibration_v1.py": "ac91d035fa40ebe557491f3c00fb7ce332c3a1bc314cbf1faa941085b50da9d9",
+    "src/uncertainty_analysis_v1.py": "4c7d097f03a063823a766e7710065563b6dcbfbd3fc691f4db17a8775f5f6930",
+    "scripts/run_vm_n05_v1.py": "9a5332566ee569cceaf36bf9d5a67b1dd5f7ca7555dcc90faeb7042004c93cbe",
+    "tests/test_vm_n05_v1.py": "17036983627054311edd2a34dd46748365a0d3ddb561a6bc207a444112be32cc"
+  },
+  "config": {
+    "version": "vm_n05_v1",
+    "point_predictor": "latest_arrived_persistence",
+    "room_seeds": [
+      530101,
+      530103,
+      530107,
+      530109,
+      530111,
+      530113,
+      530117,
+      530119
+    ],
+    "fixture_seed": 15005,
+    "data": {
+      "dt_minutes": 15,
+      "split_days": [
+        28,
+        14,
+        14
+      ],
+      "lookback": 24,
+      "horizon": 16,
+      "stride": 4,
+      "max_fill_age_steps": 12,
+      "delay_steps": 1,
+      "noise_ppm": 10.0,
+      "tau_ratio": 1.0,
+      "irregular": false,
+      "start_utc": "2026-01-05T00:00:00Z"
+    },
+    "timeline_days": {
+      "scale_start": 14,
+      "scale_end": 28,
+      "calibration_start": 28,
+      "evaluation_start": 42,
+      "end": 56
+    },
+    "horizon_steps": [
+      1,
+      4,
+      16
+    ],
+    "scenarios": [
+      {
+        "name": "stable",
+        "shifted": false,
+        "outage": false,
+        "evaluation_noise_multiplier": 1.0
+      },
+      {
+        "name": "shifted",
+        "shifted": true,
+        "outage": false,
+        "evaluation_noise_multiplier": 1.0
+      },
+      {
+        "name": "noisy",
+        "shifted": false,
+        "outage": false,
+        "evaluation_noise_multiplier": 3.0
+      },
+      {
+        "name": "shifted_noisy_outage",
+        "shifted": true,
+        "outage": true,
+        "evaluation_noise_multiplier": 3.0
+      }
+    ],
+    "arms": [
+      "static",
+      "static_matched",
+      "rolling",
+      "fourier",
+      "hour_bin",
+      "vm"
+    ],
+    "calibration": {
+      "alpha": 0.1,
+      "rolling_count": 168,
+      "minimum_pool": 20
+    },
+    "scale": {
+      "basis_count": 24,
+      "kappa": 8.0,
+      "ridge_penalty": 0.01,
+      "minimum_fit": 60,
+      "minimum_phase": 8,
+      "floor_ppm": 1.0,
+      "ceiling_ppm": 1000.0,
+      "change_divisor_ppm": 50.0
+    },
+    "regimes": {
+      "recent_rise_ppm": 25.0,
+      "recent_fall_ppm": -25.0,
+      "change_steps": 4,
+      "phase_bins": 6
+    },
+    "analysis": {
+      "primary_horizon": 4,
+      "primary_comparator": "fourier",
+      "minimum_improvement": 0.05,
+      "maximum_scenario_regression": 0.1,
+      "minimum_overall_coverage": 0.85,
+      "bootstrap_draws": 5000,
+      "bootstrap_seed": 95005,
+      "conditional_block_days": 2
+    },
+    "compute": {
+      "threads": 1,
+      "fixture_cap_seconds": 120,
+      "study_cap_seconds": 600,
+      "analysis_cap_seconds": 120,
+      "search_trials_per_conditional_arm": 1
+    }
+  },
+  "environment": {
+    "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Amine\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "platform": "Windows-10-10.0.19044-SP0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "torch": "2.5.1+cu121",
+    "cuda_available": true,
+    "cuda_runtime": "12.1",
+    "device": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+    "blas_threads": 1,
+    "torch_threads": 1
+  },
+  "engineering": {
+    "sources": {
+      "configs/vm_n05_v1.json": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+      "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "docs/vm_n05_protocol_v1.md": "9c2bab76436e0557e1d0518d79d973f591516c454e97bcb8269545efa9722609",
+      "requirements.txt": "bb8d4d1f5a84de4322d2e3efd19503431b1e207a4d7168186c8e05d112ad3b99",
+      "src/__init__.py": "414e18c167e3e5de0ca9bab053436ed87a66f9c83bf05cca941c304f157ae3dc",
+      "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "src/uncertainty_data_v1.py": "8e822efc6e39c599782066374c49c46cef0f72d94ee9d5bd881d13090a5e96eb",
+      "src/uncertainty_calibration_v1.py": "ac91d035fa40ebe557491f3c00fb7ce332c3a1bc314cbf1faa941085b50da9d9",
+      "src/uncertainty_analysis_v1.py": "4c7d097f03a063823a766e7710065563b6dcbfbd3fc691f4db17a8775f5f6930",
+      "scripts/run_vm_n05_v1.py": "9a5332566ee569cceaf36bf9d5a67b1dd5f7ca7555dcc90faeb7042004c93cbe",
+      "tests/test_vm_n05_v1.py": "17036983627054311edd2a34dd46748365a0d3ddb561a6bc207a444112be32cc"
+    },
+    "exit_code": 0,
+    "counts": {
+      "tests": 1514,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "seconds": 88.26593739981763,
+    "junit_sha256": "ad662a59f34aeeb6eab79ca0f644d22b1f3006834c4491e1ee9e7ee4ec28cf45",
+    "command": [
+      "C:\\Users\\Amine\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-m",
+      "pytest",
+      "tests/",
+      "-q",
+      "--junitxml=results\\vm_n05\\engineering_v1\\full_suite.xml"
+    ],
+    "environment": {
+      "python": "3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]",
+      "executable": "C:\\Users\\Amine\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "platform": "Windows-10-10.0.19044-SP0",
+      "numpy": "1.26.4",
+      "pandas": "2.3.3",
+      "torch": "2.5.1+cu121",
+      "cuda_available": true,
+      "cuda_runtime": "12.1",
+      "device": "NVIDIA GeForce RTX 3060 Laptop GPU",
+      "revision": "a7431a926c751868b11a3918c6cdd29be6540a32",
+      "blas_threads": 1,
+      "torch_threads": 1
+    },
+    "created_utc": "2026-09-26T18:45:27.382283+00:00"
+  },
+  "fixture": {
+    "sources": {
+      "configs/vm_n05_v1.json": "335e69f020a02e5f246a11c11f0c8f087533155980f9d2c9d3d15d634358f255",
+      "configs/vm_n04_v1.json": "8130c9842ffc33fc48a56986b12be1d774a9ba63eb10d52e6a509442e145c36e",
+      "docs/vm_n05_protocol_v1.md": "9c2bab76436e0557e1d0518d79d973f591516c454e97bcb8269545efa9722609",
+      "requirements.txt": "bb8d4d1f5a84de4322d2e3efd19503431b1e207a4d7168186c8e05d112ad3b99",
+      "src/__init__.py": "414e18c167e3e5de0ca9bab053436ed87a66f9c83bf05cca941c304f157ae3dc",
+      "src/dynamics_data_v1.py": "944912bdcc65abdb30e2985faa00346d43c257c23c46f0b7517bc4238fe6ac3f",
+      "src/uncertainty_data_v1.py": "8e822efc6e39c599782066374c49c46cef0f72d94ee9d5bd881d13090a5e96eb",
+      "src/uncertainty_calibration_v1.py": "ac91d035fa40ebe557491f3c00fb7ce332c3a1bc314cbf1faa941085b50da9d9",
+      "src/uncertainty_analysis_v1.py": "4c7d097f03a063823a766e7710065563b6dcbfbd3fc691f4db17a8775f5f6930",
+      "scripts/run_vm_n05_v1.py": "9a5332566ee569cceaf36bf9d5a67b1dd5f7ca7555dcc90faeb7042004c93cbe",
+      "tests/test_vm_n05_v1.py": "17036983627054311edd2a34dd46748365a0d3ddb561a6bc207a444112be32cc"
+    },
+    "created_utc": "2026-09-26T18:45:35.177920+00:00",
+    "projected_formal_seconds": 34.50401039980352,
+    "within_cap": true
+  },
+  "engineering_receipt_sha256": "4f246bb7c6f2cc265c9e9846076f69bd3234f569df133e428332316180362dc9",
+  "fixture_manifest_sha256": "0dbfe54fdec2fb485146d566c3bf75a777d7720328058296ce88cae61c4f9503"
+}
